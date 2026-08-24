@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VeiVakt – Bruksområder for trippelsensorsystemet</title>
+<meta name="description" content="Et patentsøkt trippelsensorsystem for faredeteksjon og varsling. 24 bruksområder, fra veg og jernbane til beredskap, industri og landbruk.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E7E9E5;
+  --panel:#F4F5F2;
+  --panel-2:#DDE0DB;
+  --ink:#0F1416;
+  --ink-2:#4C5459;
+  --ink-3:#79817F;
+  --rule:#C6CBC4;
+  --rule-2:#B3B9B1;
+  --thermal:#DE560A;
+  --hazard:#F2B705;
+  --scene:#14100E;
+  --maxw:1240px;
+  --r:3px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Familjen Grotesk","Familjen Grotesk Fallback",sans-serif;margin:0;line-height:1.05;letter-spacing:-0.02em;font-weight:700}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+:focus-visible{outline:2px solid var(--thermal);outline-offset:2px}
+
+/* ---------- scenemotor: én animert scene per bruksområde ---------- */
+.stage{background:var(--scene);border-radius:var(--r);padding:12px;overflow:hidden}
+.stage svg{display:block;width:100%;height:auto}
+.stage-top{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A7F76;margin-bottom:9px}
+.stage-live{display:inline-flex;align-items:center;gap:6px;color:var(--thermal)}
+.stage-live i{width:6px;height:6px;border-radius:50%;background:var(--thermal);display:block;animation:blip 1.8s ease-in-out infinite}
+.stage-spec{text-transform:none;letter-spacing:.04em}
+.stage-read{display:flex;justify-content:space-between;align-items:flex-end;margin-top:10px;gap:12px;flex-wrap:wrap}
+.stage-class{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;letter-spacing:.06em;color:#F6EFE8}
+.stage-class span{color:var(--thermal)}
+.stage-meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8A7F76;letter-spacing:.06em;text-align:right}
+.d-stage{margin-top:24px}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* sensorkjegler – fargene er de samme tre som ellers på siden */
+@keyframes cone{0%,100%{opacity:.30}40%{opacity:.85}}
+.cone{transform-origin:64px 108px}
+.cone-t{animation:cone 4.2s ease-in-out infinite}
+.cone-r{animation:cone 4.2s ease-in-out infinite .5s}
+.cone-l{animation:cone 4.2s ease-in-out infinite 1s}
+
+/* sveipende avlesningslinje */
+@keyframes roll{from{transform:translateX(0)}to{transform:translateX(-70px)}}
+.roll{animation:roll 1.5s linear infinite}
+@keyframes sweep{0%{transform:translateX(-40px)}100%{transform:translateX(660px)}}
+.sweep{animation:sweep 5.5s linear infinite}
+
+/* aktør som beveger seg gjennom dekningsområdet */
+@keyframes travel{from{transform:translate(var(--x0),var(--y0))}to{transform:translate(var(--x1),var(--y1))}}
+.act{animation:travel var(--dur) linear infinite}
+@keyframes lock{0%,26%{opacity:0}34%,88%{opacity:1}96%,100%{opacity:0}}
+.lock-still{opacity:1}
+.lock{animation:lock var(--dur) linear infinite}
+@keyframes pulse{0%,100%{opacity:.35;transform:scale(.86)}50%{opacity:1;transform:scale(1.1)}}
+.pulse{animation:pulse 2.2s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin 5s linear infinite}
+@keyframes rise{0%{opacity:0;transform:translateY(14px) scaleY(.6)}45%{opacity:.9}100%{opacity:0;transform:translateY(-40px) scaleY(1.25)}}
+.rise{animation:rise 4.5s ease-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes ping{0%{opacity:.9;transform:scale(.3)}100%{opacity:0;transform:scale(1)}}
+.ping{animation:ping 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
+
+/* ---------- WILDETECT-feltet ---------- */
+.flag{background:var(--ink);color:var(--paper);padding:44px 0 46px}
+.flag-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
+.flag .eyebrow{color:#8E9691;margin-bottom:16px}
+.flag h2{font-size:clamp(26px,3.2vw,40px);color:var(--paper)}
+.flag h2 em{font-style:normal;color:var(--hazard)}
+.flag p{color:#C3C9C5;font-size:16px;margin:16px 0 0;max-width:54ch;line-height:1.6}
+.flag-part{border-top:1px solid #2C3336;margin-top:8px}
+.flag-part h3{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8E9691;font-weight:600;padding:16px 0 12px}
+.flag-list{display:flex;flex-direction:column}
+.flag-list span{border-top:1px solid #2C3336;padding:9px 0;font-size:14.5px;color:var(--paper)}
+.flag-list span:first-child{border-top:0}
+.flag-list b{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8E9691;font-weight:500;letter-spacing:.06em;display:block}
+.core-tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--hazard);color:var(--ink);padding:2px 6px;border-radius:2px;margin-left:auto;flex:none}
+.nav-item[aria-current="true"] .core-tag{background:var(--hazard);color:var(--ink)}
+@media (max-width:960px){.flag-grid{grid-template-columns:1fr;gap:28px}}
+
+/* ---------- header ---------- */
+.hdr{
+  position:sticky;top:0;z-index:40;background:rgba(231,233,229,.92);
+  backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--rule);
+}
+.hdr-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
+.brand{display:flex;align-items:baseline;gap:10px;font-family:"Familjen Grotesk",sans-serif;font-weight:700;letter-spacing:-.02em;font-size:18px}
+.brand-mark{width:11px;height:11px;background:var(--thermal);border-radius:50%;box-shadow:0 0 0 3px rgba(222,86,10,.18);flex:none;align-self:center}
+.brand small{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.langsw{display:flex;border:1px solid var(--rule-2);border-radius:var(--r);overflow:hidden}
+.langsw button{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;font-weight:600;
+  padding:6px 11px;background:transparent;border:0;cursor:pointer;color:var(--ink-2);
+}
+.langsw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* ---------- hero ---------- */
+.hero{padding:64px 0 44px;border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
+.hero h1{font-size:clamp(38px,5.4vw,68px)}
+.hero h1 em{font-style:normal;color:var(--thermal)}
+.hero-lede{margin:22px 0 0;max-width:48ch;color:var(--ink-2);font-size:17px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:30px;border-top:1px solid var(--rule)}
+.hero-stats div{padding:14px 16px 2px;border-left:1px solid var(--rule)}
+.hero-stats div:first-child{border-left:0;padding-left:0}
+.hero-stats b{display:block;font-family:"Familjen Grotesk",sans-serif;font-size:26px;line-height:1;letter-spacing:-.02em}
+.hero-stats span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+
+/* detection scene */
+.scene{background:var(--scene);border-radius:var(--r);padding:14px;position:relative;overflow:hidden}
+.scene-top{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A7F76;margin-bottom:10px}
+.scene-live{display:inline-flex;align-items:center;gap:6px;color:var(--thermal)}
+.scene-live i{width:6px;height:6px;border-radius:50%;background:var(--thermal);display:block;animation:blip 1.8s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+.scene svg{display:block;width:100%;height:auto}
+.scene-read{display:flex;justify-content:space-between;align-items:flex-end;margin-top:12px;gap:12px;flex-wrap:wrap}
+.scene-class{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600;letter-spacing:.06em;color:#F6EFE8}
+.scene-class span{color:var(--thermal)}
+.scene-meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8A7F76;letter-spacing:.06em;text-align:right}
+
+/* ---------- sensor legend ---------- */
+.legend{padding:40px 0;border-bottom:1px solid var(--rule)}
+.legend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)}
+.leg{background:var(--paper);padding:20px 22px 22px}
+.leg-key{display:flex;align-items:center;gap:9px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
+.leg-key i{width:14px;height:4px;display:block;flex:none}
+.leg h3{font-size:19px;margin:10px 0 7px}
+.leg-key i{background:var(--thermal)}
+.leg-note{margin:26px 0 0;font-size:13.5px;color:var(--ink-3);max-width:70ch;line-height:1.6;border-top:1px solid var(--rule);padding-top:16px}
+.leg p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.leg-spec{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);letter-spacing:.03em}
+
+/* ---------- controls ---------- */
+.ctrl{padding:26px 0 18px;position:sticky;top:56px;z-index:30;background:var(--paper);border-bottom:1px solid var(--rule)}
+.ctrl-in{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.tiers{display:flex;gap:8px;flex-wrap:wrap}
+.tier-btn{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em;font-weight:600;
+  padding:7px 13px;border:1px solid var(--rule-2);background:transparent;border-radius:var(--r);
+  cursor:pointer;color:var(--ink-2);white-space:nowrap;
+}
+.tier-btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.search{position:relative}
+.search input{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;padding:8px 12px;width:210px;
+  border:1px solid var(--rule-2);border-radius:var(--r);background:var(--panel);color:var(--ink);
+}
+.search input::placeholder{color:var(--ink-3)}
+
+/* ---------- main split ---------- */
+.split{display:grid;grid-template-columns:340px 1fr;gap:0;align-items:start;padding-bottom:80px}
+.nav{border-right:1px solid var(--rule);padding:22px 22px 22px 0;position:sticky;top:132px;max-height:calc(100vh - 150px);overflow-y:auto}
+.nav-group{margin-bottom:22px}
+.nav-h{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:0 0 9px;display:flex;align-items:center;gap:8px}
+.nav-h i{flex:none}
+.nav-h i{width:16px;height:1px;border-radius:0;background:var(--rule-2)}
+.nav-dot{width:6px;height:6px;border-radius:50%;flex:none;align-self:center;background:var(--thermal);opacity:.75}
+.nav-item{
+  display:flex;gap:11px;align-items:center;width:100%;text-align:left;
+  background:transparent;border:0;border-top:1px solid var(--rule);
+  padding:9px 8px 9px 4px;cursor:pointer;font-family:inherit;font-size:14.5px;color:var(--ink-2);line-height:1.35;
+}
+.nav-item:hover{background:var(--panel);color:var(--ink)}
+.nav-item[aria-current="true"]{background:var(--ink);color:var(--paper);border-top-color:var(--ink)}
+.nav-item[aria-current="true"] .nav-n{color:var(--hazard)}
+.nav-n{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);flex:none;font-weight:600}
+.nav-empty{font-size:14px;color:var(--ink-3);padding:12px 0}
+
+/* ---------- detail ---------- */
+.detail{padding:22px 0 0 40px;min-width:0}
+.d-head{border-bottom:2px solid var(--ink);padding-bottom:20px}
+.d-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.chip{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;padding:4px 9px;border-radius:var(--r);border:1px solid var(--rule-2);color:var(--ink-2)}
+.chip.catsam,.chip.catnat,.chip.catsik,.chip.catind{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.d-head h2{font-size:clamp(28px,3.6vw,44px);max-width:20ch}
+.d-tag{margin:14px 0 0;font-size:17px;color:var(--ink-2);max-width:60ch}
+
+
+.d-body{display:grid;grid-template-columns:1fr;margin-top:8px;max-width:74ch}
+.fld{border-bottom:1px solid var(--rule);padding:22px 0}
+.fld.full{grid-column:1 / -1}
+.fld-h{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px;display:flex;align-items:center;gap:8px}
+.fld-h::before{content:"";width:18px;height:1px;background:var(--rule-2);flex:none}
+.fld p{margin:0;font-size:16.5px;line-height:1.65;color:var(--ink)}
+.fld p + p{margin-top:9px}
+.fld strong{font-weight:600}
+.num{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;background:linear-gradient(transparent 62%,rgba(242,183,5,.42) 62%);padding:0 1px}
+
+.d-foot{padding:26px 0 0;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.stepper{display:flex;gap:8px}
+.step{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;padding:8px 14px;border:1px solid var(--rule-2);background:transparent;border-radius:var(--r);cursor:pointer;color:var(--ink-2)}
+.step:hover:not(:disabled){background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.step:disabled{opacity:.35;cursor:default}
+
+/* ---------- footer ---------- */
+.ftr{border-top:1px solid var(--rule);padding:34px 0 60px;color:var(--ink-3);font-size:13px}
+.ftr-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.ftr p{margin:0 0 8px;max-width:62ch;line-height:1.6}
+.ftr a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
+
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .legend-grid{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr}
+  .nav{position:static;max-height:44vh;border-right:0;border-bottom:1px solid var(--rule);padding:18px 0;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .detail{padding:24px 0 0}
+  .d-body{grid-template-columns:1fr;gap:0}
+  .ctrl{position:static}
+}
+@media (max-width:620px){
+  .wrap{padding:0 18px}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .hero-stats div:nth-child(3){border-left:0;padding-left:0}
+  .hero-stats div:nth-child(n+3){border-top:1px solid var(--rule);margin-top:12px}
+  .hero{padding:40px 0 32px}
+  .search input{width:100%}
+  .search{flex:1 1 100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <div class="brand"><span class="brand-mark"></span>VeiVakt <small data-i18n="brandSub"></small></div>
+    <div class="langsw" role="group" aria-label="Språk / Language">
+      <button type="button" data-lang="no" aria-pressed="true">NO</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow mono" data-i18n="heroEyebrow"></div>
+      <h1 data-i18n-html="heroTitle"></h1>
+      <p class="hero-lede" data-i18n="heroLede"></p>
+      <div class="hero-stats">
+        <div><b class="mono">24</b><span data-i18n="statDomains"></span></div>
+        <div><b class="mono" data-i18n="statPatentV"></b><span data-i18n="statPatent"></span></div>
+        <div><b class="mono" data-i18n="statAllV"></b><span data-i18n="statAll"></span></div>
+        <div><b class="mono" data-i18n="statLocalV"></b><span data-i18n="statLocal"></span></div>
+      </div>
+    </div>
+    <div id="heroStage"></div>
+  </div>
+</section>
+
+<section class="flag">
+  <div class="wrap flag-grid">
+    <div>
+      <div class="eyebrow mono" data-i18n="flagEyebrow"></div>
+      <h2 data-i18n-html="flagTitle"></h2>
+      <p data-i18n="flagBody"></p>
+      <p data-i18n="flagBody2"></p>
+    </div>
+    <div class="flag-part">
+      <h3 data-i18n="flagPartners"></h3>
+      <div class="flag-list">
+        <span><b data-i18n="flagRole1"></b>SINTEF</span>
+        <span><b data-i18n="flagRole2"></b>NINA</span>
+        <span><b data-i18n="flagRole3"></b>Statens vegvesen</span>
+        <span><b data-i18n="flagRole4"></b>Høgskulen på Vestlandet</span>
+        <span><b data-i18n="flagRole5"></b>VeiVakt AS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="legend">
+  <div class="wrap">
+    <div class="legend-grid">
+      <div class="leg">
+        <div class="leg-key"><i></i>01 · <span data-i18n="legAKey"></span></div>
+        <h3 data-i18n="legATitle"></h3>
+        <p data-i18n="legABody"></p>
+      </div>
+      <div class="leg">
+        <div class="leg-key"><i></i>02 · <span data-i18n="legBKey"></span></div>
+        <h3 data-i18n="legBTitle"></h3>
+        <p data-i18n="legBBody"></p>
+      </div>
+      <div class="leg">
+        <div class="leg-key"><i></i>03 · <span data-i18n="legCKey"></span></div>
+        <h3 data-i18n="legCTitle"></h3>
+        <p data-i18n="legCBody"></p>
+      </div>
+    </div>
+    <p class="leg-note" data-i18n="legNote"></p>
+  </div>
+</section>
+
+<section class="ctrl">
+  <div class="wrap ctrl-in">
+    <div class="tiers" role="group" aria-label="Filter">
+      <button type="button" class="cat-btn tier-btn" data-cat="all" aria-pressed="true" data-i18n="filterAll"></button>
+      <button type="button" class="cat-btn tier-btn" data-cat="sam" aria-pressed="false" data-i18n="filterSam"></button>
+      <button type="button" class="cat-btn tier-btn" data-cat="nat" aria-pressed="false" data-i18n="filterNat"></button>
+      <button type="button" class="cat-btn tier-btn" data-cat="sik" aria-pressed="false" data-i18n="filterSik"></button>
+      <button type="button" class="cat-btn tier-btn" data-cat="ind" aria-pressed="false" data-i18n="filterInd"></button>
+    </div>
+    <div class="search">
+      <input type="search" id="q" data-i18n-ph="searchPh" aria-label="Søk">
+    </div>
+  </div>
+</section>
+
+<main class="wrap split">
+  <nav class="nav" id="nav" aria-label="Bruksområder"></nav>
+  <article class="detail" id="detail" aria-live="polite"></article>
+</main>
+
+<footer class="ftr">
+  <div class="wrap ftr-grid">
+    <div>
+      <p data-i18n="ftrNote"></p>
+      <p data-i18n="ftrSources"></p>
+    </div>
+    <div>
+      <p><a href="https://veivakten.no">veivakten.no</a> · VeiVakt AS</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* VeiVakt – bruksområder / application domains */
+const D = [
+{n:1,cat:"sam",name:{no:"Vei og vilt",en:"Roads and wildlife"},
+ tag:{no:"Kjerneproduktet: farevarsling på utsatte vegstrekninger, med automatisk varsling av nødetater ved ulykke.",
+      en:"The core product: hazard warning on high-risk road sections, with automatic emergency-service alerting after a crash."},
+ problem:{no:"SSB registrerte <span class='num'>9 350</span> elg, hjort og rådyr påkjørt og drept av bil og tog i jaktåret 2024/2025. Oslo Economics anslår samfunnskostnaden ved viltpåkjørsler til rundt <span class='num'>1,5 mrd. kroner</span> i året, der forsikringsbransjen alene betaler om lag <span class='num'>700 mill. kroner</span>. I 2025 omkom 106 personer i trafikken.",
+        en:"Statistics Norway recorded <span class='num'>9,350</span> moose, red deer and roe deer killed by cars and trains in the 2024/2025 hunting year. Oslo Economics puts the societal cost of wildlife collisions at roughly <span class='num'>NOK 1.5 bn</span> a year, of which insurers alone cover some <span class='num'>NOK 700 m</span>. Road deaths in Norway reached 106 in 2025."},
+ edge:{no:"Vilt krysser vegen om natten, i tåke og i snøkav – når sikten er dårligst og farten fortsatt er høy. Systemet oppdager dyret lenge før det er synlig fra førersetet, skiller det fra alt annet som beveger seg i vegkanten, og vurderer om det er på vei ut i kjørebanen. Varselet går ut mens bilisten fortsatt har tid til å senke farten.",
+       en:"Wildlife crosses at night, in fog and in drifting snow — when visibility is at its worst and speeds are still high. The system detects the animal long before it is visible from the driver's seat, separates it from everything else moving at the roadside, and judges whether it is heading into the carriageway. The warning goes out while the driver still has time to slow down."},
+ adapt:{no:"Ingen. Dette er systemet slik det er bygget og satt i drift.",
+        en:"None. This is the system as built and already in service."}},
+
+{n:2,cat:"sam",name:{no:"Jernbane",en:"Railway"},
+ tag:{no:"Rein og elg på sporet er jernbanens dyreste og mest belastende gjentakende hendelse.",
+      en:"Reindeer and moose on the track are the railway's most costly and most demoralising recurring incident."},
+ problem:{no:"<span class='num'>3 072</span> rein er påkjørt på Nordlandsbanen på ti år, med enkelthendelser på 106 og 135 dyr. Siden 1985 er rundt <span class='num'>8 156</span> rein påkjørt på norske baner, om lag 7 350 av dem på Nordlandsbanen. Et reingjerde til 43 mill. kroner var ikke nok. Bane NOR sier selv at de leter etter tekniske løsninger for automatisk deteksjon og varsling.",
+        en:"<span class='num'>3,072</span> reindeer have been struck on the Nordland Line in ten years, including single incidents of 106 and 135 animals. Since 1985 roughly <span class='num'>8,156</span> reindeer have been hit on Norwegian railways, some 7,350 of them on the Nordland Line. A NOK 43 m reindeer fence was not enough. Bane NOR states openly that it is looking for technical solutions for automatic detection and warning."},
+ edge:{no:"Toget kan ikke svinge unna, så varselet må komme tidlig nok til at lokfører rekker å bremse. Systemet ser flokken gjennom snødrev og polarnatt, langt utenfor rekkevidden til lyskasteren, og avgjør om dyrene står i sporet eller trygt utenfor. Det er forskjellen mellom en nødvendig saktekjøring og en unødvendig forsinkelse.",
+       en:"A train cannot swerve, so the warning has to arrive early enough for the driver to brake. The system sees the herd through drifting snow and polar night, far beyond the reach of the headlight, and determines whether the animals are on the track or safely clear of it. That is the difference between a justified speed restriction and an avoidable delay."},
+ adapt:{no:"Modellen må lære å kjenne igjen rein som flokk framfor enkeltdyr. Anlegget knyttes til strømnettet langs sporet, og varselet kobles inn i jernbanens egen trafikkstyring slik at togleder får det direkte.",
+        en:"The model has to learn to recognise reindeer as a herd rather than as individual animals. The installation connects to the power supply along the track, and the warning is fed into the railway's own traffic management so the controller receives it directly."}},
+
+{n:3,cat:"sik",name:{no:"Forsvar og perimetersikring",en:"Defence and perimeter security"},
+ tag:{no:"Rimelige, ubemannede sensorposter rundt baser, depoter og kritisk infrastruktur – inkludert deteksjon av lavtflygende droner.",
+      en:"Low-cost unmanned sensor posts around bases, depots and critical infrastructure — including detection of low-flying drones."},
+ problem:{no:"Dronehendelsene i september 2025 stengte Københavns lufthavn i nær fire timer og rammet Gardermoen samme kveld. Norske lufthavner meldte over <span class='num'>500</span> droneinnsidenter i 2024, og nær <span class='num'>300</span> GPS-jammingshendelser ble registrert nær grensen i 2023 mot 122 året før. Norge planlegger en anskaffelse av mottiltak mot droner verdt inntil <span class='num'>750 mill. kroner</span>.",
+        en:"The drone incidents of September 2025 closed Copenhagen Airport for almost four hours and hit Oslo Gardermoen the same evening. Norwegian airports logged more than <span class='num'>500</span> drone incidents in 2024, and nearly <span class='num'>300</span> GPS jamming events were recorded near the border in 2023, against 122 the year before. Norway is planning a counter-drone procurement worth up to <span class='num'>NOK 750 m</span>."},
+ edge:{no:"Et perimeter må dekke både bakken og lufta over den. Systemet oppdager personer, kjøretøy og små luftfarkoster hele døgnet, uten belysning som røper anlegget, og skiller reelle hendelser fra dyr og vær. Det siste er avgjørende: i perimeteranlegg er det de falske alarmene som koster, fordi hver eneste av dem binder personell.",
+       en:"A perimeter has to cover both the ground and the air above it. The system detects people, vehicles and small aircraft around the clock, without lighting that would reveal the site, and separates real events from animals and weather. That last part is decisive: in perimeter installations it is the false alarms that cost, because every one of them ties up personnel."},
+ adapt:{no:"Militær herding og cybersikring, og en modell som er lært opp på trusselbildet framfor på vilt. Varselet må inn i eksisterende kommando- og kontrollsystemer.",
+        en:"Military hardening and cyber protection, and a model trained on the threat picture rather than on wildlife. The alert has to reach existing command-and-control systems."}},
+
+{n:4,cat:"nat",name:{no:"Landbruk og slått",en:"Agriculture and mowing"},
+ tag:{no:"Rådyrkalven ligger stille i graset til slåmaskinen kommer. Systemet sitter på maskinen og ser enga før knivene når fram.",
+      en:"A roe deer fawn lies motionless in the grass until the mower arrives. The system rides on the machine and sees the field before the blades get there."},
+ problem:{no:"Opp mot <span class='num'>10 000</span> rådyrkalver drepes årlig av slåmaskiner i Norge. Rågeita gjemmer kalven i høyt gras, og kalven ligger helt stille på instinkt – usynlig for bonden fra førerhuset. På Vestlandet gjelder det samme for hjortekalv.",
+        en:"Up to <span class='num'>10,000</span> roe deer fawns are killed by mowers in Norway every year. The doe hides her fawn in tall grass, and instinct keeps the fawn perfectly still — invisible to the farmer from the cab. On the west coast the same applies to red deer calves."},
+ edge:{no:"Dronesøk virker, men bare i et smalt tidsvindu tidlig om morgenen, og det krever pilot, godt vær og planlegging. Montert på traktoren følger systemet med hele tiden mens slåtten pågår. Det leser enga foran maskinen, finner kalven også når den ligger helt i ro – som er nettopp det som gjør den usynlig for øyet – og varsler føreren i tide til å stanse.",
+       en:"Drone searches work, but only in a narrow window early in the morning, and they need a pilot, decent weather and planning. Mounted on the tractor, the system keeps watch throughout the mowing itself. It reads the field ahead of the machine, finds the fawn even when it lies completely still — which is precisely what makes it invisible to the eye — and warns the driver in time to stop."},
+ adapt:{no:"Systemet monteres på traktor eller slåmaskin og ser framover i kjøreretningen, med strøm fra maskinen selv. Det følger dermed maskinen fra jorde til jorde gjennom hele sesongen. Modellen må lære kalven i gras.",
+        en:"The system mounts on the tractor or the mower and looks forward along the direction of travel, powered by the machine itself. It therefore follows the machine from field to field through the whole season. The model has to learn the fawn in grass."}},
+
+{n:5,cat:"nat",name:{no:"Beitedyr og rovvilt",en:"Grazing livestock and predators"},
+ tag:{no:"Varsling til beitelag og reineier når jerv, gaupe, ulv, bjørn eller kongeørn nærmer seg flokken.",
+      en:"Alerting grazing associations and reindeer herders when wolverine, lynx, wolf, bear or golden eagle approach the flock."},
+ problem:{no:"Om lag <span class='num'>1 281 300</span> sau og lam ble sluppet på utmarksbeite i 2024. <span class='num'>68 575</span> kom ikke hjem – et tap på 5,4 %. Staten erstattet nær 15 000 sau og lam og rundt 19 000 tamrein, med over <span class='num'>108 mill. kroner</span> bare for tamrein. Siden rovviltforliket er det erstattet mer enn <span class='num'>834 665</span> sau og rein.",
+        en:"Around <span class='num'>1,281,300</span> sheep and lambs were released onto open rangeland in 2024. <span class='num'>68,575</span> never came home — a loss rate of 5.4 %. The state compensated nearly 15,000 sheep and lambs and some 19,000 semi-domesticated reindeer, paying over <span class='num'>NOK 108 m</span> for reindeer alone. Since the predator settlement, compensation has covered more than <span class='num'>834,665</span> sheep and reindeer."},
+ edge:{no:"Rovdyr beveger seg i skumring og mørke, ofte i skog. Systemet oppdager dem der viltkamera med blits verken rekker eller virker, og skiller jerv fra gaupe fra løshund – som avgjør om varselet er verdt å rykke ut på. Det gir beitelaget noe det ikke har i dag: beskjed før tapet, ikke etter.",
+       en:"Predators move at dusk and in darkness, often under forest cover. The system finds them where flash-triggered trail cameras neither reach nor function, and tells wolverine from lynx from a loose dog — which decides whether the alert is worth turning out for. It gives the grazing association something it does not have today: word before the loss, not after."},
+ adapt:{no:"Modellen må lære rovviltartene. Anlegget settes opp der flokken samles og der rovdyra kommer inn: ved samlekveer, sperregjerder og driftsbygninger. Samband løses med satellitt der mobilnettet ikke rekker.",
+        en:"The model has to learn the predator species. The installation goes where the flock gathers and where predators come in: at gathering pens, barrier fences and farm buildings. Communications are solved with satellite where the mobile network does not reach."}},
+
+{n:6,cat:"sik",name:{no:"Brann i avfallsanlegg",en:"Fires at waste facilities"},
+ tag:{no:"Litiumbatterier antenner seg selv inne i avfallshauger. Utfordringen er å oppdage det før det brenner.",
+      en:"Lithium batteries self-ignite inside waste piles. The challenge is spotting it before it burns."},
+ problem:{no:"I Sverige krever mer enn én avfallsanleggsbrann i uken utrykning fra brannvesenet. I USA anslår bransjeorganisasjonen NWRA over <span class='num'>5 000</span> branner årlig ved gjenvinningsanlegg, og EPA dokumenterte 245 branner ved 64 anlegg over sju år knyttet til litiumbatterier. RISE og DSB dokumenterer den samme økende risikoen i Norge.",
+        en:"In Sweden, more than one waste-facility fire a week requires a fire-service response. In the United States the industry body NWRA estimates over <span class='num'>5,000</span> fires a year at recycling plants, and the EPA documented 245 fires at 64 facilities over seven years linked to lithium batteries. RISE and the Norwegian Directorate for Civil Protection document the same rising risk in Norway."},
+ edge:{no:"Et batteri i termisk rusing utvikler seg lenge før det slår ut i åpen flamme. Systemet fanger opp utviklingen mens den fortsatt kan håndteres med en gravemaskin og en slange, peker ut hvor i haugen den er, og dokumenterer forløpet for anlegget og forsikringsselskapet i etterkant.",
+       en:"A battery in thermal runaway develops long before it breaks into open flame. The system picks up that development while it can still be handled with an excavator and a hose, points to where in the pile it is, and documents the sequence afterwards for the facility and its insurer."},
+ adapt:{no:"Liten. Modellen må læres opp på begynnende brann framfor på dyr, og anlegget monteres høyt nok til å dekke hele lagerflaten.",
+        en:"Minimal. The model has to be trained on incipient fire rather than on animals, and the installation mounted high enough to cover the whole storage area."}},
+
+{n:7,cat:"ind",name:{no:"Vindkraft og energianlegg",en:"Wind power and energy assets"},
+ tag:{no:"Stans turbinen når ørna nærmer seg – og hold øye med anlegget på samme tid.",
+      en:"Stop the turbine when the eagle approaches — and keep an eye on the site at the same time."},
+ problem:{no:"Smøla vindpark med 68 turbiner drepte havørn i et omfang som utløste flere NINA-studier. Å male ett turbinblad svart reduserte samlet fugledød med rundt <span class='num'>70 %</span>. Samtidig krever transformatorstasjoner, dammer og kraftlinjer både perimetersikring og tilstandsovervåking.",
+        en:"Smøla wind farm and its 68 turbines killed white-tailed eagles on a scale that prompted several NINA studies. Painting one turbine blade black cut total bird mortality by around <span class='num'>70 %</span>. At the same time, substations, dams and power lines need both perimeter security and condition monitoring."},
+ edge:{no:"Systemer som bare kjenner igjen fuglen på form og vingeslag, mister den i lav sikt og mørke. Dette anlegget følger fuglen også når sikten svikter, og avgjør om den faktisk kommer til å krysse rotorplanet – det er den vurderingen som avgjør om det er riktig å stanse turbinen. Samme anlegg kan følge med på selve anleggsområdet.",
+       en:"Systems that recognise a bird only by shape and wingbeat lose it in poor visibility and darkness. This installation keeps track of the bird when visibility fails, and judges whether it will actually cross the rotor plane — that judgement is what decides whether stopping the turbine is the right call. The same installation can watch the site itself."},
+ adapt:{no:"Modellen må lære ørn, rovfugl og flaggermus, og varselet må kobles til turbinens eget styringssystem for å kunne stanse den. Montering i navhøyde eller på egen mast krever ny mekanikk.",
+        en:"The model has to learn eagles, raptors and bats, and the alert has to connect to the turbine's own control system to be able to stop it. Mounting at hub height or on a dedicated mast requires new mechanics."}},
+
+{n:8,cat:"sam",name:{no:"Tunnel",en:"Tunnels"},
+ tag:{no:"Elbilbrann utvikler seg raskt. Den begynner lenge før røyken utløser en detektor.",
+      en:"An EV fire develops fast. It begins long before smoke sets off a detector."},
+ problem:{no:"Norge har over <span class='num'>1 100</span> vegtunneler. En tunnelbrann når 800–1 000 °C, og tunnelsikkerhetsforskriften og EU-direktiv 2004/54/EF krever deteksjon. Elbilbrann er et nytt og dårlig dekket problem: termisk rusing utvikler seg raskt og lar seg vanskelig slokke når den først er i gang.",
+        en:"Norway has more than <span class='num'>1,100</span> road tunnels. A tunnel fire reaches 800–1,000 °C, and both the Norwegian tunnel safety regulations and EU Directive 2004/54/EC require detection. EV fires are a new and poorly covered problem: thermal runaway develops fast and is hard to extinguish once under way."},
+ edge:{no:"Konvensjonelle detektorer venter på røyk. Systemet fanger opp et kjøretøy som utvikler seg feil før det kommer så langt, og skiller det fra normal trafikk. Det håndterer samtidig de andre tunnelfarene – stanset kjøretøy, feilkjøring og fotgjenger i løpet – og gjør det også når sikten i tunnelen er borte.",
+       en:"Conventional detectors wait for smoke. The system picks up a vehicle developing badly before it gets that far, and separates it from normal traffic. It handles the other tunnel hazards at the same time — stopped vehicles, wrong-way driving and pedestrians in the bore — and does so even when visibility inside the tunnel is gone."},
+ adapt:{no:"Takmontering framfor stolpe, tett kapsling mot vaskevann og eksos, og et grensesnitt mot vegtrafikksentralen.",
+        en:"Ceiling mounting rather than a pole, sealing against wash water and exhaust, and an interface to the road traffic control centre."}},
+
+{n:9,cat:"nat",name:{no:"Havbruk",en:"Aquaculture"},
+ tag:{no:"Overflateperimeter rundt merdene: predatorer, fartøy og folk over vann.",
+      en:"A surface perimeter around the pens: predators, vessels and people above the waterline."},
+ problem:{no:"Mellom 2010 og 2018 førte <span class='num'>305</span> rømmingshendelser til at rundt <span class='num'>1 960 000</span> laks og regnbueørret slapp ut i norsk sjø. Sel, fugl og oter er kroniske problemer på lokalitetene, og næringen har nullvisjon for rømming. Arbeid på merdkant i mørke er dessuten en reell HMS-risiko.",
+        en:"Between 2010 and 2018, <span class='num'>305</span> escape incidents released around <span class='num'>1,960,000</span> salmon and rainbow trout into Norwegian waters. Seals, birds and otters are chronic problems at sites, and the industry works to a zero-escape target. Working on the pen edge in darkness is also a genuine safety risk."},
+ edge:{no:"Over vannflaten oppdager systemet sel, fugl og mennesker i mørke og sjøsprøyt, og fartøy som nærmer seg anlegget uten navigasjonslys. Mann over bord er den mest tidskritiske hendelsen på en lokalitet, og det er nettopp der et anlegg som virker i mørke gjør størst forskjell.",
+       en:"Above the waterline the system finds seals, birds and people in darkness and spray, and vessels approaching the site without navigation lights. Man overboard is the most time-critical event at a site, and that is exactly where an installation that works in the dark makes the greatest difference."},
+ adapt:{no:"Marin herding mot salt og korrosjon, montering på flåte eller merdkant med kompensasjon for bevegelse, og en modell som er lært opp på sel, fugl og fartøy.",
+        en:"Marine hardening against salt and corrosion, mounting on the feed barge or pen edge with motion compensation, and a model trained on seals, birds and vessels."}},
+
+{n:10,cat:"sam",name:{no:"Lufthavn",en:"Airports"},
+ tag:{no:"Fugl, vilt og fremmedlegemer på rullebanen – og uvedkommende innenfor gjerdet.",
+      en:"Birds, wildlife and foreign object debris on the runway — and intruders inside the fence."},
+ problem:{no:"Fuglekollisjoner, uautorisert inntrenging på rullebane og fremmedlegemer er globale flysikkerhetsproblemer. Avinor drifter rundt <span class='num'>40</span> lufthavner, mange av dem kystnære eller arktiske med krevende viltforhold. EASA krever dronedeteksjonsteknologi ved lufthavner med over én million passasjerer.",
+        en:"Bird strikes, runway incursions and foreign object debris are global flight-safety problems. Avinor operates around <span class='num'>40</span> airports, many of them coastal or Arctic with demanding wildlife conditions. EASA requires drone detection technology at airports handling more than one million passengers."},
+ edge:{no:"Radar ser fugleflokker, men klarer verken små fremmedlegemer eller sikker artsbestemmelse. Systemet dekker fugl, vilt, personer og kjøretøy hele døgnet, finner små objekter på banedekket, og håndterer droner med samme anlegg som dekker perimeteret.",
+       en:"Radar sees flocks, but handles neither small debris nor reliable species identification. The system covers birds, wildlife, people and vehicles around the clock, finds small objects on the pavement, and handles drones with the same installation that covers the perimeter."},
+ adapt:{no:"Montering nær rullebane med strenge krav til brekkbarhet og lyssetting, integrasjon mot tårnet, og en modell lært opp på fugl og fremmedlegemer.",
+        en:"Runway-adjacent mounting with strict frangibility and lighting requirements, integration with the tower, and a model trained on birds and debris."}},
+
+{n:11,cat:"sik",name:{no:"Skogbrann",en:"Wildfire"},
+ tag:{no:"De første minuttene avgjør. Etter det er det ikke lenger ett mannskaps jobb.",
+      en:"The first minutes decide. After that it is no longer one crew's job."},
+ problem:{no:"Brannsesongen blir lengre, og tidlig deteksjon avgjør om en brann håndteres av ett mannskap eller av et helt distrikt. En brann som oppdages mens den fortsatt er på noen kvadratmeter, slokkes med utstyret mannskapet allerede har med seg.",
+        en:"Fire seasons are lengthening, and early detection decides whether a fire is handled by one crew or an entire district. A fire found while it still covers a few square metres is put out with the equipment the crew already carries."},
+ edge:{no:"Tårnkameraer som bare arbeider i synlig lys, trenger både dagslys og røyk som er tett nok til å se på avstand. Systemet fanger opp utviklingen tidligere og fungerer også om natten, og gir samtidig mannskapet et bilde å vurdere før de rykker ut.",
+       en:"Tower cameras working in visible light alone need both daylight and smoke dense enough to see at range. The system picks up the development earlier and works at night as well, while still giving the crew an image to judge before turning out."},
+ adapt:{no:"Modellen må lære røyk og begynnende brann, og anlegget må stå høyt nok til lang siktlinje. Et anlegg som allerede står i en kraftlinjetrasé eller en vindpark, dekker skogbrannovervåking som tilleggsfunksjon.",
+        en:"The model has to learn smoke and incipient fire, and the installation has to stand high enough for a long sight line. An installation already standing in a power-line corridor or a wind farm covers wildfire watch as an added function."}},
+
+{n:12,cat:"ind",name:{no:"Bygg, anlegg og pukkverk",en:"Construction sites and quarries"},
+ tag:{no:"Person nær maskin i mørke og støv – sett fra maskinen selv.",
+      en:"People near machinery in darkness and dust — seen from the machine itself."},
+ problem:{no:"Anleggsplasser har to problemer på samme areal: sikkerhetsavstand mellom maskin og person, og tyveri om natten. Begge er kostbare, og begge håndteres i dag med gjerder, vektere og kameraer som ser lite etter mørkets frembrudd.",
+        en:"Construction sites have two problems on the same footprint: keeping people clear of machinery, and theft at night. Both are costly, and both are handled today with fencing, guards and cameras that see little after dark."},
+ edge:{no:"Føreren av en gravemaskin ser lite bakover, og enda mindre i mørke og støv. Montert på maskinen leser systemet området rundt den og måler faktisk avstand framfor å anslå den ut fra et bilde. Varselet går rett til føreren i førerhuset, der det kan brukes med en gang. Systemet flytter seg med maskinen, som er måten en anleggsplass faktisk fungerer på.",
+       en:"An excavator operator sees little behind the machine, and less still in darkness and dust. Mounted on the machine, the system reads the area around it and measures actual distance rather than estimating it from an image. The warning goes straight to the operator in the cab, where it can be acted on immediately. The system moves with the machine, which is how a site actually works."},
+ adapt:{no:"Systemet monteres på maskinen – gravemaskin, dumper eller hjullaster – og kobles til maskinens eget strømuttak. Modellen læres opp på person, maskin og verneutstyr.",
+        en:"The system mounts on the machine — excavator, dumper or wheel loader — and connects to the machine's own power supply. The model is trained on people, machinery and protective equipment."}},
+
+{n:13,cat:"ind",name:{no:"Datasenter og telekom",en:"Data centres and telecom sites"},
+ tag:{no:"CER og NIS2 gjør fysisk sikring av kritiske virksomheter til en lovpålagt oppgave.",
+      en:"CER and NIS2 turn physical protection of critical entities into a legal obligation."},
+ problem:{no:"Norsk datasenterkapasitet vokser raskt på rimelig kraft og naturlig kjøling. Anleggene ligger ofte avsides, med lange perimetere og få folk til stede. Samtidig er avvik i kjøling og transformator en driftsrisiko som oppdages for sent med manuelle rutiner.",
+        en:"Norwegian data centre capacity is growing fast on cheap power and natural cooling. The sites are often remote, with long perimeters and few people present. At the same time, anomalies in cooling and transformers are an operational risk that manual routines catch too late."},
+ edge:{no:"Ett anlegg løser to oppgaver: det dekker perimeteret uten belysning, og fanger opp utstyr som utvikler seg feil før det får konsekvenser. Hendelsene dokumenteres i en form som lar seg rapportere videre under NIS2. Det er et tydelig regnestykke mot to separate systemer.",
+       en:"One installation covers two jobs: it secures the perimeter without lighting, and picks up equipment developing badly before it has consequences. Events are documented in a form that can be reported onward under NIS2. That is a clear cost argument against buying two separate systems."},
+ adapt:{no:"En modell lært opp på person og kjøretøy i industrimiljø, og integrasjon mot eksisterende alarmsentral.",
+        en:"A model trained on people and vehicles in an industrial setting, and integration with the existing alarm centre."}},
+
+{n:14,cat:"sik",name:{no:"Fengsel og lukkede anlegg",en:"Prisons and secure facilities"},
+ tag:{no:"Perimeter begge veier: rømning ut, og droner med smuglergods inn.",
+      en:"A perimeter that works both ways: escapes out, and contraband drones in."},
+ problem:{no:"Droner brukes systematisk til å levere smuglergods over fengselsmurer. Britiske fengsler registrerte <span class='num'>347</span> droneinnsidenter med smuglergods i 2024. Samtidig krever murperimeteret døgnkontinuerlig deteksjon med svært lav andel falske alarmer, siden hver alarm binder personell.",
+        en:"Drones are used systematically to deliver contraband over prison walls. British prisons recorded <span class='num'>347</span> contraband drone incidents in 2024. At the same time the wall perimeter needs round-the-clock detection with a very low false-alarm rate, since every alarm ties up staff."},
+ edge:{no:"Systemet dekker muren uten belysning og med få falske alarmer, som er det avgjørende driftskriteriet i et lukket anlegg. Samme anlegg håndterer luftrommet over muren, slik at begge trusselretninger dekkes uten to leverandører og to alarmsentraler.",
+       en:"The system covers the wall without lighting and with few false alarms, which is the decisive operational criterion in a closed institution. The same installation handles the airspace above the wall, so both threat directions are covered without two suppliers and two alarm centres."},
+ adapt:{no:"En modell lært opp på person, klatring, kastet gjenstand og droner, og integrasjon mot anleggets egen alarmsentral.",
+        en:"A model trained on people, climbing, thrown objects and drones, and integration with the facility's own alarm centre."}},
+
+{n:15,cat:"sam",name:{no:"Havn og maritim",en:"Ports and maritime"},
+ tag:{no:"Kaikant, terminalperimeter og mann over bord.",
+      en:"Quay edge, terminal perimeter and man overboard."},
+ problem:{no:"ISPS-koden stiller krav til sikring av havneanlegg, og norske havner har lange, åpne perimetere mot sjø og land. Fall fra kai er en gjentakende ulykkestype, og småbåter som nærmer seg terminaler i mørke er vanskelige å oppdage i tide.",
+        en:"The ISPS Code sets requirements for securing port facilities, and Norwegian ports have long, open perimeters facing both sea and land. Falls from the quay are a recurring accident type, and small craft approaching terminals in darkness are hard to spot in time."},
+ edge:{no:"Systemet finner en person i vannet – den mest tidskritiske hendelsen på en kai – og ser småbåter som går uten navigasjonslys. Det måler avstand og fart på fartøy som nærmer seg, og dokumenterer hendelser for ISPS-rapportering.",
+       en:"The system finds a person in the water — the most time-critical event on a quay — and sees small craft running without navigation lights. It measures range and speed for approaching vessels, and documents events for ISPS reporting."},
+ adapt:{no:"Marin herding, en modell lært opp på person i vann og på fartøy, og integrasjon mot havnas sikkerhetssentral.",
+        en:"Marine hardening, a model trained on people in water and on vessels, and integration with the port security centre."}},
+
+{n:16,cat:"sik",name:{no:"Grense og toll",en:"Border and customs"},
+ tag:{no:"198 kilometer grense mot Russland, mye av den i skog og mørke store deler av året.",
+      en:"198 kilometres of border with Russia, much of it forested and dark for large parts of the year."},
+ problem:{no:"Grensen mot Russland krever overvåking av ulovlig kryssing og smugling over en strekning som er lang, ubebodd og mørk i månedsvis. Nær 300 GPS-jammingshendelser ble registrert i grenseområdet i 2023, som svekker satellittavhengige løsninger.",
+        en:"The Russian border requires monitoring of illegal crossings and smuggling along a stretch that is long, uninhabited and dark for months at a time. Nearly 300 GPS jamming events were recorded in the border area in 2023, which undermines satellite-dependent solutions."},
+ edge:{no:"Systemet finner personer i skog og snø uten belysning som røper posten, og fastslår posisjon lokalt selv når satellittsignalet blir forstyrret. Alt regnes ut på stedet, så anlegget står også når sambandet faller ut.",
+       en:"The system finds people in forest and snow without lighting that would give away the post, and establishes position locally even when the satellite signal is disrupted. Everything is computed on site, so the installation keeps working when communications drop."},
+ adapt:{no:"Samme tilpasning som forsvarssporet: herding, cybersikring og lav signatur. Satellittsamband der mobilnettet mangler.",
+        en:"The same adaptation as the defence track: hardening, cyber protection and low signature. Satellite communications where the mobile network is absent."}},
+
+{n:18,cat:"ind",name:{no:"Gruvedrift",en:"Mining"},
+ tag:{no:"Under jord er det verken dagslys eller sikt. Systemet sitter på maskinen og ser likevel.",
+      en:"Underground there is neither daylight nor visibility. The system rides on the machine and sees anyway."},
+ problem:{no:"Autonom lasting og transport krever pålitelig deteksjon av personer nær maskiner, både i dagbrudd og under jord. Under jord er sikt, støv og fravær av lys en varig utfordring.",
+        en:"Autonomous loading and haulage require reliable detection of people near machinery, both in open pits and underground. Underground, visibility, dust and the absence of light are permanent challenges."},
+ edge:{no:"Under jord er et vanlig kamera nær ubrukelig uten kunstig lys, og støv gjør det verre. Montert på lastebæreren eller dumperen finner systemet personer i stollen foran og rundt maskinen, og måler faktisk avstand til dem. Det er nettopp det maskinføreren – og det autonome kjøretøyet – trenger for å stanse i tide.",
+       en:"Underground, an ordinary camera is nearly useless without artificial light, and dust makes it worse. Mounted on the loader or the hauler, the system finds people in the drift ahead of and around the machine, and measures actual distance to them. That is exactly what the operator — and the autonomous vehicle — needs in order to stop in time."},
+ adapt:{no:"Systemet monteres på lastebærer eller dumper og går på maskinens eget anlegg. ATEX-kapsling for eksplosjonsfarlige områder og støvbeskyttelse kommer i tillegg. Manglende mobildekning stopper det ikke, siden alt regnes ut om bord.",
+        en:"The system mounts on the loader or the hauler and runs off the machine's own supply. An ATEX enclosure for explosive atmospheres and dust protection is added on top. The absence of mobile coverage does not stop it, since everything is computed on board."}},
+
+{n:19,cat:"ind",name:{no:"Romfart",en:"Space"},
+ tag:{no:"Sikkerhetssonen må være tom før hver oppskyting – i mørke og kuling like mye som i klarvær.",
+      en:"The safety zone must be clear before every launch — in darkness and a gale as much as in fine weather."},
+ problem:{no:"Andøya Space må kontrollere at sikkerhetssonen er tom for personer, kjøretøy og dyr før hver oppskyting. Satellittbakkestasjoner har lange perimetere på avsidesliggende steder.",
+        en:"Andøya Space must confirm that the safety zone is clear of people, vehicles and animals before every launch. Satellite ground stations have long perimeters in remote locations."},
+ edge:{no:"Systemet klarerer sonen i mørke og dårlig vær, som er normaltilstanden på Andøya store deler av året, og gir en logget bekreftelse på at sonen faktisk var tom. Det er i praksis perimetersikring under et annet navn.",
+       en:"The system clears the zone in darkness and poor weather, which is the normal condition on Andøya for much of the year, and produces a logged confirmation that the zone really was empty. In practice this is perimeter security under another name."},
+ adapt:{no:"Liten, siden oppgaven er den samme som perimetersikring. Loggen må utformes slik at den kan brukes som formell klareringsdokumentasjon.",
+        en:"Minimal, since the task is the same as perimeter security. The log has to be designed so it can serve as formal clearance documentation."}},
+
+{n:20,cat:"sam",name:{no:"Smartby",en:"Smart cities"},
+ tag:{no:"Fotgjengeren i mørket ved gangfeltet, sett før billyktene rekker fram.",
+      en:"The pedestrian at the crossing in the dark, seen before the headlights reach them."},
+ problem:{no:"Fotgjengere og syklister blir påkjørt i mørket ved kryss og gangfelt uten tilstrekkelig belysning. Kommunene har ulykkespunkter de kjenner godt, men få virkemidler utover skilting og fartsdempere.",
+        en:"Pedestrians and cyclists are struck in darkness at junctions and crossings without adequate lighting. Municipalities know their accident black spots well, but have few tools beyond signage and speed bumps."},
+ edge:{no:"Systemet finner fotgjengeren lenge før billyktene rekker fram, og varsler bilisten med lys. Det avgjør om personen står på fortauet eller er på vei ut i gangfeltet, som er forskjellen på et varsel og et unødvendig varsel. Alt regnes ut lokalt, og systemet lagrer ingen identifiserbare personopplysninger.",
+       en:"The system finds the pedestrian long before the headlights reach them, and warns the driver with a light signal. It determines whether the person is standing on the pavement or stepping into the crossing, which is the difference between a warning and an unnecessary one. Everything is computed locally, and the system stores no identifiable personal data."},
+ adapt:{no:"Liten. Dette er kjerneproduktet flyttet fra landeveg til bygate, med en modell lært opp på fotgjenger og syklist framfor hjortevilt.",
+        en:"Minimal. This is the core product moved from open highway to city street, with a model trained on pedestrians and cyclists rather than deer."}},
+
+{n:21,cat:"sik",name:{no:"Søk og redning",en:"Search and rescue"},
+ tag:{no:"Faste risikopunkter kan overvåkes hele døgnet: elveløp, stup og innfallsporter til turterreng.",
+      en:"Fixed risk points can be watched around the clock: rivers, cliff edges and trailheads into open terrain."},
+ problem:{no:"Savnede personer finnes raskest med søk som virker i mørke. Redningstjenesten bruker droner og håndholdt utstyr, og tid er den avgjørende faktoren for utfall.",
+        en:"Missing people are found fastest with searching that works in the dark. Rescue services use drones and handheld equipment, and time is the decisive factor in outcomes."},
+ edge:{no:"Systemet finner en person i terreng og mørke, der øyet og lyskasteren ikke rekker. Et fast anlegg gjør nytte ved innfallsporter, der det kan registrere at noen gikk inn og ikke kom ut igjen. Det gir letemannskapet et startpunkt framfor et søkeområde.",
+       en:"The system finds a person in terrain and darkness, where the eye and the searchlight do not reach. A fixed installation earns its place at trailheads, where it can register that someone went in and did not come back out. That gives the search team a starting point rather than a search area."},
+ adapt:{no:"En modell lært opp på liggende og delvis tildekket person, som ser annerledes ut enn en gående. Anlegget settes opp ved innfallsporter, parkeringsplasser og andre punkter folk faktisk passerer.",
+        en:"A model trained on a person lying down or partly covered, which looks different from someone walking. The installation goes at trailheads, car parks and other points people actually pass."}},
+
+{n:22,cat:"sik",name:{no:"Skianlegg og friluftsliv",en:"Ski resorts and outdoor recreation"},
+ tag:{no:"Preppemaskinen kjører uansett hele løypa. Da kan den like gjerne se etter folk mens den gjør det.",
+      en:"The groomer covers the whole piste anyway. It may as well look for people while it does."},
+ problem:{no:"Alpinanlegg må kontrollere at løypene er tomme før preppemaskinene går ut, og savnede gjester i mørket er en gjentakende hendelse. Skredsoner i nærheten av anlegget krever også tilsyn.",
+        en:"Ski resorts must confirm that the pistes are clear before the groomers go out, and missing guests after dark are a recurring incident. Avalanche zones near the resort also need supervision."},
+ edge:{no:"Montert på preppemaskinen leser systemet løypa foran maskinen gjennom hele natten. Det finner en person som ligger i snø i mørke, og skiller vedkommende fra en terrengformasjon eller en snøhaug. Kontrollrunden gir dermed et svar og ikke bare en antakelse – uten at noen må kjøre den ekstra gangen.",
+       en:"Mounted on the groomer, the system reads the piste ahead of the machine right through the night. It finds a person lying in snow in the dark and tells them apart from a terrain feature or a snow bank. The sweep then produces an answer rather than an assumption — without anyone having to make the extra run."},
+ adapt:{no:"Systemet monteres på preppemaskinen og går på maskinens eget anlegg. Modellen læres opp på person i snø, og kaldt vær er systemet uansett bygget for.",
+        en:"The system mounts on the groomer and runs off the machine's own supply. The model is trained on people in snow, and cold weather is what the system is built for in any case."}},
+
+{n:23,cat:"nat",name:{no:"Naturovervåking og bevaring",en:"Nature monitoring and conservation"},
+ tag:{no:"Telling og artsregistrering uten blits, feller eller folk i felt.",
+      en:"Counting and species recording without a flash, a trap or people in the field."},
+ problem:{no:"EUs naturrestaureringsforordning og habitatdirektivet krever dokumentert overvåking av arter og bestander. Manuelle metoder er dyre, og viltkameraer gir spredte data av varierende kvalitet.",
+        en:"The EU Nature Restoration Regulation and the Habitats Directive require documented monitoring of species and populations. Manual methods are expensive, and trail cameras produce scattered data of variable quality."},
+ edge:{no:"Systemet registrerer dyr hele døgnet uten blits som forstyrrer dem, bestemmer art, og gir grove størrelsesmål. Til bestandstelling er det forskjellen på spredte observasjoner og et sammenhengende datagrunnlag.",
+       en:"The system records animals around the clock without a flash that disturbs them, identifies the species, and gives rough size estimates. For population counting that is the difference between scattered observations and a continuous dataset."},
+ adapt:{no:"En modell lært opp på flere arter. Datagrunnlaget fra WILDETECT kan gjenbrukes direkte. Anlegget egner seg til faste overvåkingspunkter som følges over år, der data blir sammenliknbare fra sesong til sesong.",
+        en:"A model trained on more species. The data foundation from WILDETECT can be reused directly. The installation suits permanent monitoring points followed over years, where data stay comparable from season to season."}},
+
+{n:24,cat:"sam",name:{no:"Vegkantenheter og V2X",en:"Roadside units and V2X"},
+ tag:{no:"Anlegget vet allerede at det står en elg i svingen. Bilen bak svingen gjør det ikke.",
+      en:"The installation already knows there is a moose around the bend. The car approaching it does not."},
+ problem:{no:"Tilkoblede og etter hvert autonome kjøretøy trenger informasjon om farer utenfor egen sensorrekkevidde. En vegkantenhet som allerede oppdager elg, fotgjenger og stanset kjøretøy sitter på nøyaktig disse dataene.",
+        en:"Connected and eventually autonomous vehicles need information about hazards beyond their own sensor range. A roadside unit that already detects moose, pedestrians and stopped vehicles is sitting on exactly that data."},
+ edge:{no:"Ingen annen kilde gir klassifisert faredata fra vegkanten i sanntid. Dette er i praksis en ny distribusjonskanal for informasjon anlegget allerede produserer, ikke et nytt produkt.",
+       en:"No other source provides classified hazard data from the roadside in real time. In practice this is a new distribution channel for information the installation already produces, not a new product."},
+ adapt:{no:"Kommunikasjonsstakk og meldingsformat utvikles mot de europeiske V2X-standardene. Selve deteksjonen er allerede på plass.",
+        en:"A communications stack and message format are developed against the European V2X standards. The detection itself is already in place."}},
+
+{n:25,cat:"sik",name:{no:"Hendelsesdokumentasjon",en:"Incident documentation"},
+ tag:{no:"Ikke et eget bruksområde, men en funksjon som følger med i alle de andre.",
+      en:"Not an application in its own right, but a function that comes with all the others."},
+ problem:{no:"Etter en hendelse er spørsmålet alltid det samme: hva skjedde, når, og hvor raskt gikk det? Svaret bygger som regel på vitneforklaringer og anslag i etterkant. Ved viltpåkjørsler alene gjøres det oppgjør for rundt <span class='num'>700 mill. kroner</span> i året uten objektive data om selve hendelsesforløpet.",
+        en:"After an incident the question is always the same: what happened, when, and how fast did it unfold? The answer usually rests on witness statements and after-the-fact estimates. For wildlife collisions alone, some <span class='num'>NOK 700 m</span> a year is settled without objective data on the sequence of events."},
+ edge:{no:"Anlegget logger hendelsen mens den skjer, med tidsstempel og klassifisering. Flere uavhengige målinger som peker samme vei gir langt sterkere dokumentasjon enn ett kamerabilde. Loggen lagres som hendelser, ikke som opptak, og kan brukes til å analysere hvilke punkter som faktisk er farlige.",
+       en:"The installation logs the event as it happens, with a timestamp and a classification. Several independent measurements pointing the same way make far stronger documentation than a single camera frame. The log is stored as events rather than footage, and can be used to analyse which locations are genuinely dangerous."},
+ adapt:{no:"Ingen ny maskinvare. Loggen finnes allerede i systemet; det som gjenstår er formelle regler for eksport og oppbevaring.",
+        en:"No new hardware. The log already exists in the system; what remains is formal rules for export and retention."}}
+];
+
+
+/* =====================================================================
+   Scenemotor. Hver scene er bygget av tre deler:
+   terreng (hvor), aktør (hva) og deteksjon (nodens svar).
+   Alle scener deler samme node til venstre med tre sensorkjegler.
+   ===================================================================== */
+
+
+/* --- maskiner som bærer systemet --- */
+const MACHINE = {
+ tractor:'<g><g fill="#2A2118"><circle cx="44" cy="182" r="32"/><circle cx="126" cy="192" r="22"/></g>'+
+   '<g fill="#3E3020"><circle cx="44" cy="182" r="16"/><circle cx="126" cy="192" r="11"/></g>'+
+   '<path d="M18 176 h44 v-22 h44 v22 h30 v18 H18Z" fill="#5A4526"/>'+
+   '<rect x="30" y="112" width="52" height="44" fill="#6B5430"/>'+
+   '<rect x="38" y="120" width="36" height="24" fill="#0F0C08" opacity=".75"/>'+
+   '<path d="M140 190 h74 v10 h-74Z" fill="#5A4526"/>'+
+   '<g stroke="#5A4526" stroke-width="3"><path d="M150 200 v10 M164 200 v10 M178 200 v10 M192 200 v10 M206 200 v10"/></g>'+
+   '<rect x="42" y="100" width="30" height="14" rx="2" fill="#DE560A"/>'+
+   '<circle cx="50" cy="107" r="2.6" fill="#14100E"/><circle cx="57" cy="107" r="2.6" fill="#14100E"/>'+
+   '<circle cx="64" cy="107" r="2.6" fill="#14100E"/></g>',
+ excavator:'<g><rect x="12" y="188" width="116" height="26" rx="12" fill="#2A2118"/>'+
+   '<g fill="#3E3020"><circle cx="30" cy="201" r="7"/><circle cx="70" cy="201" r="7"/><circle cx="110" cy="201" r="7"/></g>'+
+   '<path d="M22 188 v-46 h84 v46Z" fill="#5A4526"/>'+
+   '<rect x="30" y="150" width="34" height="26" fill="#0F0C08" opacity=".75"/>'+
+   '<path d="M104 154 L188 118 l8 14 L112 170Z" fill="#6B5430"/>'+
+   '<path d="M188 118 L226 168 l-14 8 L176 130Z" fill="#6B5430"/>'+
+   '<path d="M212 172 l24 14 -6 16 -26 -16Z" fill="#7A6238"/>'+
+   '<rect x="34" y="126" width="30" height="14" rx="2" fill="#DE560A"/>'+
+   '<circle cx="42" cy="133" r="2.6" fill="#14100E"/><circle cx="49" cy="133" r="2.6" fill="#14100E"/>'+
+   '<circle cx="56" cy="133" r="2.6" fill="#14100E"/></g>',
+ loader:'<g><g fill="#2A2118"><circle cx="40" cy="200" r="20"/><circle cx="112" cy="200" r="20"/></g>'+
+   '<g fill="#3E3020"><circle cx="40" cy="200" r="9"/><circle cx="112" cy="200" r="9"/></g>'+
+   '<path d="M14 200 v-30 h124 v30Z" fill="#5A4526"/>'+
+   '<rect x="46" y="146" width="46" height="26" fill="#6B5430"/>'+
+   '<rect x="53" y="152" width="30" height="15" fill="#0F0C08" opacity=".75"/>'+
+   '<path d="M138 186 l44 -10 v34 l-44 -6Z" fill="#6B5430"/>'+
+   '<rect x="54" y="134" width="30" height="14" rx="2" fill="#DE560A"/>'+
+   '<circle cx="62" cy="141" r="2.6" fill="#14100E"/><circle cx="69" cy="141" r="2.6" fill="#14100E"/>'+
+   '<circle cx="76" cy="141" r="2.6" fill="#14100E"/></g>',
+ groomer:'<g><path d="M14 202 h130 l-10 22 H24Z" fill="#2A2118"/>'+
+   '<g fill="#3E3020"><circle cx="36" cy="213" r="7"/><circle cx="78" cy="213" r="7"/><circle cx="120" cy="213" r="7"/></g>'+
+   '<path d="M20 202 v-24 h124 v24Z" fill="#4A5560"/>'+
+   '<rect x="44" y="140" width="58" height="40" fill="#5E6E7A"/>'+
+   '<rect x="52" y="147" width="42" height="24" fill="#0F0C08" opacity=".75"/>'+
+   '<path d="M144 190 l40 -8 v30 l-40 -6Z" fill="#5E6E7A"/>'+
+   '<rect x="58" y="128" width="30" height="14" rx="2" fill="#DE560A"/>'+
+   '<circle cx="66" cy="135" r="2.6" fill="#14100E"/><circle cx="73" cy="135" r="2.6" fill="#14100E"/>'+
+   '<circle cx="80" cy="135" r="2.6" fill="#14100E"/></g>'
+};
+
+/* markeringer på underlaget som ruller forbi og viser at maskinen er i bevegelse */
+function rollMarks(y, col){
+  var m = '';
+  for(var x = -140; x < 800; x += 70) m += '<path d="M'+x+' '+y+' h26"/>';
+  return '<g class="roll" stroke="'+col+'" stroke-width="3" opacity=".4" stroke-linecap="round">'+m+'</g>';
+}
+/* i en bakke må sporene ligge i bakken */
+function rollSlope(col){
+  function sy(x){ return 240 - 0.1697*(x+20); }
+  var m = '';
+  for(var x = -140; x < 800; x += 70){
+    m += '<path d="M'+x+' '+sy(x).toFixed(1)+' L'+(x+30)+' '+sy(x+30).toFixed(1)+'"/>';
+    m += '<path d="M'+(x+16)+' '+(sy(x+16)+17).toFixed(1)+' L'+(x+46)+' '+(sy(x+46)+17).toFixed(1)+'"/>';
+  }
+  return '<g class="roll" stroke="'+col+'" stroke-width="3" opacity=".35" stroke-linecap="round">'+m+'</g>';
+}
+/* under jord er det taket og sålen som passerer, ikke en tunnelmunning */
+function rollMine(col){
+  function cy(x){ var d = (x-310)/350; return 118 + 42*d*d; }
+  var m = '';
+  for(var x = -140; x < 800; x += 70){
+    m += '<path d="M'+x+' '+cy(x).toFixed(1)+' L'+(x+30)+' '+cy(x+30).toFixed(1)+'"/>';
+    m += '<path d="M'+x+' 226 h30"/>';
+  }
+  return '<g class="roll" stroke="'+col+'" stroke-width="3" opacity=".45" stroke-linecap="round">'+m+'</g>';
+}
+
+/* --- terreng --- */
+const TERRAIN = {
+ road:'<path d="M-20 240 L206 152 H414 L640 240Z" fill="#0C0907" opacity=".7"/>'+
+      '<path d="M310 240 L310 152" stroke="#F6EFE8" stroke-width="3" opacity=".22" stroke-dasharray="16 14"/>',
+ rail:'<path d="M150 240 L268 152 M470 240 L352 152" stroke="#6B4A2E" stroke-width="3" opacity=".8"/>'+
+      '<g stroke="#3A2A1C" stroke-width="4" opacity=".8"><path d="M262 160 H358 M244 176 H376 M218 198 H402 M182 226 H438"/></g>',
+ tunnel:'<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="#070505"/>'+
+        '<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="none" stroke="#6B4A2E" stroke-width="2.5" opacity=".8"/>'+
+        '<path d="M150 240 L232 214 H388 L470 240Z" fill="#1A120C"/>'+
+        '<rect x="212" y="236" width="196" height="4" fill="#6B4A2E" opacity=".5"/>',
+ runway:'<path d="M-20 240 L232 158 H392 L640 240Z" fill="#0C0907" opacity=".7"/>'+
+        '<path d="M312 240 V158" stroke="#F6EFE8" stroke-width="2" opacity=".28" stroke-dasharray="10 18"/>'+
+        '<g fill="#F2B705" opacity=".5"><rect x="196" y="214" width="14" height="4"/><rect x="414" y="214" width="14" height="4"/></g>',
+ quay:'<rect x="0" y="186" width="620" height="8" fill="#6B4A2E" opacity=".7"/>'+
+      '<rect x="0" y="194" width="620" height="46" fill="#0A1418" opacity=".85"/>'+
+      '<g stroke="#2A5A63" stroke-width="1.5" opacity=".55"><path d="M20 208 H180 M240 208 H420 M470 208 H600 M60 224 H260 M330 224 H560"/></g>',
+ crossing:'<path d="M-20 240 L206 152 H414 L640 240Z" fill="#0C0907" opacity=".7"/>'+
+          '<g fill="#F6EFE8" opacity=".24"><path d="M230 240 L250 158 h16 L240 240Z"/><path d="M282 240 L294 158 h16 L292 240Z"/>'+
+          '<path d="M334 240 L338 158 h16 L344 240Z"/><path d="M386 240 L382 158 h16 L396 240Z"/></g>',
+ field:'<rect x="0" y="176" width="620" height="64" fill="#2E2410" opacity=".8"/>'+
+       '<g stroke="#7A6A22" stroke-width="1.6" opacity=".55">'+
+       '<path d="M120 214 v-16 M134 216 v-20 M148 213 v-15 M250 218 v-18 M264 215 v-14 M278 219 v-19 '+
+       'M390 214 v-17 M404 217 v-15 M418 212 v-14 M520 216 v-18 M534 213 v-15 M548 218 v-17"/></g>',
+ fence:'<rect x="0" y="182" width="620" height="58" fill="#241C12" opacity=".8"/>'+
+       '<g stroke="#8A7250" stroke-width="2.5" opacity=".75"><path d="M180 190 v-42 M300 190 v-42 M420 190 v-42 M540 190 v-42"/></g>'+
+       '<g stroke="#8A7250" stroke-width="1.2" opacity=".45"><path d="M170 156 H620 M170 168 H620 M170 180 H620"/></g>',
+ perimeter:'<rect x="0" y="188" width="620" height="52" fill="#1C1610" opacity=".85"/>'+
+       '<g stroke="#8A7250" stroke-width="2.5" opacity=".7"><path d="M200 194 v-52 M330 194 v-52 M460 194 v-52 M590 194 v-52"/></g>'+
+       '<g stroke="#8A7250" stroke-width="1" opacity=".4"><path d="M190 150 H620 M190 164 H620 M190 178 H620"/></g>'+
+       '<path d="M186 142 h440" stroke="#DE560A" stroke-width="1.5" opacity=".45" stroke-dasharray="5 7"/>',
+ pen:'<rect x="0" y="164" width="620" height="76" fill="#0A1418" opacity=".9"/>'+
+     '<g fill="none" stroke="#2A6A73" stroke-width="2.5" opacity=".8">'+
+     '<ellipse cx="290" cy="200" rx="76" ry="26"/><ellipse cx="452" cy="192" rx="66" ry="22"/></g>'+
+     '<g stroke="#2A5A63" stroke-width="1.2" opacity=".4"><path d="M20 226 H240 M330 232 H580"/></g>',
+ forest:'<g fill="#0E1A10" opacity=".9"><path d="M150 200 L176 128 L202 200Z"/><path d="M212 202 L244 116 L276 202Z"/>'+
+        '<path d="M290 200 L314 134 L338 200Z"/><path d="M356 203 L392 110 L428 203Z"/><path d="M444 201 L470 132 L496 201Z"/>'+
+        '<path d="M510 202 L540 122 L570 202Z"/></g><rect x="0" y="198" width="620" height="42" fill="#1A1409" opacity=".85"/>',
+ treeline:'<g fill="#0E1A10" opacity=".85"><path d="M120 206 L142 154 L164 206Z"/><path d="M178 208 L204 146 L230 208Z"/>'+
+        '<path d="M244 206 L264 158 L284 206Z"/><path d="M300 209 L330 140 L360 209Z"/><path d="M374 206 L396 156 L418 206Z"/>'+
+        '<path d="M432 208 L458 148 L484 208Z"/><path d="M498 206 L520 158 L542 206Z"/></g>'+
+        '<rect x="0" y="204" width="620" height="36" fill="#1A1409" opacity=".85"/>',
+ wall:'<rect x="0" y="200" width="620" height="40" fill="#1C1610" opacity=".85"/>'+
+      '<rect x="196" y="118" width="330" height="84" fill="#241C14"/>'+
+      '<g stroke="#0F0C08" stroke-width="1.5" opacity=".7"><path d="M196 146 H526 M196 174 H526 M258 118 V202 M338 118 V202 M418 118 V202"/></g>',
+ pile:'<rect x="0" y="196" width="620" height="44" fill="#1A1409" opacity=".85"/>'+
+      '<path d="M180 198 Q276 116 372 160 Q432 188 500 198Z" fill="#2A2014"/>'+
+      '<path d="M180 198 Q276 116 372 160 Q432 188 500 198" fill="none" stroke="#6B4A2E" stroke-width="1.5" opacity=".6"/>',
+ turbine:'<rect x="0" y="200" width="620" height="40" fill="#141C18" opacity=".85"/>'+
+      '<path d="M446 200 L456 96 h12 L478 200Z" fill="#2C3A34"/>'+
+      '<g class="spin" style="transform-origin:462px 96px"><g stroke="#5B6E64" stroke-width="5" stroke-linecap="round">'+
+      '<path d="M462 96 V26"/><path d="M462 96 L523 131"/><path d="M462 96 L401 131"/></g>'+
+      '<circle cx="462" cy="96" r="6" fill="#7B8E84"/></g>',
+ site:'<rect x="0" y="196" width="620" height="44" fill="#241C12" opacity=".85"/>'+
+      '<path d="M330 198 Q392 148 454 198Z" fill="#2E2418"/>'+
+      '<path d="M470 198 Q516 162 562 198Z" fill="#2A2014"/>'+
+      '<g fill="#3A2E1E"><rect x="238" y="170" width="56" height="28" rx="3"/><rect x="248" y="156" width="36" height="14" rx="2"/></g>'+
+      '<g stroke="#8A7250" stroke-width="2" opacity=".5"><path d="M596 198 v-40 M540 198 v-40"/></g>',
+ building:'<rect x="0" y="198" width="620" height="42" fill="#181C1E" opacity=".85"/>'+
+      '<rect x="300" y="122" width="250" height="76" fill="#222A2E"/>'+
+      '<g fill="#3B4A50" opacity=".8"><rect x="316" y="138" width="26" height="14"/><rect x="352" y="138" width="26" height="14"/>'+
+      '<rect x="388" y="138" width="26" height="14"/><rect x="316" y="164" width="26" height="14"/><rect x="352" y="164" width="26" height="14"/></g>'+
+      '<g stroke="#8A7250" stroke-width="2" opacity=".6"><path d="M180 200 v-46 M240 200 v-46"/></g>'+
+      '<g stroke="#8A7250" stroke-width="1" opacity=".35"><path d="M170 160 H300 M170 174 H300 M170 188 H300"/></g>',
+ mine:'<path d="M-40 -20 H660 V160 Q310 112 -40 160Z" fill="#070505"/>'+
+      '<path d="M-40 160 Q310 112 660 160" fill="none" stroke="#5B4630" stroke-width="3" opacity=".6"/>'+
+      '<rect x="0" y="222" width="620" height="18" fill="#2A2014" opacity=".9"/>'+
+      '<path d="M0 222 H620" stroke="#5B4630" stroke-width="2" opacity=".45"/>',
+ pad:'<rect x="0" y="202" width="620" height="38" fill="#1A1A1E" opacity=".85"/>'+
+     '<g stroke="#4A5058" stroke-width="2.5"><path d="M420 202 V96 M492 202 V96 M420 96 H492"/></g>'+
+     '<g stroke="#3A4048" stroke-width="1.2" opacity=".8"><path d="M420 120 L492 148 M492 120 L420 148 M420 152 L492 180 M492 152 L420 180"/></g>'+
+     '<path d="M448 202 V116 h16 V202Z" fill="#6E757E" opacity=".9"/>'+
+     '<path d="M456 116 L448 96 h16Z" fill="#8E959E"/>',
+ slope:'<path d="M-20 240 L640 128 V240Z" fill="#1C2226" opacity=".9"/>'+
+       '<path d="M-20 240 L640 128" stroke="#5E6E78" stroke-width="2" opacity=".5"/>',
+ river:'<rect x="0" y="188" width="620" height="52" fill="#1A1409" opacity=".8"/>'+
+       '<path d="M-20 214 Q160 190 320 216 Q480 242 640 208 V240 H-20Z" fill="#0A1418" opacity=".9"/>'+
+       '<g stroke="#2A5A63" stroke-width="1.4" opacity=".5"><path d="M40 220 Q180 202 300 222 M340 228 Q460 240 600 216"/></g>'+
+       '<g fill="#241C12"><path d="M120 196 L146 168 L172 196Z"/><path d="M470 194 L492 170 L514 194Z"/></g>'
+};
+
+/* --- aktører, tegnet omkring eget nullpunkt ved «føttene» --- */
+const ACTOR = {
+ quad:(sx)=>'<g transform="scale('+sx+')" fill="#F2B705">'+
+   '<ellipse cx="0" cy="-26" rx="30" ry="17"/><ellipse cx="26" cy="-42" rx="12" ry="9"/>'+
+   '<path d="M30 -50 l7 -13 M22 -50 l-3 -13" stroke="#F2B705" stroke-width="3" fill="none"/>'+
+   '<g stroke="#F2B705" stroke-width="5" stroke-linecap="round"><path d="M-18 -12 V0 M-6 -12 V0 M10 -12 V0 M20 -12 V0"/></g></g>',
+ herd:()=>'<g fill="#F2B705">'+
+   '<ellipse cx="0" cy="-22" rx="24" ry="13"/><ellipse cx="20" cy="-34" rx="9" ry="7"/>'+
+   '<g stroke="#F2B705" stroke-width="4" stroke-linecap="round"><path d="M-14 -10 V0 M-2 -10 V0 M12 -10 V0"/></g>'+
+   '<g opacity=".62"><ellipse cx="-46" cy="-18" rx="20" ry="11"/><ellipse cx="-30" cy="-28" rx="8" ry="6"/>'+
+   '<g stroke="#F2B705" stroke-width="3.5" stroke-linecap="round"><path d="M-58 -8 V0 M-46 -8 V0 M-34 -8 V0"/></g></g>'+
+   '<g opacity=".4"><ellipse cx="-86" cy="-15" rx="17" ry="9"/><ellipse cx="-72" cy="-23" rx="7" ry="5"/></g></g>',
+ person:()=>'<g fill="#F6EFE8"><circle cx="0" cy="-46" r="8"/><path d="M-7 -36 h14 l3 20 h-20Z"/>'+
+   '<g stroke="#F6EFE8" stroke-width="4.5" stroke-linecap="round"><path d="M-4 -16 L-7 0 M4 -16 L8 0"/></g></g>',
+ lying:()=>'<g fill="#F6EFE8"><ellipse cx="0" cy="-7" rx="30" ry="8"/><circle cx="-28" cy="-10" r="7"/>'+
+   '<path d="M8 -8 l18 4" stroke="#F6EFE8" stroke-width="5" stroke-linecap="round"/></g>',
+ drone:()=>'<g fill="#F6EFE8"><rect x="-9" y="-6" width="18" height="10" rx="3"/>'+
+   '<g stroke="#F6EFE8" stroke-width="2.5"><path d="M-9 -4 L-26 -12 M9 -4 L26 -12 M-9 2 L-24 8 M9 2 L24 8"/></g>'+
+   '<g fill="none" stroke="#F6EFE8" stroke-width="2" opacity=".8">'+
+   '<path d="M-34 -14 a8 3 0 0 1 16 0"/><path d="M18 -14 a8 3 0 0 1 16 0"/></g></g>',
+ bird:()=>'<g fill="none" stroke="#F2B705" stroke-width="4.5" stroke-linecap="round">'+
+   '<path d="M-26 4 Q-13 -14 0 0 Q13 -14 26 4"/></g><ellipse cx="0" cy="1" rx="5" ry="3.5" fill="#F2B705"/>',
+ flock:()=>'<g fill="none" stroke="#F2B705" stroke-width="3" stroke-linecap="round" opacity=".9">'+
+   '<path d="M-20 0 Q-10 -10 0 0 Q10 -10 20 0"/><path d="M-52 16 Q-44 8 -36 16 Q-28 8 -20 16" opacity=".7"/>'+
+   '<path d="M16 22 Q24 14 32 22 Q40 14 48 22" opacity=".6"/><path d="M-64 -14 Q-56 -22 -48 -14 Q-40 -22 -32 -14" opacity=".5"/></g>',
+ pred:()=>'<g fill="#F2B705"><ellipse cx="0" cy="-14" rx="26" ry="10"/><ellipse cx="23" cy="-21" rx="10" ry="7.5"/>'+
+   '<path d="M29 -27 l3 -6 M18 -27 l-2 -6" stroke="#F2B705" stroke-width="3" fill="none"/>'+
+   '<path d="M-24 -17 q-17 -3 -23 7" stroke="#F2B705" stroke-width="7" stroke-linecap="round" fill="none"/>'+
+   '<g stroke="#F2B705" stroke-width="4.5" stroke-linecap="round"><path d="M-14 -6 V0 M-3 -6 V0 M9 -6 V0 M18 -6 V0"/></g></g>',
+ seal:()=>'<g fill="#F6EFE8"><ellipse cx="0" cy="-8" rx="26" ry="10"/><ellipse cx="22" cy="-16" rx="9" ry="7"/>'+
+   '<path d="M-24 -10 l-14 -7 l2 12Z"/></g>',
+ swim:()=>'<g><ellipse cx="0" cy="0" rx="30" ry="6" fill="#2A5A63" opacity=".75"/>'+
+   '<ellipse cx="0" cy="0" rx="18" ry="4" fill="#0A1418" opacity=".6"/>'+
+   '<circle cx="2" cy="-13" r="8" fill="#F6EFE8"/>'+
+   '<path d="M-15 -9 q7 -13 15 -6" stroke="#F6EFE8" stroke-width="5" stroke-linecap="round" fill="none"/></g>',
+ car:()=>'<g fill="#F6EFE8"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
+   '<g fill="#14100E"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g>',
+ carHot:()=>'<g><ellipse class="pulse" cx="0" cy="-8" rx="30" ry="16" fill="#DE560A" opacity=".55"/>'+
+   '<g fill="#F6EFE8"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
+   '<g fill="#14100E"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g>'+
+   '<circle cx="-4" cy="-8" r="6" fill="#FFD08A"/></g>',
+ carAlert:()=>'<g><circle class="ping" cx="0" cy="-14" r="34" fill="none" stroke="#F2B705" stroke-width="2"/>'+
+   '<g fill="#F6EFE8"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
+   '<g fill="#14100E"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g></g>',
+ glow:()=>'<g><circle class="pulse" cx="0" cy="-12" r="22" fill="#DE560A" opacity=".45"/>'+
+   '<circle cx="0" cy="-12" r="10" fill="#FFD08A"/><circle cx="0" cy="-12" r="5" fill="#FFF3E0"/></g>',
+ plume:()=>'<g><g class="rise" fill="#DE560A" opacity=".5"><ellipse cx="0" cy="-30" rx="18" ry="24"/></g>'+
+   '<ellipse class="pulse" cx="0" cy="-8" rx="16" ry="8" fill="#FFB45A" opacity=".8"/>'+
+   '<circle cx="0" cy="-8" r="6" fill="#FFF3E0"/></g>',
+ event:()=>'<g><circle class="ping" cx="0" cy="-16" r="26" fill="none" stroke="#F2B705" stroke-width="2"/>'+
+   '<circle cx="0" cy="-16" r="7" fill="#F2B705"/>'+
+   '<g stroke="#F2B705" stroke-width="2" opacity=".7"><path d="M-34 -16 h16 M18 -16 h16 M0 -46 v-14"/></g></g>'
+};
+
+/* --- scenetabell: hvilket terreng, hvilken aktør, hvor den går --- */
+const SC = {
+ 1:{t:'road',a:'quad',s:1,aw:78,ah:60,x0:592,y0:0,x1:322,y1:8,dur:9,lab:{no:'ELG',en:'MOOSE'},cf:'0,94'},
+ 2:{t:'rail',a:'herd',aw:150,ah:48,x0:596,y0:-6,x1:318,y1:6,dur:11,lab:{no:'REIN',en:'REINDEER'},cf:'0,93'},
+ 3:{t:'perimeter',a:'drone',aw:76,ah:44,x0:600,y0:-92,x1:210,y1:-104,dur:8,lab:{no:'DRONE',en:'DRONE'},cf:'0,88'},
+ 4:{t:'field',mob:'tractor',ox:57,oy:100,mark:214,mc:'#7A6A22',a:'lying',aw:76,ah:34,x0:600,y0:0,x1:268,y1:2,dur:9,lab:{no:'RÅDYRKALV',en:'FAWN'},cf:'0,91'},
+ 5:{t:'fence',a:'pred',aw:62,ah:36,x0:596,y0:0,x1:296,y1:0,dur:10,lab:{no:'JERV',en:'WOLVERINE'},cf:'0,86'},
+ 6:{t:'pile',a:'glow',aw:62,ah:52,x0:300,y0:-38,x1:300,y1:-38,dur:6,still:1,lab:{no:'GLOBRANN',en:'EMBER'},cf:'0,97'},
+ 7:{t:'turbine',a:'bird',aw:70,ah:38,x0:120,y0:-96,x1:436,y1:-104,dur:9,lab:{no:'HAVØRN',en:'EAGLE'},cf:'0,89'},
+ 8:{t:'tunnel',a:'carHot',aw:82,ah:44,x0:534,y0:32,x1:330,y1:18,dur:9,lab:{no:'BATTERI 84 °C',en:'BATTERY 84 °C'},cf:'0,95'},
+ 9:{t:'pen',a:'seal',aw:74,ah:36,x0:594,y0:-6,x1:306,y1:2,dur:10,lab:{no:'SEL',en:'SEAL'},cf:'0,87'},
+10:{t:'runway',a:'flock',aw:140,ah:56,x0:600,y0:-78,x1:242,y1:-62,dur:9,lab:{no:'FUGLEFLOKK',en:'BIRD FLOCK'},cf:'0,90'},
+11:{t:'treeline',a:'plume',aw:60,ah:64,x0:340,y0:-4,x1:340,y1:-4,dur:6,still:1,lab:{no:'VARMEPLUME',en:'HEAT PLUME'},cf:'0,96'},
+12:{t:'site',mob:'excavator',ox:49,oy:126,mark:216,mc:'#6B5430',a:'person',aw:48,ah:60,x0:594,y0:0,x1:286,y1:0,dur:9,lab:{no:'PERSON NÆR MASKIN',en:'PERSON NEAR PLANT'},cf:'0,95'},
+13:{t:'building',a:'glow',aw:56,ah:48,x0:452,y0:-72,x1:452,y1:-72,dur:6,still:1,lab:{no:'VARMGANG',en:'OVERHEATING'},cf:'0,94'},
+14:{t:'wall',a:'drone',aw:76,ah:44,x0:596,y0:-142,x1:340,y1:-96,dur:8,lab:{no:'DRONE',en:'DRONE'},cf:'0,88'},
+15:{t:'quay',a:'swim',aw:58,ah:32,x0:522,y0:26,x1:326,y1:34,dur:10,lab:{no:'PERSON I SJØEN',en:'PERSON IN WATER'},cf:'0,92'},
+16:{t:'forest',a:'person',aw:48,ah:60,x0:582,y0:0,x1:288,y1:2,dur:11,lab:{no:'PERSON',en:'PERSON'},cf:'0,91'},
+18:{t:'mine',mob:'loader',ox:69,oy:134,mtype:'mine',mc:'#6B5638',a:'person',aw:48,ah:60,x0:560,y0:26,x1:266,y1:26,dur:9,lab:{no:'PERSON',en:'PERSON'},cf:'0,93'},
+19:{t:'pad',a:'car',aw:82,ah:44,x0:600,y0:0,x1:346,y1:0,dur:9,lab:{no:'KJØRETØY I SONEN',en:'VEHICLE IN ZONE'},cf:'0,96'},
+20:{t:'crossing',a:'person',aw:48,ah:60,x0:566,y0:0,x1:330,y1:6,dur:8,lab:{no:'FOTGJENGER',en:'PEDESTRIAN'},cf:'0,95'},
+21:{t:'river',a:'lying',aw:76,ah:34,x0:398,y0:-10,x1:398,y1:-10,dur:7,still:1,lab:{no:'PERSON',en:'PERSON'},cf:'0,89'},
+22:{t:'slope',mob:'groomer',ox:73,oy:128,mtype:'slope',mc:'#6E7E88',a:'lying',aw:76,ah:34,x0:600,y0:-63,x1:270,y1:-7,dur:10,lab:{no:'PERSON I LØYPA',en:'PERSON ON PISTE'},cf:'0,90'},
+23:{t:'forest',a:'quad',s:.78,aw:64,ah:50,x0:592,y0:0,x1:300,y1:0,dur:12,lab:{no:'HJORT',en:'RED DEER'},cf:'0,92'},
+24:{t:'road',a:'carAlert',aw:84,ah:52,x0:566,y0:6,x1:322,y1:0,dur:9,lab:{no:'VARSEL SENDT',en:'ALERT SENT'},cf:'0,94'},
+25:{t:'road',a:'event',aw:70,ah:56,x0:336,y0:-16,x1:336,y1:-16,dur:6,still:1,lab:{no:'HENDELSE LOGGET',en:'EVENT LOGGED'},cf:'0,94'}
+};
+
+/* --- selve tegningen --- */
+function sceneSVG(n){
+  const c = SC[n]; if(!c) return '';
+  const act = ACTOR[c.a](c.s || 1);
+  const bx = -c.aw/2, by = -c.ah;
+  const still = c.still ? true : false;
+  const OX = c.ox || 64, OY = c.oy || 108;
+  const BY = 198;
+  const y0 = BY + c.y0, y1 = BY + c.y1;
+  const style = 'style="--x0:'+c.x0+'px;--y0:'+y0+'px;--x1:'+c.x1+'px;--y1:'+y1+'px;--dur:'+c.dur+'s;'+
+                'transform:translate('+(still?c.x0:Math.round((c.x0+c.x1)/2))+'px,'+(still?y0:Math.round((y0+y1)/2))+'px)"';
+  return '<svg viewBox="0 0 620 240" role="img" aria-hidden="true">'+
+   '<defs><linearGradient id="sky'+n+'" x1="0" y1="0" x2="0" y2="1">'+
+   '<stop offset="0" stop-color="#1B1310"/><stop offset="1" stop-color="#3A2113"/></linearGradient>'+
+   '<linearGradient id="grd'+n+'" x1="0" y1="0" x2="0" y2="1">'+
+   '<stop offset="0" stop-color="#57290F"/><stop offset="1" stop-color="#100C0A"/></linearGradient>'+
+   ['cT|#DE560A','cR|#DE560A','cL|#DE560A'].map(function(g){var a=g.split('|');
+     return '<linearGradient id="'+a[0]+n+'" x1="0" y1="0" x2="1" y2="0">'+
+            '<stop offset="0" stop-color="'+a[1]+'" stop-opacity=".62"/>'+
+            '<stop offset=".45" stop-color="'+a[1]+'" stop-opacity=".16"/>'+
+            '<stop offset="1" stop-color="'+a[1]+'" stop-opacity="0"/></linearGradient>';}).join('')+
+   '</defs>'+
+   '<rect width="620" height="150" fill="url(#sky'+n+')"/><rect y="150" width="620" height="90" fill="url(#grd'+n+')"/>'+
+   '<g opacity=".16" stroke="#DE560A" stroke-width="1"><path d="M0 166 H620 M0 184 H620 M0 206 H620 M0 232 H620"/></g>'+
+   TERRAIN[c.t]+
+   (c.mob ? (c.mtype === 'slope' ? rollSlope(c.mc)
+           : c.mtype === 'mine'  ? rollMine(c.mc)
+           : rollMarks(c.mark, c.mc)) : '')+
+   '<g class="cone cone-t" fill="url(#cT'+n+')"><path d="M'+OX+' '+OY+' L620 14 V70Z"/></g>'+
+   '<g class="cone cone-r" fill="url(#cR'+n+')"><path d="M'+OX+' '+OY+' L620 74 V130Z"/></g>'+
+   '<g class="cone cone-l" fill="url(#cL'+n+')"><path d="M'+OX+' '+OY+' L620 134 V212Z"/></g>'+
+   '<g '+(still?'':'class="act" ')+style+'>'+
+     act+
+     '<g class="'+(still?'lock-still':'lock')+'" '+(still?'':'style="--dur:'+c.dur+'s"')+'>'+
+       '<rect x="'+bx+'" y="'+by+'" width="'+c.aw+'" height="'+c.ah+'" fill="none" stroke="#F2B705" stroke-width="2"/>'+
+       '<rect x="'+bx+'" y="'+(by-13)+'" width="'+Math.max(30, c.lab[lang].length*5.9+8)+'" height="13" fill="#F2B705"/>'+
+       '<text x="'+(bx+4)+'" y="'+(by-3.5)+'" font-family="IBM Plex Mono, monospace" font-size="9" fill="#14100E">'+c.lab[lang]+'</text>'+
+     '</g>'+
+   '</g>'+
+   '<rect class="sweep" x="0" y="0" width="2" height="240" fill="#F6EFE8" opacity=".08"/>'+
+   (c.mob ? MACHINE[c.mob] :
+     '<rect x="60" y="66" width="7" height="174" fill="#0A0806"/>'+
+     '<rect x="48" y="52" width="31" height="17" rx="2" fill="#DE560A"/>'+
+     '<circle cx="56" cy="60.5" r="2.7" fill="#14100E"/><circle cx="63.5" cy="60.5" r="2.7" fill="#14100E"/>'+
+     '<circle cx="71" cy="60.5" r="2.7" fill="#14100E"/>')+
+   '</svg>';
+}
+
+function stage(n, extraClass){
+  const c = SC[n]; if(!c) return '';
+  return '<div class="stage '+(extraClass||'')+'">'+
+    '<div class="stage-top"><span class="stage-live"><i></i>'+t('sceneLive')+'</span></div>'+
+    sceneSVG(n)+
+    '<div class="stage-read"><div class="stage-class">'+c.lab[lang]+' <span>'+
+      (lang==='no'?c.cf:c.cf.replace(',','.'))+'</span></div>'+
+    '<div class="stage-meta">'+t('sceneNode')+' N-0'+String(n).padStart(2,'0')+'</div></div></div>';
+}
+
+/* ---------------- grensesnittekster / interface strings ---------------- */
+const T = {
+ no:{
+  brandSub:"Bruksområder",
+  flagEyebrow:"Hovedprosjektet · finansiert av Forskningsrådet",
+  flagTitle:"WILDETECT: <em>viltdeteksjon</em> på norske veger",
+  flagBody:"VeiVakt utvikler deteksjonsanlegget i WILDETECT, et forskningsprosjekt om å hindre påkjørsler av hjortevilt langs veg. Dette er selskapets største prosjekt. Det er her systemet trenes, valideres i felt og møter kravene til drift gjennom en norsk vinter.",
+  flagBody2:"Konsortiet gir tilgang til noe et lite selskap ikke kan bygge alene: viltfaglig kompetanse, vegeierens krav og et forskningsmiljø som etterprøver resultatene. Vei og vilt er kjerneproduktet. De øvrige bruksområdene på denne siden er kartlagt av VeiVakt.",
+  flagPartners:"Konsortiet",
+  flagRole1:"Prosjektledelse og forskning",
+  flagRole2:"Viltbiologi og bestandsdata",
+  flagRole3:"Vegeier og kravstiller",
+  flagRole4:"Forskning og validering",
+  flagRole5:"Deteksjonsanlegg",
+  coreTag:"Kjerne",
+  heroEyebrow:"Patentsøkt trippelsensorsystem · 24 bruksområder",
+  heroTitle:"Ett system.<br>Mange oppgaver.<br><em>Ett prinsipp.</em>",
+  heroLede:"VeiVakt er bygget for å oppdage farer langs veg. Det samme patentsøkte trippelsensorsystemet løser en rekke andre oppgaver der vanlige overvåkingsløsninger kommer til kort. Her er oversikten over hva det kan brukes til.",
+  statDomains:"bruksområder",
+  statPatentV:"Patentsøkt",statPatent:"trippelsensorsystem",
+  statAllV:"Døgnet",statAll:"drift uten belysning",
+  statLocalV:"Lokalt",statLocal:"alt regnes ut på stedet",
+  sceneLive:"Deteksjon",sceneNode:"anlegg",
+  legAKey:"Oppdager",legATitle:"Ser det ingen andre ser",
+  legABody:"Systemet oppdager farer i mørke, tåke, røyk og snødrev, uten belysning og uten at noe må stå stille for å bli lagt merke til. Det er her vanlige kameraløsninger stopper.",
+  legBKey:"Skiller",legBTitle:"Avgjør hva det faktisk er",
+  legBBody:"Et varsel har bare verdi hvis det er riktig. Systemet avgjør hva objektet er og hvor det er på vei, slik at falske alarmer ikke tar knekken på tilliten – og på bemanningen.",
+  legCKey:"Varsler",legCTitle:"Handler på stedet",
+  legCBody:"Alt regnes ut lokalt i anlegget. Varselet går ut med en gang, uten at data må sendes ut først, og uten at systemet er avhengig av at sambandet står.",
+  legNote:"De tekniske detaljene i systemet er ikke offentlige. VeiVakt har patentsøknad under behandling, og komponentvalg, arkitektur og ytelsestall holdes tilbake til søknadsprosessen er sluttført.",
+  filterAll:"Alle 24",filterSam:"Samferdsel",filterNat:"Natur og landbruk",filterSik:"Beredskap",filterInd:"Industri og anlegg",
+  searchPh:"Søk i bruksområder …",
+  catsam:"Samferdsel",catnat:"Natur og landbruk",catsik:"Beredskap og sikkerhet",catind:"Industri og anlegg",
+  fProblem:"Behovet",fEdge:"Slik brukes systemet",fAdapt:"Oppsett og tilpasning",
+  prev:"← Forrige",next:"Neste →",
+  empty:"Ingen bruksområder passer søket.",
+  ftrNote:"Oversikten viser hva systemet kan brukes til. Noen områder er i drift i dag, andre krever at systemet læres opp på nye objekttyper eller monteres annerledes. Det står i teksten for hvert område.",
+  ftrSources:"Tall og statistikk er hentet fra SSB, Hjorteviltregisteret, Oslo Economics, NIBIO, Miljødirektoratet, Bane NOR, NINA, Fiskeridirektoratet, RISE, US EPA og offentlig tilgjengelige rapporter."
+ },
+ en:{
+  brandSub:"Applications",
+  flagEyebrow:"The main project · funded by the Research Council of Norway",
+  flagTitle:"WILDETECT: <em>wildlife detection</em> on Norwegian roads",
+  flagBody:"VeiVakt develops the detection installation in WILDETECT, a research project on preventing deer collisions along the road network. It is the company's largest project. This is where the system is trained, validated in the field, and made to meet the demands of running through a Norwegian winter.",
+  flagBody2:"The consortium provides what a small company cannot build alone: wildlife expertise, the road owner's requirements, and a research environment that tests the results. Roads and wildlife is the core product. The other applications on this page were mapped by VeiVakt.",
+  flagPartners:"The consortium",
+  flagRole1:"Project lead and research",
+  flagRole2:"Wildlife biology and population data",
+  flagRole3:"Road owner and requirements",
+  flagRole4:"Research and validation",
+  flagRole5:"Detection installation",
+  coreTag:"Core",
+  heroEyebrow:"Patent-pending triple-sensor system · 24 applications",
+  heroTitle:"One system.<br>Many jobs.<br><em>One principle.</em>",
+  heroLede:"VeiVakt was built to spot hazards on the road. The same patent-pending triple-sensor system handles a range of other jobs where conventional monitoring falls short. Here is what it can be used for.",
+  statDomains:"applications",
+  statPatentV:"Patent pending",statPatent:"triple-sensor system",
+  statAllV:"Around the clock",statAll:"operating without lighting",
+  statLocalV:"On site",statLocal:"everything computed locally",
+  sceneLive:"Detection",sceneNode:"installation",
+  legAKey:"Detects",legATitle:"Sees what nothing else sees",
+  legABody:"The system finds hazards in darkness, fog, smoke and drifting snow, without lighting and without anything having to stand still to be noticed. This is where conventional camera solutions stop.",
+  legBKey:"Distinguishes",legBTitle:"Determines what it actually is",
+  legBBody:"A warning is only worth anything if it is right. The system determines what the object is and where it is heading, so that false alarms do not destroy trust — or exhaust the people responding.",
+  legCKey:"Warns",legCTitle:"Acts on the spot",
+  legCBody:"Everything is computed locally within the installation. The warning goes out immediately, without data having to leave the site first, and without the system depending on the network staying up.",
+  legNote:"The technical details of the system are not public. VeiVakt has a patent application under examination, and component choices, architecture and performance figures are withheld until that process concludes.",
+  filterAll:"All 24",filterSam:"Transport",filterNat:"Nature and farming",filterSik:"Safety and response",filterInd:"Industry and sites",
+  searchPh:"Search applications …",
+  catsam:"Transport",catnat:"Nature and farming",catsik:"Safety and response",catind:"Industry and sites",
+  fProblem:"The need",fEdge:"How the system is used",fAdapt:"Setup and adaptation",
+  prev:"← Previous",next:"Next →",
+  empty:"No applications match that search.",
+  ftrNote:"This overview shows what the system can be used for. Some applications are in service today; others require the system to be trained on new object types or mounted differently. Each entry says which.",
+  ftrSources:"Figures and statistics are drawn from Statistics Norway, the Norwegian Deer Register, Oslo Economics, NIBIO, the Norwegian Environment Agency, Bane NOR, NINA, the Directorate of Fisheries, RISE, the US EPA and publicly available reports."
+ }
+};
+
+const CATS = ["sam","nat","sik","ind"];
+let lang = "no", cat = "all", q = "", cur = 1;
+
+/* Slik kan man lenke rett til et bruksområde på valgt språk:
+   ...html?lang=en#jernbane  – uten dette er alt bare én adresse. */
+function slug(name){
+  return name.toLowerCase()
+    .replace(/æ/g,"ae").replace(/ø/g,"o").replace(/å/g,"a")
+    .replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+}
+function readUrl(){
+  try{
+  const qs = new URLSearchParams(location.search);
+  const l = (qs.get("lang") || "").toLowerCase();
+  if(l === "en" || l === "no") lang = l;
+  const h = decodeURIComponent(location.hash.replace(/^#/,""));
+  if(h){
+    const hit = D.find(d => slug(d.name.no) === h || slug(d.name.en) === h);
+    if(hit) cur = hit.n;
+  }
+  }catch(e){ /* uleselig adresse: siden åpner med standardvalg */ }
+}
+function writeUrl(){
+  // Ikke alle sammenhenger tillater at siden endrer adressen – i en sandkasse
+  // eller uten eget opphav kaster nettleseren. Da er adressen bare mindre nyttig,
+  // ikke ødelagt, så feilen skal ikke stoppe resten av siden.
+  try{
+    const d = D.find(x => x.n === cur);
+    const url = location.pathname + (lang === "en" ? "?lang=en" : "") + (d ? "#" + slug(d.name.no) : "");
+    history.replaceState(null, "", url);
+  }catch(e){ /* adressen forblir uendret */ }
+}
+const $ = s => document.querySelector(s);
+const t = k => T[lang][k];
+
+/* ---------------- hero: scenen sykler gjennom fire bruksområder ----------------
+   Hvert bytte venter til scenen har fullført en hel runde, slik at
+   bevegelsen aldri hopper tilbake til start rett før skiftet.        */
+const HERO = [1, 4, 3, 6];
+let hi = 0, heroTimer = null;
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function heroPaint(){
+  const el = $("#heroStage");
+  if(el) el.innerHTML = stage(HERO[hi]);
+}
+function heroSchedule(){
+  if(reduce) return;
+  clearTimeout(heroTimer);
+  const d = SC[HERO[hi]].dur;
+  heroTimer = setTimeout(heroNext, (d >= 8 ? d : d * 2) * 1000);
+}
+function heroNext(){
+  hi = (hi + 1) % HERO.length;
+  heroPaint();
+  heroSchedule();
+}
+
+function matches(d){
+  if(cat !== "all" && d.cat !== cat) return false;
+  if(!q) return true;
+  const hay = [d.name[lang], d.tag[lang], d.problem[lang], d.edge[lang], d.adapt[lang]]
+    .join(" ").toLowerCase().replace(/<[^>]+>/g,"");
+  return hay.includes(q.toLowerCase());
+}
+
+/* ---------------- rendering ---------------- */
+function renderNav(){
+  const list = D.filter(matches);
+  const nav = $("#nav");
+  if(!list.length){ nav.innerHTML = '<p class="nav-empty">'+t("empty")+'</p>'; return; }
+  let html = "";
+  CATS.forEach(c=>{
+    const g = list.filter(d=>d.cat===c);
+    if(!g.length) return;
+    html += '<div class="nav-group"><div class="nav-h '+c+'"><i></i>'+t("cat"+c)+'</div>';
+    g.forEach(d=>{
+      html += '<button type="button" class="nav-item" data-n="'+d.n+'"'+(d.n===cur?' aria-current="true"':'')+
+              '><span class="nav-dot"></span><span>'+d.name[lang]+'</span>'+(d.n===1?'<span class="core-tag">'+t('coreTag')+'</span>':'')+'</button>';
+    });
+    html += '</div>';
+  });
+  nav.innerHTML = html;
+  nav.querySelectorAll(".nav-item").forEach(b=>{
+    b.addEventListener("click",()=>{ cur = +b.dataset.n; render();
+      if(window.innerWidth<=960) $("#detail").scrollIntoView({behavior: reduce?"auto":"smooth", block:"start"});
+    });
+  });
+}
+
+function renderDetail(){
+  const list = D.filter(matches);
+  if(!list.length){ $("#detail").innerHTML = ""; return; }
+  if(!list.some(d=>d.n===cur)) cur = list[0].n;
+  const d = D.find(x=>x.n===cur);
+  const i = list.findIndex(x=>x.n===cur);
+  const fld = (k,key) =>
+    '<section class="fld full"><h3 class="fld-h">'+t(k)+'</h3><p>'+d[key][lang]+'</p></section>';
+
+  $("#detail").innerHTML =
+   '<header class="d-head">'+
+     '<div class="d-chips">'+
+       '<span class="chip cat'+d.cat+'">'+t("cat"+d.cat)+'</span>'+
+     '</div>'+
+     '<h2>'+d.name[lang]+'</h2>'+
+     '<p class="d-tag">'+d.tag[lang]+'</p>'+
+     stage(d.n,'d-stage')+
+   '</header>'+
+   '<div class="d-body">'+
+     fld("fProblem","problem")+
+     fld("fEdge","edge")+
+     fld("fAdapt","adapt")+
+   '</div>'+
+   '<div class="d-foot"><div class="stepper">'+
+     '<button type="button" class="step" id="prev"'+(i<=0?' disabled':'')+'>'+t("prev")+'</button>'+
+     '<button type="button" class="step" id="next"'+(i>=list.length-1?' disabled':'')+'>'+t("next")+'</button>'+
+   '</div></div>';
+
+  const p = $("#prev"), nx = $("#next");
+  if(p) p.addEventListener("click",()=>{ if(i>0){ cur = list[i-1].n; render(); }});
+  if(nx) nx.addEventListener("click",()=>{ if(i<list.length-1){ cur = list[i+1].n; render(); }});
+}
+
+function renderStatic(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{ el.innerHTML = t(el.dataset.i18nHtml); });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.placeholder = t(el.dataset.i18nPh); });
+  document.title = lang === "no"
+    ? "VeiVakt – Bruksområder for trippelsensorsystemet"
+    : "VeiVakt – Applications for the triple-sensor system";
+}
+
+function render(){ renderStatic(); renderNav(); renderDetail(); writeUrl(); }
+
+/* ---------------- hendelser ---------------- */
+document.querySelectorAll(".langsw button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    lang = b.dataset.lang;
+    document.querySelectorAll(".langsw button").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.lang===lang)));
+    render(); heroPaint();
+  });
+});
+document.querySelectorAll(".cat-btn").forEach(b=>{
+  b.addEventListener("click",()=>{
+    cat = b.dataset.cat;
+    document.querySelectorAll(".cat-btn").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.cat===cat)));
+    render();
+  });
+});
+$("#q").addEventListener("input", e=>{ q = e.target.value.trim(); render(); });
+window.addEventListener("hashchange", ()=>{
+  let h = "";
+  try{ h = decodeURIComponent(location.hash.replace(/^#/,"")); }catch(e){ return; }
+  const hit = D.find(d => slug(d.name.no) === h || slug(d.name.en) === h);
+  if(hit && hit.n !== cur){ cur = hit.n; render(); }
+});
+
+readUrl();
+document.querySelectorAll(".langsw button").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.lang===lang)));
+render();
+heroPaint();
+heroSchedule();
+</script>
+</body>
+</html>
