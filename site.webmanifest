@@ -1,0 +1,15 @@
+{
+  "name": "VeiVakt",
+  "short_name": "VeiVakt",
+  "description": "Faredeteksjon og varsling på vei",
+  "lang": "nb-NO",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "theme_color": "#16324F",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "start_url": "/"
+}
