@@ -5,22 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VeiVakt – Bruksområder for trippelsensorsystemet</title>
 <meta name="description" content="Et patentsøkt trippelsensorsystem for faredeteksjon og varsling. 24 bruksområder, fra veg og jernbane til beredskap, industri og landbruk.">
+
+<!-- Favikon og ikoner -->
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#16324F">
+
+<!-- Delingsbilde -->
+<meta property="og:title" content="VeiVakt">
+<meta property="og:description" content="Faredeteksjon og varsling på vei">
+<meta property="og:image" content="https://veivakten.no/veivakt-og-bilde.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://veivakten.no/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VeiVakt">
+<meta property="og:locale" content="nb_NO">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#E7E9E5;
-  --panel:#F4F5F2;
-  --panel-2:#DDE0DB;
-  --ink:#0F1416;
-  --ink-2:#4C5459;
-  --ink-3:#79817F;
-  --rule:#C6CBC4;
-  --rule-2:#B3B9B1;
-  --thermal:#DE560A;
-  --hazard:#F2B705;
-  --scene:#14100E;
+  --paper:#F1F4F7;
+  --panel:#FFFFFF;
+  --panel-2:#E2E8EF;
+  --ink:#16324F;
+  --ink-2:#46617F;
+  --ink-3:#7A8CA0;
+  --rule:#D4DCE5;
+  --rule-2:#BDC8D4;
+  --thermal:#F2860D;
+  --signal-ink:#A85400;
+  --hazard:#FFC46B;
+  --scene:#0E1B2A;
   --maxw:1240px;
   --r:3px;
 }
@@ -28,11 +50,11 @@
 html{-webkit-text-size-adjust:100%}
 body{
   margin:0;background:var(--paper);color:var(--ink);
-  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-family:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   font-size:16px;line-height:1.6;
   -webkit-font-smoothing:antialiased;
 }
-h1,h2,h3,h4{font-family:"Familjen Grotesk","Familjen Grotesk Fallback",sans-serif;margin:0;line-height:1.05;letter-spacing:-0.02em;font-weight:700}
+h1,h2,h3,h4{font-family:"Manrope",sans-serif;margin:0;line-height:1.05;letter-spacing:-0.015em;font-weight:700}
 .mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
 a{color:inherit}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
@@ -41,14 +63,14 @@ a{color:inherit}
 /* ---------- scenemotor: én animert scene per bruksområde ---------- */
 .stage{background:var(--scene);border-radius:var(--r);padding:12px;overflow:hidden}
 .stage svg{display:block;width:100%;height:auto}
-.stage-top{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A7F76;margin-bottom:9px}
+.stage-top{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7D8FA3;margin-bottom:9px}
 .stage-live{display:inline-flex;align-items:center;gap:6px;color:var(--thermal)}
 .stage-live i{width:6px;height:6px;border-radius:50%;background:var(--thermal);display:block;animation:blip 1.8s ease-in-out infinite}
 .stage-spec{text-transform:none;letter-spacing:.04em}
 .stage-read{display:flex;justify-content:space-between;align-items:flex-end;margin-top:10px;gap:12px;flex-wrap:wrap}
-.stage-class{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;letter-spacing:.06em;color:#F6EFE8}
+.stage-class{font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;letter-spacing:.06em;color:#EAF0F6}
 .stage-class span{color:var(--thermal)}
-.stage-meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8A7F76;letter-spacing:.06em;text-align:right}
+.stage-meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#7D8FA3;letter-spacing:.06em;text-align:right}
 .d-stage{margin-top:24px}
 @keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
 
@@ -92,34 +114,34 @@ a{color:inherit}
   border-top:1px solid var(--rule);padding-top:12px}
 .contact dd{margin:2px 0 12px;font-size:15.5px;color:var(--ink)}
 .contact dd a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
-.contact .todo{color:var(--thermal);font-family:"IBM Plex Mono",monospace;font-size:13.5px}
+.contact .todo{color:var(--signal-ink);font-family:"IBM Plex Mono",monospace;font-size:13.5px}
 @media (max-width:960px){.about-grid{grid-template-columns:1fr;gap:30px}}
 
 /* ---------- WILDETECT-feltet ---------- */
 .flag{background:var(--ink);color:var(--paper);padding:44px 0 46px}
 .flag-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
-.flag .eyebrow{color:#8E9691;margin-bottom:16px}
+.flag .eyebrow{color:#8392A1;margin-bottom:16px}
 .flag h2{font-size:clamp(26px,3.2vw,40px);color:var(--paper)}
-.flag h2 em{font-style:normal;color:var(--hazard)}
-.flag p{color:#C3C9C5;font-size:16px;margin:16px 0 0;max-width:54ch;line-height:1.6}
-.flag-part{border-top:1px solid #2C3336;margin-top:8px}
-.flag-part h3{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8E9691;font-weight:600;padding:16px 0 12px}
+.flag h2 em{font-style:normal;color:var(--signal-ink)}
+.flag p{color:#BEC6CE;font-size:16px;margin:16px 0 0;max-width:54ch;line-height:1.6}
+.flag-part{border-top:1px solid #2C3236;margin-top:8px}
+.flag-part h3{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8392A1;font-weight:600;padding:16px 0 12px}
 .flag-list{display:flex;flex-direction:column}
-.flag-list span{border-top:1px solid #2C3336;padding:9px 0;font-size:14.5px;color:var(--paper)}
+.flag-list span{border-top:1px solid #2C3236;padding:9px 0;font-size:14.5px;color:var(--paper)}
 .flag-list span:first-child{border-top:0}
-.flag-list b{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8E9691;font-weight:500;letter-spacing:.06em;display:block}
-.core-tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--hazard);color:var(--ink);padding:2px 6px;border-radius:2px;margin-left:auto;flex:none}
-.nav-item[aria-current="true"] .core-tag{background:var(--hazard);color:var(--ink)}
+.flag-list b{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8392A1;font-weight:500;letter-spacing:.06em;display:block}
+.core-tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--thermal);color:var(--ink);padding:2px 6px;border-radius:2px;margin-left:auto;flex:none}
+.nav-item[aria-current="true"] .core-tag{background:var(--thermal);color:var(--ink)}
 @media (max-width:960px){.flag-grid{grid-template-columns:1fr;gap:28px}}
 
 /* ---------- header ---------- */
 .hdr{
-  position:sticky;top:0;z-index:40;background:rgba(231,233,229,.92);
+  position:sticky;top:0;z-index:40;background:rgba(241,244,247,.92);
   backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--rule);
 }
 .hdr-in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:56px}
-.brand{display:flex;align-items:baseline;gap:10px;font-family:"Familjen Grotesk",sans-serif;font-weight:700;letter-spacing:-.02em;font-size:18px}
-.brand-mark{width:11px;height:11px;background:var(--thermal);border-radius:50%;box-shadow:0 0 0 3px rgba(222,86,10,.18);flex:none;align-self:center}
+.brand{display:flex;align-items:center;gap:9px;font-family:"Manrope",sans-serif;font-weight:700;letter-spacing:-.02em;font-size:18px}
+.brand-mark{width:26px;height:24px;flex:none;align-self:center;color:var(--ink)}
 .brand small{font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .langsw{display:flex;border:1px solid var(--rule-2);border-radius:var(--r);overflow:hidden}
 .langsw button{
@@ -133,25 +155,25 @@ a{color:inherit}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
 .hero h1{font-size:clamp(38px,5.4vw,68px)}
-.hero h1 em{font-style:normal;color:var(--thermal)}
+.hero h1 em{font-style:normal;color:var(--signal-ink)}
 .hero-lede{margin:22px 0 0;max-width:48ch;color:var(--ink-2);font-size:17px}
 .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:30px;border-top:1px solid var(--rule)}
 .hero-stats div{padding:14px 16px 2px;border-left:1px solid var(--rule)}
 .hero-stats div:first-child{border-left:0;padding-left:0}
-.hero-stats b{display:block;font-family:"Familjen Grotesk",sans-serif;font-size:26px;line-height:1;letter-spacing:-.02em}
+.hero-stats b{display:block;font-family:"Manrope",sans-serif;font-size:26px;line-height:1;letter-spacing:-.02em}
 .hero-stats span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
 
 /* detection scene */
 .scene{background:var(--scene);border-radius:var(--r);padding:14px;position:relative;overflow:hidden}
-.scene-top{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8A7F76;margin-bottom:10px}
+.scene-top{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7D8FA3;margin-bottom:10px}
 .scene-live{display:inline-flex;align-items:center;gap:6px;color:var(--thermal)}
 .scene-live i{width:6px;height:6px;border-radius:50%;background:var(--thermal);display:block;animation:blip 1.8s ease-in-out infinite}
 @keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
 .scene svg{display:block;width:100%;height:auto}
 .scene-read{display:flex;justify-content:space-between;align-items:flex-end;margin-top:12px;gap:12px;flex-wrap:wrap}
-.scene-class{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600;letter-spacing:.06em;color:#F6EFE8}
+.scene-class{font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600;letter-spacing:.06em;color:#EAF0F6}
 .scene-class span{color:var(--thermal)}
-.scene-meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8A7F76;letter-spacing:.06em;text-align:right}
+.scene-meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#7D8FA3;letter-spacing:.06em;text-align:right}
 
 /* ---------- sensor legend ---------- */
 .legend{padding:40px 0;border-bottom:1px solid var(--rule)}
@@ -197,7 +219,7 @@ a{color:inherit}
 }
 .nav-item:hover{background:var(--panel);color:var(--ink)}
 .nav-item[aria-current="true"]{background:var(--ink);color:var(--paper);border-top-color:var(--ink)}
-.nav-item[aria-current="true"] .nav-n{color:var(--hazard)}
+.nav-item[aria-current="true"] .nav-n{color:var(--signal-ink)}
 .nav-n{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);flex:none;font-weight:600}
 .nav-empty{font-size:14px;color:var(--ink-3);padding:12px 0}
 
@@ -219,7 +241,7 @@ a{color:inherit}
 .fld p{margin:0;font-size:16.5px;line-height:1.65;color:var(--ink)}
 .fld p + p{margin-top:9px}
 .fld strong{font-weight:600}
-.num{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;background:linear-gradient(transparent 62%,rgba(242,183,5,.42) 62%);padding:0 1px}
+.num{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;background:linear-gradient(transparent 62%,rgba(255,196,107,.42) 62%);padding:0 1px}
 
 .d-foot{padding:26px 0 0;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
 .stepper{display:flex;gap:8px}
@@ -260,7 +282,7 @@ a{color:inherit}
 
 <header class="hdr">
   <div class="wrap hdr-in">
-    <div class="brand"><span class="brand-mark"></span>VeiVakt <small data-i18n="brandSub"></small></div>
+    <div class="brand"><svg class="brand-mark" viewBox="5.75 7.75 84.5 77.5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M 55.88,27.27 L 77.63,66.65 A 9,9 0 0 1 69.75,80.00 L 26.25,80.00 A 9,9 0 0 1 18.37,66.65 L 40.12,27.27 A 9,9 0 0 1 55.88,27.27 Z" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linejoin="round"/><circle cx="48" cy="58" r="9.5" fill="var(--thermal)"/></svg>VeiVakt <small data-i18n="brandSub"></small></div>
     <div class="langsw" role="group" aria-label="Språk / Language">
       <button type="button" data-lang="no" aria-pressed="true">NO</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -648,44 +670,44 @@ const D = [
 
 /* --- maskiner som bærer systemet --- */
 const MACHINE = {
- tractor:'<g><g fill="#2A2118"><circle cx="44" cy="182" r="32"/><circle cx="126" cy="192" r="22"/></g>'+
-   '<g fill="#3E3020"><circle cx="44" cy="182" r="16"/><circle cx="126" cy="192" r="11"/></g>'+
-   '<path d="M18 176 h44 v-22 h44 v22 h30 v18 H18Z" fill="#5A4526"/>'+
-   '<rect x="30" y="112" width="52" height="44" fill="#6B5430"/>'+
-   '<rect x="38" y="120" width="36" height="24" fill="#0F0C08" opacity=".75"/>'+
-   '<path d="M140 190 h74 v10 h-74Z" fill="#5A4526"/>'+
-   '<g stroke="#5A4526" stroke-width="3"><path d="M150 200 v10 M164 200 v10 M178 200 v10 M192 200 v10 M206 200 v10"/></g>'+
-   '<rect x="42" y="100" width="30" height="14" rx="2" fill="#DE560A"/>'+
-   '<circle cx="50" cy="107" r="2.6" fill="#14100E"/><circle cx="57" cy="107" r="2.6" fill="#14100E"/>'+
-   '<circle cx="64" cy="107" r="2.6" fill="#14100E"/></g>',
- excavator:'<g><rect x="12" y="188" width="116" height="26" rx="12" fill="#2A2118"/>'+
-   '<g fill="#3E3020"><circle cx="30" cy="201" r="7"/><circle cx="70" cy="201" r="7"/><circle cx="110" cy="201" r="7"/></g>'+
-   '<path d="M22 188 v-46 h84 v46Z" fill="#5A4526"/>'+
-   '<rect x="30" y="150" width="34" height="26" fill="#0F0C08" opacity=".75"/>'+
-   '<path d="M104 154 L188 118 l8 14 L112 170Z" fill="#6B5430"/>'+
-   '<path d="M188 118 L226 168 l-14 8 L176 130Z" fill="#6B5430"/>'+
-   '<path d="M212 172 l24 14 -6 16 -26 -16Z" fill="#7A6238"/>'+
-   '<rect x="34" y="126" width="30" height="14" rx="2" fill="#DE560A"/>'+
-   '<circle cx="42" cy="133" r="2.6" fill="#14100E"/><circle cx="49" cy="133" r="2.6" fill="#14100E"/>'+
-   '<circle cx="56" cy="133" r="2.6" fill="#14100E"/></g>',
- loader:'<g><g fill="#2A2118"><circle cx="40" cy="200" r="20"/><circle cx="112" cy="200" r="20"/></g>'+
-   '<g fill="#3E3020"><circle cx="40" cy="200" r="9"/><circle cx="112" cy="200" r="9"/></g>'+
-   '<path d="M14 200 v-30 h124 v30Z" fill="#5A4526"/>'+
-   '<rect x="46" y="146" width="46" height="26" fill="#6B5430"/>'+
-   '<rect x="53" y="152" width="30" height="15" fill="#0F0C08" opacity=".75"/>'+
-   '<path d="M138 186 l44 -10 v34 l-44 -6Z" fill="#6B5430"/>'+
-   '<rect x="54" y="134" width="30" height="14" rx="2" fill="#DE560A"/>'+
-   '<circle cx="62" cy="141" r="2.6" fill="#14100E"/><circle cx="69" cy="141" r="2.6" fill="#14100E"/>'+
-   '<circle cx="76" cy="141" r="2.6" fill="#14100E"/></g>',
- groomer:'<g><path d="M14 202 h130 l-10 22 H24Z" fill="#2A2118"/>'+
-   '<g fill="#3E3020"><circle cx="36" cy="213" r="7"/><circle cx="78" cy="213" r="7"/><circle cx="120" cy="213" r="7"/></g>'+
+ tractor:'<g><g fill="#1C2126"><circle cx="44" cy="182" r="32"/><circle cx="126" cy="192" r="22"/></g>'+
+   '<g fill="#272F37"><circle cx="44" cy="182" r="16"/><circle cx="126" cy="192" r="11"/></g>'+
+   '<path d="M18 176 h44 v-22 h44 v22 h30 v18 H18Z" fill="#32404E"/>'+
+   '<rect x="30" y="112" width="52" height="44" fill="#3D4E5E"/>'+
+   '<rect x="38" y="120" width="36" height="24" fill="#0D0F12" opacity=".75"/>'+
+   '<path d="M140 190 h74 v10 h-74Z" fill="#32404E"/>'+
+   '<g stroke="#32404E" stroke-width="3"><path d="M150 200 v10 M164 200 v10 M178 200 v10 M192 200 v10 M206 200 v10"/></g>'+
+   '<rect x="42" y="100" width="30" height="14" rx="2" fill="#F2860D"/>'+
+   '<circle cx="50" cy="107" r="2.6" fill="#0E1B2A"/><circle cx="57" cy="107" r="2.6" fill="#0E1B2A"/>'+
+   '<circle cx="64" cy="107" r="2.6" fill="#0E1B2A"/></g>',
+ excavator:'<g><rect x="12" y="188" width="116" height="26" rx="12" fill="#1C2126"/>'+
+   '<g fill="#272F37"><circle cx="30" cy="201" r="7"/><circle cx="70" cy="201" r="7"/><circle cx="110" cy="201" r="7"/></g>'+
+   '<path d="M22 188 v-46 h84 v46Z" fill="#32404E"/>'+
+   '<rect x="30" y="150" width="34" height="26" fill="#0D0F12" opacity=".75"/>'+
+   '<path d="M104 154 L188 118 l8 14 L112 170Z" fill="#3D4E5E"/>'+
+   '<path d="M188 118 L226 168 l-14 8 L176 130Z" fill="#3D4E5E"/>'+
+   '<path d="M212 172 l24 14 -6 16 -26 -16Z" fill="#47596B"/>'+
+   '<rect x="34" y="126" width="30" height="14" rx="2" fill="#F2860D"/>'+
+   '<circle cx="42" cy="133" r="2.6" fill="#0E1B2A"/><circle cx="49" cy="133" r="2.6" fill="#0E1B2A"/>'+
+   '<circle cx="56" cy="133" r="2.6" fill="#0E1B2A"/></g>',
+ loader:'<g><g fill="#1C2126"><circle cx="40" cy="200" r="20"/><circle cx="112" cy="200" r="20"/></g>'+
+   '<g fill="#272F37"><circle cx="40" cy="200" r="9"/><circle cx="112" cy="200" r="9"/></g>'+
+   '<path d="M14 200 v-30 h124 v30Z" fill="#32404E"/>'+
+   '<rect x="46" y="146" width="46" height="26" fill="#3D4E5E"/>'+
+   '<rect x="53" y="152" width="30" height="15" fill="#0D0F12" opacity=".75"/>'+
+   '<path d="M138 186 l44 -10 v34 l-44 -6Z" fill="#3D4E5E"/>'+
+   '<rect x="54" y="134" width="30" height="14" rx="2" fill="#F2860D"/>'+
+   '<circle cx="62" cy="141" r="2.6" fill="#0E1B2A"/><circle cx="69" cy="141" r="2.6" fill="#0E1B2A"/>'+
+   '<circle cx="76" cy="141" r="2.6" fill="#0E1B2A"/></g>',
+ groomer:'<g><path d="M14 202 h130 l-10 22 H24Z" fill="#1C2126"/>'+
+   '<g fill="#272F37"><circle cx="36" cy="213" r="7"/><circle cx="78" cy="213" r="7"/><circle cx="120" cy="213" r="7"/></g>'+
    '<path d="M20 202 v-24 h124 v24Z" fill="#4A5560"/>'+
-   '<rect x="44" y="140" width="58" height="40" fill="#5E6E7A"/>'+
-   '<rect x="52" y="147" width="42" height="24" fill="#0F0C08" opacity=".75"/>'+
-   '<path d="M144 190 l40 -8 v30 l-40 -6Z" fill="#5E6E7A"/>'+
-   '<rect x="58" y="128" width="30" height="14" rx="2" fill="#DE560A"/>'+
-   '<circle cx="66" cy="135" r="2.6" fill="#14100E"/><circle cx="73" cy="135" r="2.6" fill="#14100E"/>'+
-   '<circle cx="80" cy="135" r="2.6" fill="#14100E"/></g>'
+   '<rect x="44" y="140" width="58" height="40" fill="#5E6D7A"/>'+
+   '<rect x="52" y="147" width="42" height="24" fill="#0D0F12" opacity=".75"/>'+
+   '<path d="M144 190 l40 -8 v30 l-40 -6Z" fill="#5E6D7A"/>'+
+   '<rect x="58" y="128" width="30" height="14" rx="2" fill="#F2860D"/>'+
+   '<circle cx="66" cy="135" r="2.6" fill="#0E1B2A"/><circle cx="73" cy="135" r="2.6" fill="#0E1B2A"/>'+
+   '<circle cx="80" cy="135" r="2.6" fill="#0E1B2A"/></g>'
 };
 
 /* markeringer på underlaget som ruller forbi og viser at maskinen er i bevegelse */
@@ -717,136 +739,136 @@ function rollMine(col){
 
 /* --- terreng --- */
 const TERRAIN = {
- road:'<path d="M-20 240 L206 152 H414 L640 240Z" fill="#0C0907" opacity=".7"/>'+
-      '<path d="M310 240 L310 152" stroke="#F6EFE8" stroke-width="3" opacity=".22" stroke-dasharray="16 14"/>',
- rail:'<path d="M150 240 L268 152 M470 240 L352 152" stroke="#6B4A2E" stroke-width="3" opacity=".8"/>'+
-      '<g stroke="#3A2A1C" stroke-width="4" opacity=".8"><path d="M262 160 H358 M244 176 H376 M218 198 H402 M182 226 H438"/></g>',
- tunnel:'<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="#070505"/>'+
-        '<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="none" stroke="#6B4A2E" stroke-width="2.5" opacity=".8"/>'+
-        '<path d="M150 240 L232 214 H388 L470 240Z" fill="#1A120C"/>'+
-        '<rect x="212" y="236" width="196" height="4" fill="#6B4A2E" opacity=".5"/>',
- runway:'<path d="M-20 240 L232 158 H392 L640 240Z" fill="#0C0907" opacity=".7"/>'+
-        '<path d="M312 240 V158" stroke="#F6EFE8" stroke-width="2" opacity=".28" stroke-dasharray="10 18"/>'+
-        '<g fill="#F2B705" opacity=".5"><rect x="196" y="214" width="14" height="4"/><rect x="414" y="214" width="14" height="4"/></g>',
- quay:'<rect x="0" y="186" width="620" height="8" fill="#6B4A2E" opacity=".7"/>'+
-      '<rect x="0" y="194" width="620" height="46" fill="#0A1418" opacity=".85"/>'+
-      '<g stroke="#2A5A63" stroke-width="1.5" opacity=".55"><path d="M20 208 H180 M240 208 H420 M470 208 H600 M60 224 H260 M330 224 H560"/></g>',
- crossing:'<path d="M-20 240 L206 152 H414 L640 240Z" fill="#0C0907" opacity=".7"/>'+
-          '<g fill="#F6EFE8" opacity=".24"><path d="M230 240 L250 158 h16 L240 240Z"/><path d="M282 240 L294 158 h16 L292 240Z"/>'+
+ road:'<path d="M-20 240 L206 152 H414 L640 240Z" fill="#0C0E10" opacity=".7"/>'+
+      '<path d="M310 240 L310 152" stroke="#EAF0F6" stroke-width="3" opacity=".22" stroke-dasharray="16 14"/>',
+ rail:'<path d="M150 240 L268 152 M470 240 L352 152" stroke="#3C4C5D" stroke-width="3" opacity=".8"/>'+
+      '<g stroke="#232B33" stroke-width="4" opacity=".8"><path d="M262 160 H358 M244 176 H376 M218 198 H402 M182 226 H438"/></g>',
+ tunnel:'<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="#090A0C"/>'+
+        '<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="none" stroke="#3C4C5D" stroke-width="2.5" opacity=".8"/>'+
+        '<path d="M150 240 L232 214 H388 L470 240Z" fill="#0F1317"/>'+
+        '<rect x="212" y="236" width="196" height="4" fill="#3C4C5D" opacity=".5"/>',
+ runway:'<path d="M-20 240 L232 158 H392 L640 240Z" fill="#0C0E10" opacity=".7"/>'+
+        '<path d="M312 240 V158" stroke="#EAF0F6" stroke-width="2" opacity=".28" stroke-dasharray="10 18"/>'+
+        '<g fill="#FFC46B" opacity=".5"><rect x="196" y="214" width="14" height="4"/><rect x="414" y="214" width="14" height="4"/></g>',
+ quay:'<rect x="0" y="186" width="620" height="8" fill="#3C4C5D" opacity=".7"/>'+
+      '<rect x="0" y="194" width="620" height="46" fill="#0A1218" opacity=".85"/>'+
+      '<g stroke="#2A4D63" stroke-width="1.5" opacity=".55"><path d="M20 208 H180 M240 208 H420 M470 208 H600 M60 224 H260 M330 224 H560"/></g>',
+ crossing:'<path d="M-20 240 L206 152 H414 L640 240Z" fill="#0C0E10" opacity=".7"/>'+
+          '<g fill="#EAF0F6" opacity=".24"><path d="M230 240 L250 158 h16 L240 240Z"/><path d="M282 240 L294 158 h16 L292 240Z"/>'+
           '<path d="M334 240 L338 158 h16 L344 240Z"/><path d="M386 240 L382 158 h16 L396 240Z"/></g>',
- field:'<rect x="0" y="176" width="620" height="64" fill="#2E2410" opacity=".8"/>'+
-       '<g stroke="#7A6A22" stroke-width="1.6" opacity=".55">'+
+ field:'<rect x="0" y="176" width="620" height="64" fill="#171F27" opacity=".8"/>'+
+       '<g stroke="#364E66" stroke-width="1.6" opacity=".55">'+
        '<path d="M120 214 v-16 M134 216 v-20 M148 213 v-15 M250 218 v-18 M264 215 v-14 M278 219 v-19 '+
        'M390 214 v-17 M404 217 v-15 M418 212 v-14 M520 216 v-18 M534 213 v-15 M548 218 v-17"/></g>',
- fence:'<rect x="0" y="182" width="620" height="58" fill="#241C12" opacity=".8"/>'+
-       '<g stroke="#8A7250" stroke-width="2.5" opacity=".75"><path d="M180 190 v-42 M300 190 v-42 M420 190 v-42 M540 190 v-42"/></g>'+
-       '<g stroke="#8A7250" stroke-width="1.2" opacity=".45"><path d="M170 156 H620 M170 168 H620 M170 180 H620"/></g>',
- perimeter:'<rect x="0" y="188" width="620" height="52" fill="#1C1610" opacity=".85"/>'+
-       '<g stroke="#8A7250" stroke-width="2.5" opacity=".7"><path d="M200 194 v-52 M330 194 v-52 M460 194 v-52 M590 194 v-52"/></g>'+
-       '<g stroke="#8A7250" stroke-width="1" opacity=".4"><path d="M190 150 H620 M190 164 H620 M190 178 H620"/></g>'+
-       '<path d="M186 142 h440" stroke="#DE560A" stroke-width="1.5" opacity=".45" stroke-dasharray="5 7"/>',
- pen:'<rect x="0" y="164" width="620" height="76" fill="#0A1418" opacity=".9"/>'+
-     '<g fill="none" stroke="#2A6A73" stroke-width="2.5" opacity=".8">'+
+ fence:'<rect x="0" y="182" width="620" height="58" fill="#161B20" opacity=".8"/>'+
+       '<g stroke="#5D6D7D" stroke-width="2.5" opacity=".75"><path d="M180 190 v-42 M300 190 v-42 M420 190 v-42 M540 190 v-42"/></g>'+
+       '<g stroke="#5D6D7D" stroke-width="1.2" opacity=".45"><path d="M170 156 H620 M170 168 H620 M170 180 H620"/></g>',
+ perimeter:'<rect x="0" y="188" width="620" height="52" fill="#131619" opacity=".85"/>'+
+       '<g stroke="#5D6D7D" stroke-width="2.5" opacity=".7"><path d="M200 194 v-52 M330 194 v-52 M460 194 v-52 M590 194 v-52"/></g>'+
+       '<g stroke="#5D6D7D" stroke-width="1" opacity=".4"><path d="M190 150 H620 M190 164 H620 M190 178 H620"/></g>'+
+       '<path d="M186 142 h440" stroke="#F2860D" stroke-width="1.5" opacity=".45" stroke-dasharray="5 7"/>',
+ pen:'<rect x="0" y="164" width="620" height="76" fill="#0A1218" opacity=".9"/>'+
+     '<g fill="none" stroke="#2E576F" stroke-width="2.5" opacity=".8">'+
      '<ellipse cx="290" cy="200" rx="76" ry="26"/><ellipse cx="452" cy="192" rx="66" ry="22"/></g>'+
-     '<g stroke="#2A5A63" stroke-width="1.2" opacity=".4"><path d="M20 226 H240 M330 232 H580"/></g>',
- forest:'<g fill="#0E1A10" opacity=".9"><path d="M150 200 L176 128 L202 200Z"/><path d="M212 202 L244 116 L276 202Z"/>'+
+     '<g stroke="#2A4D63" stroke-width="1.2" opacity=".4"><path d="M20 226 H240 M330 232 H580"/></g>',
+ forest:'<g fill="#111417" opacity=".9"><path d="M150 200 L176 128 L202 200Z"/><path d="M212 202 L244 116 L276 202Z"/>'+
         '<path d="M290 200 L314 134 L338 200Z"/><path d="M356 203 L392 110 L428 203Z"/><path d="M444 201 L470 132 L496 201Z"/>'+
-        '<path d="M510 202 L540 122 L570 202Z"/></g><rect x="0" y="198" width="620" height="42" fill="#1A1409" opacity=".85"/>',
- treeline:'<g fill="#0E1A10" opacity=".85"><path d="M120 206 L142 154 L164 206Z"/><path d="M178 208 L204 146 L230 208Z"/>'+
+        '<path d="M510 202 L540 122 L570 202Z"/></g><rect x="0" y="198" width="620" height="42" fill="#0D1116" opacity=".85"/>',
+ treeline:'<g fill="#111417" opacity=".85"><path d="M120 206 L142 154 L164 206Z"/><path d="M178 208 L204 146 L230 208Z"/>'+
         '<path d="M244 206 L264 158 L284 206Z"/><path d="M300 209 L330 140 L360 209Z"/><path d="M374 206 L396 156 L418 206Z"/>'+
         '<path d="M432 208 L458 148 L484 208Z"/><path d="M498 206 L520 158 L542 206Z"/></g>'+
-        '<rect x="0" y="204" width="620" height="36" fill="#1A1409" opacity=".85"/>',
- wall:'<rect x="0" y="200" width="620" height="40" fill="#1C1610" opacity=".85"/>'+
-      '<rect x="196" y="118" width="330" height="84" fill="#241C14"/>'+
-      '<g stroke="#0F0C08" stroke-width="1.5" opacity=".7"><path d="M196 146 H526 M196 174 H526 M258 118 V202 M338 118 V202 M418 118 V202"/></g>',
- pile:'<rect x="0" y="196" width="620" height="44" fill="#1A1409" opacity=".85"/>'+
-      '<path d="M180 198 Q276 116 372 160 Q432 188 500 198Z" fill="#2A2014"/>'+
-      '<path d="M180 198 Q276 116 372 160 Q432 188 500 198" fill="none" stroke="#6B4A2E" stroke-width="1.5" opacity=".6"/>',
- turbine:'<rect x="0" y="200" width="620" height="40" fill="#141C18" opacity=".85"/>'+
-      '<path d="M446 200 L456 96 h12 L478 200Z" fill="#2C3A34"/>'+
-      '<g class="spin" style="transform-origin:462px 96px"><g stroke="#5B6E64" stroke-width="5" stroke-linecap="round">'+
+        '<rect x="0" y="204" width="620" height="36" fill="#0D1116" opacity=".85"/>',
+ wall:'<rect x="0" y="200" width="620" height="40" fill="#131619" opacity=".85"/>'+
+      '<rect x="196" y="118" width="330" height="84" fill="#181C20"/>'+
+      '<g stroke="#0D0F12" stroke-width="1.5" opacity=".7"><path d="M196 146 H526 M196 174 H526 M258 118 V202 M338 118 V202 M418 118 V202"/></g>',
+ pile:'<rect x="0" y="196" width="620" height="44" fill="#0D1116" opacity=".85"/>'+
+      '<path d="M180 198 Q276 116 372 160 Q432 188 500 198Z" fill="#191F25"/>'+
+      '<path d="M180 198 Q276 116 372 160 Q432 188 500 198" fill="none" stroke="#3C4C5D" stroke-width="1.5" opacity=".6"/>',
+ turbine:'<rect x="0" y="200" width="620" height="40" fill="#15181B" opacity=".85"/>'+
+      '<path d="M446 200 L456 96 h12 L478 200Z" fill="#2C333A"/>'+
+      '<g class="spin" style="transform-origin:462px 96px"><g stroke="#566473" stroke-width="5" stroke-linecap="round">'+
       '<path d="M462 96 V26"/><path d="M462 96 L523 131"/><path d="M462 96 L401 131"/></g>'+
-      '<circle cx="462" cy="96" r="6" fill="#7B8E84"/></g>',
- site:'<rect x="0" y="196" width="620" height="44" fill="#241C12" opacity=".85"/>'+
-      '<path d="M330 198 Q392 148 454 198Z" fill="#2E2418"/>'+
-      '<path d="M470 198 Q516 162 562 198Z" fill="#2A2014"/>'+
-      '<g fill="#3A2E1E"><rect x="238" y="170" width="56" height="28" rx="3"/><rect x="248" y="156" width="36" height="14" rx="2"/></g>'+
-      '<g stroke="#8A7250" stroke-width="2" opacity=".5"><path d="M596 198 v-40 M540 198 v-40"/></g>',
- building:'<rect x="0" y="198" width="620" height="42" fill="#181C1E" opacity=".85"/>'+
-      '<rect x="300" y="122" width="250" height="76" fill="#222A2E"/>'+
-      '<g fill="#3B4A50" opacity=".8"><rect x="316" y="138" width="26" height="14"/><rect x="352" y="138" width="26" height="14"/>'+
+      '<circle cx="462" cy="96" r="6" fill="#738496"/></g>',
+ site:'<rect x="0" y="196" width="620" height="44" fill="#161B20" opacity=".85"/>'+
+      '<path d="M330 198 Q392 148 454 198Z" fill="#1D2329"/>'+
+      '<path d="M470 198 Q516 162 562 198Z" fill="#191F25"/>'+
+      '<g fill="#242C34"><rect x="238" y="170" width="56" height="28" rx="3"/><rect x="248" y="156" width="36" height="14" rx="2"/></g>'+
+      '<g stroke="#5D6D7D" stroke-width="2" opacity=".5"><path d="M596 198 v-40 M540 198 v-40"/></g>',
+ building:'<rect x="0" y="198" width="620" height="42" fill="#181B1E" opacity=".85"/>'+
+      '<rect x="300" y="122" width="250" height="76" fill="#22292E"/>'+
+      '<g fill="#3B4750" opacity=".8"><rect x="316" y="138" width="26" height="14"/><rect x="352" y="138" width="26" height="14"/>'+
       '<rect x="388" y="138" width="26" height="14"/><rect x="316" y="164" width="26" height="14"/><rect x="352" y="164" width="26" height="14"/></g>'+
-      '<g stroke="#8A7250" stroke-width="2" opacity=".6"><path d="M180 200 v-46 M240 200 v-46"/></g>'+
-      '<g stroke="#8A7250" stroke-width="1" opacity=".35"><path d="M170 160 H300 M170 174 H300 M170 188 H300"/></g>',
- mine:'<path d="M-40 -20 H660 V160 Q310 112 -40 160Z" fill="#070505"/>'+
-      '<path d="M-40 160 Q310 112 660 160" fill="none" stroke="#5B4630" stroke-width="3" opacity=".6"/>'+
-      '<rect x="0" y="222" width="620" height="18" fill="#2A2014" opacity=".9"/>'+
-      '<path d="M0 222 H620" stroke="#5B4630" stroke-width="2" opacity=".45"/>',
- pad:'<rect x="0" y="202" width="620" height="38" fill="#1A1A1E" opacity=".85"/>'+
-     '<g stroke="#4A5058" stroke-width="2.5"><path d="M420 202 V96 M492 202 V96 M420 96 H492"/></g>'+
-     '<g stroke="#3A4048" stroke-width="1.2" opacity=".8"><path d="M420 120 L492 148 M492 120 L420 148 M420 152 L492 180 M492 152 L420 180"/></g>'+
-     '<path d="M448 202 V116 h16 V202Z" fill="#6E757E" opacity=".9"/>'+
-     '<path d="M456 116 L448 96 h16Z" fill="#8E959E"/>',
- slope:'<path d="M-20 240 L640 128 V240Z" fill="#1C2226" opacity=".9"/>'+
-       '<path d="M-20 240 L640 128" stroke="#5E6E78" stroke-width="2" opacity=".5"/>',
- river:'<rect x="0" y="188" width="620" height="52" fill="#1A1409" opacity=".8"/>'+
-       '<path d="M-20 214 Q160 190 320 216 Q480 242 640 208 V240 H-20Z" fill="#0A1418" opacity=".9"/>'+
-       '<g stroke="#2A5A63" stroke-width="1.4" opacity=".5"><path d="M40 220 Q180 202 300 222 M340 228 Q460 240 600 216"/></g>'+
-       '<g fill="#241C12"><path d="M120 196 L146 168 L172 196Z"/><path d="M470 194 L492 170 L514 194Z"/></g>'
+      '<g stroke="#5D6D7D" stroke-width="2" opacity=".6"><path d="M180 200 v-46 M240 200 v-46"/></g>'+
+      '<g stroke="#5D6D7D" stroke-width="1" opacity=".35"><path d="M170 160 H300 M170 174 H300 M170 188 H300"/></g>',
+ mine:'<path d="M-40 -20 H660 V160 Q310 112 -40 160Z" fill="#090A0C"/>'+
+      '<path d="M-40 160 Q310 112 660 160" fill="none" stroke="#3A4651" stroke-width="3" opacity=".6"/>'+
+      '<rect x="0" y="222" width="620" height="18" fill="#191F25" opacity=".9"/>'+
+      '<path d="M0 222 H620" stroke="#3A4651" stroke-width="2" opacity=".45"/>',
+ pad:'<rect x="0" y="202" width="620" height="38" fill="#1A1B1E" opacity=".85"/>'+
+     '<g stroke="#4A5158" stroke-width="2.5"><path d="M420 202 V96 M492 202 V96 M420 96 H492"/></g>'+
+     '<g stroke="#3A4148" stroke-width="1.2" opacity=".8"><path d="M420 120 L492 148 M492 120 L420 148 M420 152 L492 180 M492 152 L420 180"/></g>'+
+     '<path d="M448 202 V116 h16 V202Z" fill="#6E767E" opacity=".9"/>'+
+     '<path d="M456 116 L448 96 h16Z" fill="#8E969E"/>',
+ slope:'<path d="M-20 240 L640 128 V240Z" fill="#1C2126" opacity=".9"/>'+
+       '<path d="M-20 240 L640 128" stroke="#5E6C78" stroke-width="2" opacity=".5"/>',
+ river:'<rect x="0" y="188" width="620" height="52" fill="#0D1116" opacity=".8"/>'+
+       '<path d="M-20 214 Q160 190 320 216 Q480 242 640 208 V240 H-20Z" fill="#0A1218" opacity=".9"/>'+
+       '<g stroke="#2A4D63" stroke-width="1.4" opacity=".5"><path d="M40 220 Q180 202 300 222 M340 228 Q460 240 600 216"/></g>'+
+       '<g fill="#161B20"><path d="M120 196 L146 168 L172 196Z"/><path d="M470 194 L492 170 L514 194Z"/></g>'
 };
 
 /* --- aktører, tegnet omkring eget nullpunkt ved «føttene» --- */
 const ACTOR = {
- quad:(sx)=>'<g transform="scale('+sx+')" fill="#F2B705">'+
+ quad:(sx)=>'<g transform="scale('+sx+')" fill="#FFC46B">'+
    '<ellipse cx="0" cy="-26" rx="30" ry="17"/><ellipse cx="26" cy="-42" rx="12" ry="9"/>'+
-   '<path d="M30 -50 l7 -13 M22 -50 l-3 -13" stroke="#F2B705" stroke-width="3" fill="none"/>'+
-   '<g stroke="#F2B705" stroke-width="5" stroke-linecap="round"><path d="M-18 -12 V0 M-6 -12 V0 M10 -12 V0 M20 -12 V0"/></g></g>',
- herd:()=>'<g fill="#F2B705">'+
+   '<path d="M30 -50 l7 -13 M22 -50 l-3 -13" stroke="#FFC46B" stroke-width="3" fill="none"/>'+
+   '<g stroke="#FFC46B" stroke-width="5" stroke-linecap="round"><path d="M-18 -12 V0 M-6 -12 V0 M10 -12 V0 M20 -12 V0"/></g></g>',
+ herd:()=>'<g fill="#FFC46B">'+
    '<ellipse cx="0" cy="-22" rx="24" ry="13"/><ellipse cx="20" cy="-34" rx="9" ry="7"/>'+
-   '<g stroke="#F2B705" stroke-width="4" stroke-linecap="round"><path d="M-14 -10 V0 M-2 -10 V0 M12 -10 V0"/></g>'+
+   '<g stroke="#FFC46B" stroke-width="4" stroke-linecap="round"><path d="M-14 -10 V0 M-2 -10 V0 M12 -10 V0"/></g>'+
    '<g opacity=".62"><ellipse cx="-46" cy="-18" rx="20" ry="11"/><ellipse cx="-30" cy="-28" rx="8" ry="6"/>'+
-   '<g stroke="#F2B705" stroke-width="3.5" stroke-linecap="round"><path d="M-58 -8 V0 M-46 -8 V0 M-34 -8 V0"/></g></g>'+
+   '<g stroke="#FFC46B" stroke-width="3.5" stroke-linecap="round"><path d="M-58 -8 V0 M-46 -8 V0 M-34 -8 V0"/></g></g>'+
    '<g opacity=".4"><ellipse cx="-86" cy="-15" rx="17" ry="9"/><ellipse cx="-72" cy="-23" rx="7" ry="5"/></g></g>',
- person:()=>'<g fill="#F6EFE8"><circle cx="0" cy="-46" r="8"/><path d="M-7 -36 h14 l3 20 h-20Z"/>'+
-   '<g stroke="#F6EFE8" stroke-width="4.5" stroke-linecap="round"><path d="M-4 -16 L-7 0 M4 -16 L8 0"/></g></g>',
- lying:()=>'<g fill="#F6EFE8"><ellipse cx="0" cy="-7" rx="30" ry="8"/><circle cx="-28" cy="-10" r="7"/>'+
-   '<path d="M8 -8 l18 4" stroke="#F6EFE8" stroke-width="5" stroke-linecap="round"/></g>',
- drone:()=>'<g fill="#F6EFE8"><rect x="-9" y="-6" width="18" height="10" rx="3"/>'+
-   '<g stroke="#F6EFE8" stroke-width="2.5"><path d="M-9 -4 L-26 -12 M9 -4 L26 -12 M-9 2 L-24 8 M9 2 L24 8"/></g>'+
-   '<g fill="none" stroke="#F6EFE8" stroke-width="2" opacity=".8">'+
+ person:()=>'<g fill="#EAF0F6"><circle cx="0" cy="-46" r="8"/><path d="M-7 -36 h14 l3 20 h-20Z"/>'+
+   '<g stroke="#EAF0F6" stroke-width="4.5" stroke-linecap="round"><path d="M-4 -16 L-7 0 M4 -16 L8 0"/></g></g>',
+ lying:()=>'<g fill="#EAF0F6"><ellipse cx="0" cy="-7" rx="30" ry="8"/><circle cx="-28" cy="-10" r="7"/>'+
+   '<path d="M8 -8 l18 4" stroke="#EAF0F6" stroke-width="5" stroke-linecap="round"/></g>',
+ drone:()=>'<g fill="#EAF0F6"><rect x="-9" y="-6" width="18" height="10" rx="3"/>'+
+   '<g stroke="#EAF0F6" stroke-width="2.5"><path d="M-9 -4 L-26 -12 M9 -4 L26 -12 M-9 2 L-24 8 M9 2 L24 8"/></g>'+
+   '<g fill="none" stroke="#EAF0F6" stroke-width="2" opacity=".8">'+
    '<path d="M-34 -14 a8 3 0 0 1 16 0"/><path d="M18 -14 a8 3 0 0 1 16 0"/></g></g>',
- bird:()=>'<g fill="none" stroke="#F2B705" stroke-width="4.5" stroke-linecap="round">'+
-   '<path d="M-26 4 Q-13 -14 0 0 Q13 -14 26 4"/></g><ellipse cx="0" cy="1" rx="5" ry="3.5" fill="#F2B705"/>',
- flock:()=>'<g fill="none" stroke="#F2B705" stroke-width="3" stroke-linecap="round" opacity=".9">'+
+ bird:()=>'<g fill="none" stroke="#FFC46B" stroke-width="4.5" stroke-linecap="round">'+
+   '<path d="M-26 4 Q-13 -14 0 0 Q13 -14 26 4"/></g><ellipse cx="0" cy="1" rx="5" ry="3.5" fill="#FFC46B"/>',
+ flock:()=>'<g fill="none" stroke="#FFC46B" stroke-width="3" stroke-linecap="round" opacity=".9">'+
    '<path d="M-20 0 Q-10 -10 0 0 Q10 -10 20 0"/><path d="M-52 16 Q-44 8 -36 16 Q-28 8 -20 16" opacity=".7"/>'+
    '<path d="M16 22 Q24 14 32 22 Q40 14 48 22" opacity=".6"/><path d="M-64 -14 Q-56 -22 -48 -14 Q-40 -22 -32 -14" opacity=".5"/></g>',
- pred:()=>'<g fill="#F2B705"><ellipse cx="0" cy="-14" rx="26" ry="10"/><ellipse cx="23" cy="-21" rx="10" ry="7.5"/>'+
-   '<path d="M29 -27 l3 -6 M18 -27 l-2 -6" stroke="#F2B705" stroke-width="3" fill="none"/>'+
-   '<path d="M-24 -17 q-17 -3 -23 7" stroke="#F2B705" stroke-width="7" stroke-linecap="round" fill="none"/>'+
-   '<g stroke="#F2B705" stroke-width="4.5" stroke-linecap="round"><path d="M-14 -6 V0 M-3 -6 V0 M9 -6 V0 M18 -6 V0"/></g></g>',
- seal:()=>'<g fill="#F6EFE8"><ellipse cx="0" cy="-8" rx="26" ry="10"/><ellipse cx="22" cy="-16" rx="9" ry="7"/>'+
+ pred:()=>'<g fill="#FFC46B"><ellipse cx="0" cy="-14" rx="26" ry="10"/><ellipse cx="23" cy="-21" rx="10" ry="7.5"/>'+
+   '<path d="M29 -27 l3 -6 M18 -27 l-2 -6" stroke="#FFC46B" stroke-width="3" fill="none"/>'+
+   '<path d="M-24 -17 q-17 -3 -23 7" stroke="#FFC46B" stroke-width="7" stroke-linecap="round" fill="none"/>'+
+   '<g stroke="#FFC46B" stroke-width="4.5" stroke-linecap="round"><path d="M-14 -6 V0 M-3 -6 V0 M9 -6 V0 M18 -6 V0"/></g></g>',
+ seal:()=>'<g fill="#EAF0F6"><ellipse cx="0" cy="-8" rx="26" ry="10"/><ellipse cx="22" cy="-16" rx="9" ry="7"/>'+
    '<path d="M-24 -10 l-14 -7 l2 12Z"/></g>',
- swim:()=>'<g><ellipse cx="0" cy="0" rx="30" ry="6" fill="#2A5A63" opacity=".75"/>'+
-   '<ellipse cx="0" cy="0" rx="18" ry="4" fill="#0A1418" opacity=".6"/>'+
-   '<circle cx="2" cy="-13" r="8" fill="#F6EFE8"/>'+
-   '<path d="M-15 -9 q7 -13 15 -6" stroke="#F6EFE8" stroke-width="5" stroke-linecap="round" fill="none"/></g>',
- car:()=>'<g fill="#F6EFE8"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
-   '<g fill="#14100E"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g>',
- carHot:()=>'<g><ellipse class="pulse" cx="0" cy="-8" rx="30" ry="16" fill="#DE560A" opacity=".55"/>'+
-   '<g fill="#F6EFE8"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
-   '<g fill="#14100E"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g>'+
-   '<circle cx="-4" cy="-8" r="6" fill="#FFD08A"/></g>',
- carAlert:()=>'<g><circle class="ping" cx="0" cy="-14" r="34" fill="none" stroke="#F2B705" stroke-width="2"/>'+
-   '<g fill="#F6EFE8"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
-   '<g fill="#14100E"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g></g>',
- glow:()=>'<g><circle class="pulse" cx="0" cy="-12" r="22" fill="#DE560A" opacity=".45"/>'+
-   '<circle cx="0" cy="-12" r="10" fill="#FFD08A"/><circle cx="0" cy="-12" r="5" fill="#FFF3E0"/></g>',
- plume:()=>'<g><g class="rise" fill="#DE560A" opacity=".5"><ellipse cx="0" cy="-30" rx="18" ry="24"/></g>'+
-   '<ellipse class="pulse" cx="0" cy="-8" rx="16" ry="8" fill="#FFB45A" opacity=".8"/>'+
-   '<circle cx="0" cy="-8" r="6" fill="#FFF3E0"/></g>',
- event:()=>'<g><circle class="ping" cx="0" cy="-16" r="26" fill="none" stroke="#F2B705" stroke-width="2"/>'+
-   '<circle cx="0" cy="-16" r="7" fill="#F2B705"/>'+
-   '<g stroke="#F2B705" stroke-width="2" opacity=".7"><path d="M-34 -16 h16 M18 -16 h16 M0 -46 v-14"/></g></g>'
+ swim:()=>'<g><ellipse cx="0" cy="0" rx="30" ry="6" fill="#2A4D63" opacity=".75"/>'+
+   '<ellipse cx="0" cy="0" rx="18" ry="4" fill="#0A1218" opacity=".6"/>'+
+   '<circle cx="2" cy="-13" r="8" fill="#EAF0F6"/>'+
+   '<path d="M-15 -9 q7 -13 15 -6" stroke="#EAF0F6" stroke-width="5" stroke-linecap="round" fill="none"/></g>',
+ car:()=>'<g fill="#EAF0F6"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
+   '<g fill="#0E1B2A"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g>',
+ carHot:()=>'<g><ellipse class="pulse" cx="0" cy="-8" rx="30" ry="16" fill="#F2860D" opacity=".55"/>'+
+   '<g fill="#EAF0F6"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
+   '<g fill="#0E1B2A"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g>'+
+   '<circle cx="-4" cy="-8" r="6" fill="#FFC46B"/></g>',
+ carAlert:()=>'<g><circle class="ping" cx="0" cy="-14" r="34" fill="none" stroke="#FFC46B" stroke-width="2"/>'+
+   '<g fill="#EAF0F6"><path d="M-32 0 v-13 l12 -12 h26 l14 12 v13Z"/>'+
+   '<g fill="#0E1B2A"><circle cx="-18" cy="0" r="6"/><circle cx="20" cy="0" r="6"/></g></g></g>',
+ glow:()=>'<g><circle class="pulse" cx="0" cy="-12" r="22" fill="#F2860D" opacity=".45"/>'+
+   '<circle cx="0" cy="-12" r="10" fill="#FFC46B"/><circle cx="0" cy="-12" r="5" fill="#FFE9CC"/></g>',
+ plume:()=>'<g><g class="rise" fill="#F2860D" opacity=".5"><ellipse cx="0" cy="-30" rx="18" ry="24"/></g>'+
+   '<ellipse class="pulse" cx="0" cy="-8" rx="16" ry="8" fill="#F9A94A" opacity=".8"/>'+
+   '<circle cx="0" cy="-8" r="6" fill="#FFE9CC"/></g>',
+ event:()=>'<g><circle class="ping" cx="0" cy="-16" r="26" fill="none" stroke="#FFC46B" stroke-width="2"/>'+
+   '<circle cx="0" cy="-16" r="7" fill="#FFC46B"/>'+
+   '<g stroke="#FFC46B" stroke-width="2" opacity=".7"><path d="M-34 -16 h16 M18 -16 h16 M0 -46 v-14"/></g></g>'
 };
 
 /* --- scenetabell: hvilket terreng, hvilken aktør, hvor den går --- */
@@ -854,7 +876,7 @@ const SC = {
  1:{t:'road',a:'quad',s:1,aw:78,ah:60,x0:592,y0:0,x1:322,y1:8,dur:9,lab:{no:'ELG',en:'MOOSE'},cf:'0,94'},
  2:{t:'rail',a:'herd',aw:150,ah:48,x0:596,y0:-6,x1:318,y1:6,dur:11,lab:{no:'REIN',en:'REINDEER'},cf:'0,93'},
  3:{t:'perimeter',a:'drone',aw:76,ah:44,x0:600,y0:-92,x1:210,y1:-104,dur:8,lab:{no:'DRONE',en:'DRONE'},cf:'0,88'},
- 4:{t:'field',mob:'tractor',ox:57,oy:100,mark:214,mc:'#7A6A22',a:'lying',aw:76,ah:34,x0:600,y0:0,x1:268,y1:2,dur:9,lab:{no:'RÅDYRKALV',en:'FAWN'},cf:'0,91'},
+ 4:{t:'field',mob:'tractor',ox:57,oy:100,mark:214,mc:'#364E66',a:'lying',aw:76,ah:34,x0:600,y0:0,x1:268,y1:2,dur:9,lab:{no:'RÅDYRKALV',en:'FAWN'},cf:'0,91'},
  5:{t:'fence',a:'pred',aw:62,ah:36,x0:596,y0:0,x1:296,y1:0,dur:10,lab:{no:'JERV',en:'WOLVERINE'},cf:'0,86'},
  6:{t:'pile',a:'glow',aw:62,ah:52,x0:300,y0:-38,x1:300,y1:-38,dur:6,still:1,lab:{no:'GLOBRANN',en:'EMBER'},cf:'0,97'},
  7:{t:'turbine',a:'bird',aw:70,ah:38,x0:120,y0:-96,x1:436,y1:-104,dur:9,lab:{no:'HAVØRN',en:'EAGLE'},cf:'0,89'},
@@ -862,16 +884,16 @@ const SC = {
  9:{t:'pen',a:'seal',aw:74,ah:36,x0:594,y0:-6,x1:306,y1:2,dur:10,lab:{no:'SEL',en:'SEAL'},cf:'0,87'},
 10:{t:'runway',a:'flock',aw:140,ah:56,x0:600,y0:-78,x1:242,y1:-62,dur:9,lab:{no:'FUGLEFLOKK',en:'BIRD FLOCK'},cf:'0,90'},
 11:{t:'treeline',a:'plume',aw:60,ah:64,x0:340,y0:-4,x1:340,y1:-4,dur:6,still:1,lab:{no:'VARMEPLUME',en:'HEAT PLUME'},cf:'0,96'},
-12:{t:'site',mob:'excavator',ox:49,oy:126,mark:216,mc:'#6B5430',a:'person',aw:48,ah:60,x0:594,y0:0,x1:286,y1:0,dur:9,lab:{no:'PERSON NÆR MASKIN',en:'PERSON NEAR PLANT'},cf:'0,95'},
+12:{t:'site',mob:'excavator',ox:49,oy:126,mark:216,mc:'#3D4E5E',a:'person',aw:48,ah:60,x0:594,y0:0,x1:286,y1:0,dur:9,lab:{no:'PERSON NÆR MASKIN',en:'PERSON NEAR PLANT'},cf:'0,95'},
 13:{t:'building',a:'glow',aw:56,ah:48,x0:452,y0:-72,x1:452,y1:-72,dur:6,still:1,lab:{no:'VARMGANG',en:'OVERHEATING'},cf:'0,94'},
 14:{t:'wall',a:'drone',aw:76,ah:44,x0:596,y0:-142,x1:340,y1:-96,dur:8,lab:{no:'DRONE',en:'DRONE'},cf:'0,88'},
 15:{t:'quay',a:'swim',aw:58,ah:32,x0:522,y0:26,x1:326,y1:34,dur:10,lab:{no:'PERSON I SJØEN',en:'PERSON IN WATER'},cf:'0,92'},
 16:{t:'forest',a:'person',aw:48,ah:60,x0:582,y0:0,x1:288,y1:2,dur:11,lab:{no:'PERSON',en:'PERSON'},cf:'0,91'},
-18:{t:'mine',mob:'loader',ox:69,oy:134,mtype:'mine',mc:'#6B5638',a:'person',aw:48,ah:60,x0:560,y0:26,x1:266,y1:26,dur:9,lab:{no:'PERSON',en:'PERSON'},cf:'0,93'},
+18:{t:'mine',mob:'loader',ox:69,oy:134,mtype:'mine',mc:'#435160',a:'person',aw:48,ah:60,x0:560,y0:26,x1:266,y1:26,dur:9,lab:{no:'PERSON',en:'PERSON'},cf:'0,93'},
 19:{t:'pad',a:'car',aw:82,ah:44,x0:600,y0:0,x1:346,y1:0,dur:9,lab:{no:'KJØRETØY I SONEN',en:'VEHICLE IN ZONE'},cf:'0,96'},
 20:{t:'crossing',a:'person',aw:48,ah:60,x0:566,y0:0,x1:330,y1:6,dur:8,lab:{no:'FOTGJENGER',en:'PEDESTRIAN'},cf:'0,95'},
 21:{t:'river',a:'lying',aw:76,ah:34,x0:398,y0:-10,x1:398,y1:-10,dur:7,still:1,lab:{no:'PERSON',en:'PERSON'},cf:'0,89'},
-22:{t:'slope',mob:'groomer',ox:73,oy:128,mtype:'slope',mc:'#6E7E88',a:'lying',aw:76,ah:34,x0:600,y0:-63,x1:270,y1:-7,dur:10,lab:{no:'PERSON I LØYPA',en:'PERSON ON PISTE'},cf:'0,90'},
+22:{t:'slope',mob:'groomer',ox:73,oy:128,mtype:'slope',mc:'#6E7C88',a:'lying',aw:76,ah:34,x0:600,y0:-63,x1:270,y1:-7,dur:10,lab:{no:'PERSON I LØYPA',en:'PERSON ON PISTE'},cf:'0,90'},
 23:{t:'forest',a:'quad',s:.78,aw:64,ah:50,x0:592,y0:0,x1:300,y1:0,dur:12,lab:{no:'HJORT',en:'RED DEER'},cf:'0,92'},
 24:{t:'road',a:'carAlert',aw:84,ah:52,x0:566,y0:6,x1:322,y1:0,dur:9,lab:{no:'VARSEL SENDT',en:'ALERT SENT'},cf:'0,94'},
 25:{t:'road',a:'event',aw:70,ah:56,x0:336,y0:-16,x1:336,y1:-16,dur:6,still:1,lab:{no:'HENDELSE LOGGET',en:'EVENT LOGGED'},cf:'0,94'}
@@ -890,17 +912,17 @@ function sceneSVG(n){
                 'transform:translate('+(still?c.x0:Math.round((c.x0+c.x1)/2))+'px,'+(still?y0:Math.round((y0+y1)/2))+'px)"';
   return '<svg viewBox="0 0 620 240" role="img" aria-hidden="true">'+
    '<defs><linearGradient id="sky'+n+'" x1="0" y1="0" x2="0" y2="1">'+
-   '<stop offset="0" stop-color="#1B1310"/><stop offset="1" stop-color="#3A2113"/></linearGradient>'+
+   '<stop offset="0" stop-color="#121519"/><stop offset="1" stop-color="#1C2631"/></linearGradient>'+
    '<linearGradient id="grd'+n+'" x1="0" y1="0" x2="0" y2="1">'+
-   '<stop offset="0" stop-color="#57290F"/><stop offset="1" stop-color="#100C0A"/></linearGradient>'+
-   ['cT|#DE560A','cR|#DE560A','cL|#DE560A'].map(function(g){var a=g.split('|');
+   '<stop offset="0" stop-color="#1F3347"/><stop offset="1" stop-color="#0E1113"/></linearGradient>'+
+   ['cT|#F2860D','cR|#F2860D','cL|#F2860D'].map(function(g){var a=g.split('|');
      return '<linearGradient id="'+a[0]+n+'" x1="0" y1="0" x2="1" y2="0">'+
             '<stop offset="0" stop-color="'+a[1]+'" stop-opacity=".62"/>'+
             '<stop offset=".45" stop-color="'+a[1]+'" stop-opacity=".16"/>'+
             '<stop offset="1" stop-color="'+a[1]+'" stop-opacity="0"/></linearGradient>';}).join('')+
    '</defs>'+
    '<rect width="620" height="150" fill="url(#sky'+n+')"/><rect y="150" width="620" height="90" fill="url(#grd'+n+')"/>'+
-   '<g opacity=".16" stroke="#DE560A" stroke-width="1"><path d="M0 166 H620 M0 184 H620 M0 206 H620 M0 232 H620"/></g>'+
+   '<g opacity=".16" stroke="#F2860D" stroke-width="1"><path d="M0 166 H620 M0 184 H620 M0 206 H620 M0 232 H620"/></g>'+
    TERRAIN[c.t]+
    (c.mob ? (c.mtype === 'slope' ? rollSlope(c.mc)
            : c.mtype === 'mine'  ? rollMine(c.mc)
@@ -911,17 +933,17 @@ function sceneSVG(n){
    '<g '+(still?'':'class="act" ')+style+'>'+
      act+
      '<g class="'+(still?'lock-still':'lock')+'" '+(still?'':'style="--dur:'+c.dur+'s"')+'>'+
-       '<rect x="'+bx+'" y="'+by+'" width="'+c.aw+'" height="'+c.ah+'" fill="none" stroke="#F2B705" stroke-width="2"/>'+
-       '<rect x="'+bx+'" y="'+(by-13)+'" width="'+Math.max(30, c.lab[lang].length*5.9+8)+'" height="13" fill="#F2B705"/>'+
-       '<text x="'+(bx+4)+'" y="'+(by-3.5)+'" font-family="IBM Plex Mono, monospace" font-size="9" fill="#14100E">'+c.lab[lang]+'</text>'+
+       '<rect x="'+bx+'" y="'+by+'" width="'+c.aw+'" height="'+c.ah+'" fill="none" stroke="#FFC46B" stroke-width="2"/>'+
+       '<rect x="'+bx+'" y="'+(by-13)+'" width="'+Math.max(30, c.lab[lang].length*5.9+8)+'" height="13" fill="#FFC46B"/>'+
+       '<text x="'+(bx+4)+'" y="'+(by-3.5)+'" font-family="IBM Plex Mono, monospace" font-size="9" fill="#0E1B2A">'+c.lab[lang]+'</text>'+
      '</g>'+
    '</g>'+
-   '<rect class="sweep" x="0" y="0" width="2" height="240" fill="#F6EFE8" opacity=".08"/>'+
+   '<rect class="sweep" x="0" y="0" width="2" height="240" fill="#EAF0F6" opacity=".08"/>'+
    (c.mob ? MACHINE[c.mob] :
-     '<rect x="60" y="66" width="7" height="174" fill="#0A0806"/>'+
-     '<rect x="48" y="52" width="31" height="17" rx="2" fill="#DE560A"/>'+
-     '<circle cx="56" cy="60.5" r="2.7" fill="#14100E"/><circle cx="63.5" cy="60.5" r="2.7" fill="#14100E"/>'+
-     '<circle cx="71" cy="60.5" r="2.7" fill="#14100E"/>')+
+     '<rect x="60" y="66" width="7" height="174" fill="#0B0C0E"/>'+
+     '<rect x="48" y="52" width="31" height="17" rx="2" fill="#F2860D"/>'+
+     '<circle cx="56" cy="60.5" r="2.7" fill="#0E1B2A"/><circle cx="63.5" cy="60.5" r="2.7" fill="#0E1B2A"/>'+
+     '<circle cx="71" cy="60.5" r="2.7" fill="#0E1B2A"/>')+
    '</svg>';
 }
 
