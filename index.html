@@ -1034,6 +1034,9 @@ const TERRAIN = {
       '<path d="M310 240 L310 152" stroke="#EAF0F6" stroke-width="3" opacity=".22" stroke-dasharray="16 14"/>',
  rail:'<path d="M150 240 L268 152 M470 240 L352 152" stroke="#3C4C5D" stroke-width="3" opacity=".8"/>'+
       '<g stroke="#232B33" stroke-width="4" opacity=".8"><path d="M262 160 H358 M244 176 H376 M218 198 H402 M182 226 H438"/></g>',
+ roadSide:'<rect x="0" y="176" width="620" height="60" fill="#0C0E10" opacity=".75"/>'+
+      '<path d="M0 176 H620 M0 236 H620" stroke="#3A4651" stroke-width="2" opacity=".55"/>'+
+      '<path d="M0 198 H620" stroke="#EAF0F6" stroke-width="3" opacity=".22" stroke-dasharray="16 14"/>',
  tunnel:'<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="#090A0C"/>'+
         '<path d="M212 240 V196 A98 74 0 0 1 408 196 V240" fill="none" stroke="#3C4C5D" stroke-width="2.5" opacity=".8"/>'+
         '<path d="M150 240 L232 214 H388 L470 240Z" fill="#0F1317"/>'+
@@ -1186,7 +1189,7 @@ const SC = {
 21:{t:'river',a:'lying',aw:76,ah:34,x0:398,y0:-10,x1:398,y1:-10,dur:7,still:1,lab:{no:'PERSON',en:'PERSON'},cf:'0,89'},
 22:{t:'slope',mob:'groomer',ox:73,oy:128,mtype:'slope',mc:'#6E7C88',a:'lying',aw:76,ah:34,x0:600,y0:-63,x1:270,y1:-7,dur:10,lab:{no:'PERSON I LØYPA',en:'PERSON ON PISTE'},cf:'0,90'},
 23:{t:'forest',a:'quad',s:.78,aw:64,ah:50,x0:592,y0:0,x1:300,y1:0,dur:12,lab:{no:'HJORT',en:'RED DEER'},cf:'0,92'},
-24:{t:'road',a:'carAlert',aw:84,ah:52,x0:566,y0:6,x1:322,y1:0,dur:9,lab:{no:'VARSEL SENDT',en:'ALERT SENT'},cf:'0,94'},
+24:{t:'roadSide',a:'carAlert',aw:84,ah:52,x0:566,y0:28,x1:322,y1:28,dur:9,lab:{no:'VARSEL SENDT',en:'ALERT SENT'},cf:'0,94'},
 25:{t:'road',a:'event',aw:70,ah:56,x0:336,y0:-16,x1:336,y1:-16,dur:6,still:1,lab:{no:'HENDELSE LOGGET',en:'EVENT LOGGED'},cf:'0,94'}
 };
 
@@ -1719,7 +1722,7 @@ kForm.addEventListener("submit", async e => {
     });
     if(tm) clearTimeout(tm);
     let ok = res.ok;
-    try{ const j = await res.json(); if(j && (j.success === false || j.success === "false")) ok = false; }catch(_){ }
+    try{ const j = await res.json(); if(j && (j.success === false || j.success === "false")){ ok = false; console.warn("Skjematjenesten svarte:", j.message || j); } }catch(_){ }
     if(!ok) throw new Error("ikke sendt");
     visKvittering(d);
   }catch(err){
