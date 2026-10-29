@@ -687,20 +687,21 @@ const SKJEMA = {
    KONSORTIET – logoene vises automatisk når filene ligger i mappa
    «logoer» i repoet. Mangler en fil, vises navnet i stedet.
    SVG er best; PNG med gjennomsiktig bakgrunn går også (endre filnavnet).
+   «h» er visningshøyden i piksler, slik at logoer med ulik form ser like store ut.
    ===================================================================== */
 const PARTNERE = [
   {id:"sintef", hoved:true, navn:{no:"SINTEF",en:"SINTEF"}, logo:"logoer/sintef.svg",
    rolle:{no:"Prosjektleder",en:"Project lead"},
    om:{no:"En av Europas største uavhengige forskningsorganisasjoner",en:"One of Europe’s largest independent research organisations"}},
-  {id:"nina", navn:{no:"NINA",en:"NINA"}, logo:"logoer/nina.svg",
+  {id:"nina", navn:{no:"NINA",en:"NINA"}, logo:"logoer/nina.png", h:58,
    rolle:{no:"Viltbiologi og bestandsdata",en:"Wildlife biology and population data"},
    om:{no:"Norsk institutt for naturforskning",en:"Norwegian Institute for Nature Research"}},
-  {id:"svv", navn:{no:"Statens vegvesen",en:"Statens vegvesen"}, logo:"logoer/statens-vegvesen.svg",
+  {id:"svv", navn:{no:"Statens vegvesen",en:"Statens vegvesen"}, logo:"logoer/statens-vegvesen.png", h:76,
    rolle:{no:"Veieier og kravstiller",en:"Road owner and requirements"},
    om:{no:"",en:"Norwegian Public Roads Administration"}},
-  {id:"hvl", navn:{no:"Høgskulen på Vestlandet",en:"Høgskulen på Vestlandet"}, logo:"logoer/hvl.svg",
+  {id:"hvl", navn:{no:"Høgskulen på Vestlandet",en:"Høgskulen på Vestlandet"}, logo:"logoer/hvl.png", h:48,
    rolle:{no:"Forskning og validering",en:"Research and validation"},
-   om:{no:"",en:"Western Norway University of Applied Sciences"}},
+   om:{no:"",en:""}},
   {id:"rcn", fond:true, navn:{no:"Forskningsrådet",en:"Research Council of Norway"}, logo:"logoer/forskningsradet.svg",
    rolle:{no:"Finansierer prosjektet",en:"Funds the project"},
    om:{no:"",en:""}}
@@ -1485,7 +1486,7 @@ function renderPartners(){
   ul.innerHTML = PARTNERE.map(p => {
     const navn = p.navn[lang];
     const mark = logoOK[p.id]
-      ? '<img src="'+p.logo+'" alt="'+esc(navn)+'">'
+      ? '<img src="'+p.logo+'" alt="'+esc(navn)+'"'+(p.h?' style="max-height:'+p.h+'px"':'')+'>'
       : '<span class="p-word">'+esc(navn)+'</span>';
     const om = p.om[lang] ? '<span>'+esc(p.om[lang])+'</span>' : '';
     return '<li class="p-tile'+(p.hoved?' p-lead':'')+(p.fond?' p-fund':'')+'">'+
