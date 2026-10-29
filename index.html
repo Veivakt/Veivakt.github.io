@@ -674,16 +674,17 @@ const KONTAKT = {
 
 /* =====================================================================
    KONTAKTSKJEMA – hvor henvendelsene sendes.
-   FormSubmit videresender skjemaet som e-post. Første gang skjemaet
-   brukes, sender FormSubmit en bekreftelseslenke til adressen under.
-   Klikk på den én gang, så kommer alle senere henvendelser fram.
-   Bytter du til en annen tjeneste, endrer du bare «endepunkt» og
-   navnet i personvernteksten (kPriv lenger ned).
+   Henvendelsene sendes som e-post via Web3Forms. Lim inn tilgangsnøkkelen
+   fra web3forms.com i «nokkel». Nøkkelen er laget for å stå åpent i
+   nettsiden. Er feltet tomt, brukes FormSubmit som reserve.
+   Feiler innsendingen, får besøkende alltid tilbud om å sende som e-post.
    ===================================================================== */
 const SKJEMA = {
-  endepunkt: "https://formsubmit.co/ajax/benjamin@veivakten.no",
-  emne:      "Ny henvendelse fra veivakten.no"
+  nokkel:  "",
+  reserve: "https://formsubmit.co/ajax/benjamin@veivakten.no",
+  emne:    "Ny henvendelse fra veivakten.no"
 };
+const SKJEMA_TJENESTE = SKJEMA.nokkel ? "Web3Forms" : "FormSubmit";
 
 /* =====================================================================
    KONSORTIET – logoene vises automatisk når filene ligger i mappa
@@ -1325,7 +1326,7 @@ const T = {
   kSend:"Send henvendelse",kSending:"Sender …",
   kFail:"Henvendelsen ble ikke sendt. Prøv igjen om litt, eller send den som e-post.",
   kFailMail:"Send som e-post",
-  kPriv:"Vi bruker opplysningene bare til å svare på og følge opp henvendelsen. Skjemaet sendes via tjenesten FormSubmit.",
+  kPriv:"Vi bruker opplysningene bare til å svare på og følge opp henvendelsen. Skjemaet sendes via tjenesten {tjeneste}.",
   kDoneTitle:"Henvendelsen er sendt",
   kDoneText:"Takk! Vi svarer til {epost}.",
   kDoneClose:"Lukk",
@@ -1409,7 +1410,7 @@ const T = {
   kSend:"Send enquiry",kSending:"Sending …",
   kFail:"Your enquiry was not sent. Try again shortly, or send it by email.",
   kFailMail:"Send by email",
-  kPriv:"We use your details only to reply to and follow up your enquiry. The form is sent via the FormSubmit service.",
+  kPriv:"We use your details only to reply to and follow up your enquiry. The form is sent via the {tjeneste} service.",
   kDoneTitle:"Your enquiry has been sent",
   kDoneText:"Thank you! We will reply to {epost}.",
   kDoneClose:"Close",
@@ -1582,7 +1583,7 @@ function renderDetail(){
 
 function renderStatic(){
   document.documentElement.lang = lang;
-  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.dataset.i18n).replace("{tjeneste}", SKJEMA_TJENESTE); });
   document.querySelectorAll("[data-i18n-html]").forEach(el=>{ el.innerHTML = t(el.dataset.i18nHtml); });
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.placeholder = t(el.dataset.i18nPh); });
   document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
@@ -1707,17 +1708,19 @@ kForm.addEventListener("submit", async e => {
   try{
     const ctrl = ("AbortController" in window) ? new AbortController() : null;
     const tm = ctrl ? setTimeout(() => ctrl.abort(), 15000) : null;
-    const res = await fetch(SKJEMA.endepunkt, {
+    const felles = {
+      Navn: d.navn, Bedrift: d.bedrift, "E-post": d.epost, Melding: d.melding,
+      Gjelder: d.gjelder || "–", Knapp: kKilde || "lenke", "Språk": lang.toUpperCase()
+    };
+    const emne = SKJEMA.emne + " – " + d.bedrift;
+    const nyttelast = SKJEMA.nokkel
+      ? Object.assign({ access_key: SKJEMA.nokkel, subject: emne, from_name: "veivakten.no",
+                        replyto: d.epost, botcheck: false }, felles)
+      : Object.assign({ _subject: emne, _replyto: d.epost, _template: "table", _honey: "" }, felles);
+    const res = await fetch(SKJEMA.nokkel ? "https://api.web3forms.com/submit" : SKJEMA.reserve, {
       method: "POST",
       headers: {"Content-Type":"application/json", "Accept":"application/json"},
-      body: JSON.stringify({
-        Navn: d.navn, Bedrift: d.bedrift, "E-post": d.epost, Melding: d.melding,
-        Gjelder: d.gjelder || "–", Knapp: kKilde || "lenke", "Språk": lang.toUpperCase(),
-        _subject: SKJEMA.emne + " – " + d.bedrift,
-        _replyto: d.epost,
-        _template: "table",
-        _honey: ""
-      }),
+      body: JSON.stringify(nyttelast),
       signal: ctrl ? ctrl.signal : undefined
     });
     if(tm) clearTimeout(tm);
