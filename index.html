@@ -131,7 +131,7 @@ a{color:inherit}
 
 /* ---------- øyne langs veien ---------- */
 .eyes{background:var(--ink);color:#fff;padding:76px 0 72px}
-.eyes-grid{display:grid;grid-template-columns:1fr 1.1fr;grid-template-areas:"head fig" "items fig";gap:0 64px;align-items:start}
+.eyes-grid{display:grid;grid-template-columns:1fr 1.1fr;grid-template-areas:"head fig" "items fig" "cta fig";gap:0 64px;align-items:start}
 .eyes-head{grid-area:head}
 .eyes-fig{grid-area:fig;margin:0}
 .eyes-items{grid-area:items;list-style:none;margin:30px 0 0;padding:0}
@@ -140,6 +140,9 @@ a{color:inherit}
 .eyes-items li{border-top:1px solid #2C4A69;padding:18px 0 16px}
 .eyes-items h3{font-size:19px;line-height:1.25;color:#fff;display:flex;gap:12px;align-items:baseline}
 .eyes-items h3::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--thermal);transform:translateY(-2px)}
+.eyes-cta{grid-area:cta;border-top:1px solid #2C4A69;padding-top:24px;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.eyes-cta p{margin:0;font-size:20px;font-weight:700;letter-spacing:-.01em;color:#fff}
+.eyes-cta .btn:focus-visible{outline-color:#fff}
 .eyes-items p{margin:6px 0 0 20px;font-size:15.5px;line-height:1.55;color:#C9D4DF;max-width:52ch}
 .eyes-svg{display:block;width:100%;height:auto;border-radius:var(--r);background:var(--scene)}
 .eyes-key{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;font-size:14px;color:#C9D4DF}
@@ -178,17 +181,12 @@ a{color:inherit}
 .areas-head{padding:72px 0 6px}
 .areas-head h2{font-size:clamp(28px,3.4vw,44px)}
 .areas-head p{margin:14px 0 0;font-size:17px;color:var(--ink-2);max-width:60ch}
-.d-cta{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;
-  background:var(--ink);color:#fff;border-radius:var(--r);padding:22px 24px}
-.d-cta p{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em}
-.d-cta .btn:focus-visible,.closing .btn:focus-visible{outline-color:#fff}
-
 /* ---------- avslutning ---------- */
 .closing{background:var(--ink);color:#fff;padding:80px 0 76px}
 .closing-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start}
 .closing h2{font-size:clamp(34px,4.6vw,60px);line-height:1.02;max-width:15ch;color:#fff}
 .closing-grid > div > p{margin:20px 0 30px;font-size:18px;line-height:1.55;color:#C9D4DF;max-width:48ch}
-.closing :focus-visible{outline-color:#fff}
+.closing :focus-visible,.closing .btn:focus-visible{outline-color:#fff}
 
 /* ---------- kontaktskjema ---------- */
 html.k-open{overflow:hidden}
@@ -354,7 +352,7 @@ section[id]{scroll-margin-top:64px}
   .p-tile:nth-child(n+4){border-top:1px solid var(--rule)}
   .p-tile.p-fund{padding-left:16px}
   .closing-grid{grid-template-columns:1fr;gap:44px}
-  .eyes-grid{grid-template-columns:1fr;grid-template-areas:"head" "fig" "items";gap:28px}
+  .eyes-grid{grid-template-columns:1fr;grid-template-areas:"head" "fig" "items" "cta";gap:28px}
   .eyes-items{margin-top:0}
   .about-grid{grid-template-columns:1fr;gap:18px}
   .legend-grid{grid-template-columns:1fr}
@@ -498,6 +496,11 @@ section[id]{scroll-margin-top:64px}
       <li><h3 data-i18n="eyes2T"></h3><p data-i18n="eyes2B"></p></li>
       <li><h3 data-i18n="eyes3T"></h3><p data-i18n="eyes3B"></p></li>
     </ul>
+    <div class="eyes-cta">
+      <p data-i18n="eyesCtaQ"></p>
+      <!-- Knapp 2 av 3 -->
+      <button type="button" class="btn" data-kontakt="eyes" data-kilde="midten" data-i18n="eyesCta"></button>
+    </div>
   </div>
 </section>
 
@@ -549,7 +552,6 @@ section[id]{scroll-margin-top:64px}
 
 <div class="wrap split">
   <nav class="nav" id="nav" data-i18n-aria="navLbl"></nav>
-  <!-- Knapp 2 av 3 ligger nederst i hvert bruksområde (se renderDetail) -->
   <article class="detail" id="detail" aria-live="polite"></article>
 </div>
 
@@ -1264,6 +1266,8 @@ const T = {
   eyes2B:"Enheten utvikles for å sende farene videre i sanntid etter de europeiske standardene for tilkoblede kjøretøy (C-ITS). Da ser kjøretøyet lenger enn egne sensorer rekker.",
   eyes3T:"Gir veieieren oversikt",
   eyes3B:"Hver hendelse logges med tid og type. Veieieren ser hvor og når farene oppstår, og hvilke strekninger som trenger tiltak.",
+  eyesCtaQ:"Har dere en strekning som trenger øyne?",
+  eyesCta:"Fortell oss om strekningen",
   ctaHero:"Avtal en samtale",
   ctaHeroLink:"Se de 24 bruksområdene",
   sceneLive:"Deteksjon",sceneNode:"anlegg",
@@ -1289,8 +1293,6 @@ const T = {
   searchPh:"Søk i bruksområder …",
   catsam:"Samferdsel",catnat:"Natur og landbruk",catsik:"Beredskap og sikkerhet",catind:"Industri og anlegg",
   fProblem:"Behovet",fEdge:"Slik skal systemet brukes",fAdapt:"Oppsett og tilpasning",
-  areaCtaQ:"Er dette aktuelt for dere?",
-  areaCta:"Ta kontakt om dette området",
   prev:"← Forrige",next:"Neste →",
   empty:"Ingen bruksområder passer søket.",
 
@@ -1308,7 +1310,7 @@ const T = {
 
   kTitle:"Ta kontakt med VeiVakt",
   kIntro:"Fortell kort hvem dere er og hva dere ønsker. Du får svar direkte fra daglig leder, normalt innen to virkedager.",
-  kTopicLbl:"Gjelder:",topicCall:"Samtale",topicPilot:"Pilotprosjekt",
+  kTopicLbl:"Gjelder:",topicCall:"Samtale",topicPilot:"Pilotprosjekt",topicEyes:"Øyne langs veien",
   kReq:"Alle feltene må fylles ut.",
   fNavn:"Navn",fBedrift:"Bedrift",fEpost:"E-post",fMelding:"Melding",
   fMeldingHint:"For eksempel hva dere vil oppdage, hvor og når dere ønsker å starte.",
@@ -1348,6 +1350,8 @@ const T = {
   eyes2B:"The unit is being developed to pass hazards on in real time using the European standards for connected vehicles (C-ITS). The vehicle then sees further than its own sensors reach.",
   eyes3T:"Gives the road owner an overview",
   eyes3B:"Every event is logged with its time and type. The road owner sees where and when hazards occur, and which sections need action.",
+  eyesCtaQ:"Got a stretch of road that needs eyes?",
+  eyesCta:"Tell us about your road",
   ctaHero:"Book a call",
   ctaHeroLink:"See all 24 applications",
   sceneLive:"Detection",sceneNode:"installation",
@@ -1373,8 +1377,6 @@ const T = {
   searchPh:"Search applications …",
   catsam:"Transport",catnat:"Nature and farming",catsik:"Safety and response",catind:"Industry and sites",
   fProblem:"The need",fEdge:"How the system is meant to be used",fAdapt:"Setup and adaptation",
-  areaCtaQ:"Is this relevant to you?",
-  areaCta:"Get in touch about this application",
   prev:"← Previous",next:"Next →",
   empty:"No applications match that search.",
 
@@ -1392,7 +1394,7 @@ const T = {
 
   kTitle:"Get in touch with VeiVakt",
   kIntro:"Tell us briefly who you are and what you need. You will get a reply from the CEO in person, normally within two working days.",
-  kTopicLbl:"Regarding:",topicCall:"A call",topicPilot:"Pilot project",
+  kTopicLbl:"Regarding:",topicCall:"A call",topicPilot:"Pilot project",topicEyes:"Eyes along the road",
   kReq:"All fields are required.",
   fNavn:"Name",fBedrift:"Company",fEpost:"Email",fMelding:"Message",
   fMeldingHint:"For example what you want to detect, where, and when you would like to start.",
@@ -1565,9 +1567,6 @@ function renderDetail(){
      fld("fEdge","edge")+
      fld("fAdapt","adapt")+
    '</div>'+
-   '<div class="d-cta"><p>'+t("areaCtaQ")+'</p>'+
-     '<button type="button" class="btn" data-kontakt="area" data-n="'+d.n+'" data-kilde="bruksomrade">'+t("areaCta")+'</button>'+
-   '</div>'+
    '<div class="d-foot"><div class="stepper">'+
      '<button type="button" class="step" id="prev"'+(i<=0?' disabled':'')+'>'+t("prev")+'</button>'+
      '<button type="button" class="step" id="next"'+(i>=list.length-1?' disabled':'')+'>'+t("next")+'</button>'+
@@ -1616,7 +1615,7 @@ const FELT = [
 function temaTekst(){
   if(!kTema) return "";
   if(kTema.type === "area"){ const d = D.find(x => x.n === kTema.n); return d ? d.name[lang] : ""; }
-  return t(kTema.type === "pilot" ? "topicPilot" : "topicCall");
+  return t({pilot:"topicPilot", eyes:"topicEyes"}[kTema.type] || "topicCall");
 }
 function paintTopic(){
   const el = $("#kTopic"), s = temaTekst();
