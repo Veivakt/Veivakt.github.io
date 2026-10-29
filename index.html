@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VeiVakt – Bruksområder for faredeteksjon og varsling</title>
-<meta name="description" content="Et patentsøkt system med sensorer og kunstig intelligens for faredeteksjon og varsling. 24 kartlagte bruksområder, fra vei og jernbane til beredskap, industri og landbruk.">
+<title>VeiVakt – sensorer og kunstig intelligens for varsling og overvåking</title>
+<meta name="description" content="VeiVakt AS utvikler sensorer og kunstig intelligens som oppdager farer og varsler med én gang. 24 bruksområder, fra vei og jernbane til industri, beredskap og kritisk infrastruktur.">
 
 <!-- Favikon og ikoner -->
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -15,7 +15,7 @@
 
 <!-- Delingsbilde -->
 <meta property="og:title" content="VeiVakt">
-<meta property="og:description" content="Faredeteksjon og varsling på vei">
+<meta property="og:description" content="Sensorer og kunstig intelligens for varsling og overvåking">
 <meta property="og:image" content="https://veivakten.no/veivakt-og-bilde.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -36,7 +36,7 @@
   --panel-2:#E2E8EF;
   --ink:#16324F;
   --ink-2:#46617F;
-  --ink-3:#7A8CA0;
+  --ink-3:#5A6C84;
   --rule:#D4DCE5;
   --rule-2:#BDC8D4;
   --thermal:#F2860D;
@@ -103,36 +103,98 @@ a{color:inherit}
 .ping{animation:ping 2.4s ease-out infinite;transform-box:fill-box;transform-origin:center}
 
 /* ---------- om selskapet ---------- */
-.about{border-top:1px solid var(--rule);padding:52px 0 56px;background:var(--panel)}
-.about-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:start}
-.about h2{font-size:clamp(24px,3vw,34px);max-width:18ch}
-.about p{margin:18px 0 0;font-size:16px;color:var(--ink-2);max-width:56ch;line-height:1.62}
-.contact h3{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
-  border-top:1px solid var(--rule-2);padding:16px 0 4px;margin:0}
+.about{border-top:1px solid var(--rule);padding:64px 0;background:var(--panel)}
+.about-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:52px;align-items:start}
+.about h2{font-size:clamp(26px,3vw,36px)}
+.about p{margin:0 0 14px;font-size:17px;color:var(--ink-2);max-width:58ch;line-height:1.6}
+.contact h3{font-size:16px;color:#fff;font-weight:700;letter-spacing:0;margin:0 0 6px}
 .contact dl{margin:0;display:grid;grid-template-columns:1fr}
-.contact dt{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.06em;color:var(--ink-3);
-  border-top:1px solid var(--rule);padding-top:12px}
-.contact dd{margin:2px 0 12px;font-size:15.5px;color:var(--ink)}
-.contact dd a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.contact dt{font-size:13.5px;color:#A9B8C8;border-top:1px solid #2C4A69;padding-top:12px}
+.contact dd{margin:2px 0 12px;font-size:16px;color:#fff}
+.contact dd a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .contact .todo{color:var(--signal-ink);font-family:"IBM Plex Mono",monospace;font-size:13.5px}
 @media (max-width:960px){.about-grid{grid-template-columns:1fr;gap:30px}}
 
-/* ---------- WILDETECT-feltet ---------- */
-.flag{background:var(--ink);color:var(--paper);padding:44px 0 46px}
-.flag-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:start}
-.flag .eyebrow{color:#8392A1;margin-bottom:16px}
-.flag h2{font-size:clamp(26px,3.2vw,40px);color:var(--paper)}
-.flag h2 em{font-style:normal;color:var(--signal-ink)}
-.flag p{color:#BEC6CE;font-size:16px;margin:16px 0 0;max-width:54ch;line-height:1.6}
-.flag-part{border-top:1px solid #2C3236;margin-top:8px}
-.flag-part h3{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8392A1;font-weight:600;padding:16px 0 12px}
-.flag-list{display:flex;flex-direction:column}
-.flag-list span{border-top:1px solid #2C3236;padding:9px 0;font-size:14.5px;color:var(--paper)}
-.flag-list span:first-child{border-top:0}
-.flag-list b{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#8392A1;font-weight:500;letter-spacing:.06em;display:block}
-.core-tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--thermal);color:var(--ink);padding:2px 6px;border-radius:2px;margin-left:auto;flex:none}
-.nav-item[aria-current="true"] .core-tag{background:var(--thermal);color:var(--ink)}
-@media (max-width:960px){.flag-grid{grid-template-columns:1fr;gap:28px}}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- knapper ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:13px 24px;
+  font:700 16.5px/1.2 "Manrope",sans-serif;letter-spacing:-.005em;text-decoration:none;cursor:pointer;
+  background:var(--thermal);color:var(--ink);border:0;border-radius:var(--r)}
+.btn:hover{background:#FF9B33}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn[disabled]{opacity:.65;cursor:progress}
+.tlink{font-weight:600;color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;padding:10px 0}
+.tlink:hover{text-decoration-thickness:2px}
+.skip{position:absolute;left:12px;top:-60px;z-index:100;background:var(--ink);color:#fff;padding:10px 14px;border-radius:var(--r);font-weight:600}
+.skip:focus{top:10px}
+
+/* ---------- konsortiet ---------- */
+.partners{background:var(--panel);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:44px 0 40px}
+.partners-head{display:grid;grid-template-columns:1fr 1fr;gap:16px 56px;align-items:start;margin-bottom:26px}
+.partners h2{font-size:clamp(26px,2.8vw,36px);line-height:1.1;max-width:22ch}
+.partners-head p{margin:0;color:var(--ink-2);font-size:16.5px;max-width:52ch}
+.p-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1.75fr repeat(4,1fr);border-top:2px solid var(--ink)}
+.p-tile{display:flex;flex-direction:column;justify-content:flex-start;gap:16px;padding:26px 22px 6px;border-left:1px solid var(--rule)}
+.p-tile:first-child{border-left:0;padding-left:0}
+.p-mark{min-height:80px;display:flex;align-items:flex-end}
+.p-word{font-size:21px;font-weight:700;line-height:1.15;letter-spacing:-.01em;color:var(--ink)}
+.p-lead .p-word{font-size:clamp(46px,5.6vw,76px);font-weight:800;line-height:.95;letter-spacing:-.025em}
+.p-mark img{display:block;width:auto;height:auto;max-width:100%;max-height:46px}
+.p-lead .p-mark img{max-height:76px}
+.p-role{margin:0;font-size:14px;line-height:1.45;color:var(--ink-2)}
+.p-role b{display:block;font-weight:700;color:var(--ink);font-size:15px}
+.p-fund .p-role b::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--thermal);margin-right:8px;vertical-align:1px}
+.p-note{margin:24px 0 0;font-size:14px;color:var(--ink-3);max-width:78ch}
+
+/* ---------- bruksområder ---------- */
+.areas-head{padding:72px 0 6px}
+.areas-head h2{font-size:clamp(28px,3.4vw,44px)}
+.areas-head p{margin:14px 0 0;font-size:17px;color:var(--ink-2);max-width:60ch}
+.d-cta{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;
+  background:var(--ink);color:#fff;border-radius:var(--r);padding:22px 24px}
+.d-cta p{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em}
+.d-cta .btn:focus-visible,.closing .btn:focus-visible{outline-color:#fff}
+
+/* ---------- avslutning ---------- */
+.closing{background:var(--ink);color:#fff;padding:80px 0 76px}
+.closing-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start}
+.closing h2{font-size:clamp(34px,4.6vw,60px);line-height:1.02;max-width:15ch;color:#fff}
+.closing-grid > div > p{margin:20px 0 30px;font-size:18px;line-height:1.55;color:#C9D4DF;max-width:48ch}
+.closing :focus-visible{outline-color:#fff}
+
+/* ---------- kontaktskjema ---------- */
+html.k-open{overflow:hidden}
+.kdlg{border:0;padding:0;border-radius:6px;width:min(580px,calc(100% - 32px));max-height:calc(100dvh - 32px);
+  background:var(--panel);color:var(--ink);box-shadow:0 30px 80px rgba(14,27,42,.4)}
+.kdlg::backdrop{background:rgba(14,27,42,.66)}
+.kdlg form,.k-done{padding:28px 30px 30px}
+.k-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.k-top h2{font-size:28px;line-height:1.12;padding-top:4px}
+.k-top h2:focus{outline:none}
+.k-x{flex:none;width:44px;height:44px;margin:-6px -12px 0 0;display:grid;place-items:center;border:0;background:transparent;border-radius:var(--r);color:var(--ink);cursor:pointer}
+.k-x:hover{background:var(--paper)}
+.k-intro{margin:10px 0 0;font-size:16px;color:var(--ink-2)}
+.k-topic{display:inline-block;margin:16px 0 0;padding:5px 10px;font-size:14px;font-weight:600;background:var(--paper);border:1px solid var(--rule-2);border-radius:var(--r)}
+.k-req{margin:18px 0 0;font-size:14px;color:var(--ink-3)}
+.f{margin-top:16px}
+.f label{display:block;margin-bottom:6px;font-size:15.5px;font-weight:700}
+.f-hint{display:block;margin:-2px 0 7px;font-size:14px;color:var(--ink-3)}
+.f input,.f textarea{display:block;width:100%;min-height:50px;padding:12px 13px;font:400 16px/1.45 "Manrope",sans-serif;color:var(--ink);
+  background:#fff;border:1px solid var(--ink-3);border-radius:var(--r)}
+.f textarea{min-height:136px;resize:vertical}
+.f input:focus,.f textarea:focus{outline:3px solid var(--thermal);outline-offset:0;border-color:var(--ink)}
+.f [aria-invalid="true"]{border:2px solid #B3261E}
+.f-err{margin:7px 0 0;font-size:14.5px;font-weight:600;color:#B3261E}
+.f-err:empty{display:none}
+.k-hp{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+.k-actions{margin-top:24px}
+.k-status{margin:14px 0 0;font-size:15px}
+.k-status:empty{display:none}
+.k-status.err{color:#B3261E;font-weight:600}
+.k-status a{color:var(--ink)}
+.k-priv{margin:18px 0 0;font-size:13.5px;line-height:1.5;color:var(--ink-3)}
+.k-done p{margin:14px 0 26px;font-size:17px;color:var(--ink-2)}
 
 /* ---------- header ---------- */
 .hdr{
@@ -151,18 +213,13 @@ a{color:inherit}
 .langsw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 
 /* ---------- hero ---------- */
-.hero{padding:64px 0 44px;border-bottom:1px solid var(--rule)}
+.hero{padding:60px 0 54px}
+section[id]{scroll-margin-top:64px}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:20px}
-.hero h1{font-size:clamp(38px,5.4vw,68px)}
-.hero h1 em{font-style:normal;color:var(--signal-ink)}
-.hero-lede{margin:22px 0 0;max-width:48ch;color:var(--ink-2);font-size:17px}
-.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:30px;border-top:1px solid var(--rule)}
-.hero-stats div{padding:14px 16px 2px;border-left:1px solid var(--rule)}
-.hero-stats div:first-child{border-left:0;padding-left:0}
-.hero-stats b{display:block;font-family:"Manrope",sans-serif;font-size:26px;line-height:1;letter-spacing:-.02em}
-.hero-stats span{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-
+.hero h1{font-size:clamp(40px,5.2vw,68px);line-height:1.02}
+.hero-lede{margin:24px 0 0;max-width:46ch;color:var(--ink-2);font-size:18px;line-height:1.55}
+.hero-cta{display:flex;gap:14px 26px;align-items:center;flex-wrap:wrap;margin-top:32px}
 /* detection scene */
 .scene{background:var(--scene);border-radius:var(--r);padding:14px;position:relative;overflow:hidden}
 .scene-top{display:flex;justify-content:space-between;align-items:center;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#7D8FA3;margin-bottom:10px}
@@ -176,19 +233,19 @@ a{color:inherit}
 .scene-meta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:#7D8FA3;letter-spacing:.06em;text-align:right}
 
 /* ---------- sensor legend ---------- */
-.legend{padding:40px 0;border-bottom:1px solid var(--rule)}
+.legend{padding:56px 0 48px;border-bottom:1px solid var(--rule)}
 .legend-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule)}
-.leg{background:var(--paper);padding:20px 22px 22px}
-.leg-key{display:flex;align-items:center;gap:9px;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600}
-.leg-key i{width:14px;height:4px;display:block;flex:none}
-.leg h3{font-size:19px;margin:10px 0 7px}
+.leg{background:var(--paper);padding:24px 26px 26px}
+.leg-key{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--ink)}
+.leg-key i{width:18px;height:4px;display:block;flex:none}
+.leg h3{font-size:22px;margin:12px 0 10px;line-height:1.15}
 .leg-key i{background:var(--thermal)}
 .leg-note{margin:26px 0 0;font-size:13.5px;color:var(--ink-3);max-width:70ch;line-height:1.6;border-top:1px solid var(--rule);padding-top:16px}
-.leg p{margin:0;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+.leg p{margin:0;font-size:15.5px;color:var(--ink-2);line-height:1.58}
 .leg-spec{margin-top:10px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);letter-spacing:.03em}
 
 /* ---------- controls ---------- */
-.ctrl{padding:26px 0 18px;position:sticky;top:56px;z-index:30;background:var(--paper);border-bottom:1px solid var(--rule)}
+.ctrl{padding:18px 0 18px;position:sticky;top:56px;z-index:30;background:var(--paper);border-bottom:1px solid var(--rule)}
 .ctrl-in{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:space-between}
 .tiers{display:flex;gap:8px;flex-wrap:wrap}
 .tier-btn{
@@ -243,7 +300,7 @@ a{color:inherit}
 .fld strong{font-weight:600}
 .num{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:15px;background:linear-gradient(transparent 62%,rgba(255,196,107,.42) 62%);padding:0 1px}
 
-.d-foot{padding:26px 0 0;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.d-foot{padding:18px 0 0;display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap}
 .stepper{display:flex;gap:8px}
 .step{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;padding:8px 14px;border:1px solid var(--rule-2);background:transparent;border-radius:var(--r);cursor:pointer;color:var(--ink-2)}
 .step:hover:not(:disabled){background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -256,7 +313,20 @@ a{color:inherit}
 .ftr a{color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
 
 @media (max-width:960px){
-  .hero-grid{grid-template-columns:1fr;gap:34px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .partners-head{grid-template-columns:1fr}
+  .p-grid{grid-template-columns:1fr 1fr}
+  .p-tile{padding:20px 16px 18px;gap:10px}
+  .p-mark{min-height:0}
+  .p-word{font-size:19px}
+  .p-lead .p-word{font-size:56px}
+  #heroStage{display:none}
+  .p-tile.p-lead{grid-column:1 / -1;border-left:0;padding-left:0;padding-bottom:22px;border-bottom:1px solid var(--rule)}
+  .p-tile:nth-child(2n){border-left:0;padding-left:0}
+  .p-tile:nth-child(n+4){border-top:1px solid var(--rule)}
+  .p-tile.p-fund{padding-left:16px}
+  .closing-grid{grid-template-columns:1fr;gap:44px}
+  .about-grid{grid-template-columns:1fr;gap:18px}
   .legend-grid{grid-template-columns:1fr}
   .split{grid-template-columns:1fr}
   .nav{position:static;max-height:44vh;border-right:0;border-bottom:1px solid var(--rule);padding:18px 0;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -266,10 +336,15 @@ a{color:inherit}
 }
 @media (max-width:620px){
   .wrap{padding:0 18px}
-  .hero-stats{grid-template-columns:repeat(2,1fr)}
-  .hero-stats div:nth-child(3){border-left:0;padding-left:0}
-  .hero-stats div:nth-child(n+3){border-top:1px solid var(--rule);margin-top:12px}
-  .hero{padding:40px 0 32px}
+  .hero{padding:44px 0 44px}
+  .hero-lede{font-size:17px}
+  .partners{padding:44px 0 36px}
+  .areas-head{padding:52px 0 4px}
+  .closing{padding:60px 0}
+  .btn{width:100%}
+  .hero-cta .tlink{width:100%;text-align:center}
+  .kdlg{width:100%;max-width:100%;height:100dvh;max-height:100dvh;margin:0;border-radius:0}
+  .kdlg form,.k-done{padding:20px 18px 28px;min-height:100%}
   .search input{width:100%}
   .search{flex:1 1 100%}
 }
@@ -280,9 +355,11 @@ a{color:inherit}
 </head>
 <body>
 
+<a class="skip" href="#hoved" data-i18n="skip"></a>
+
 <header class="hdr">
   <div class="wrap hdr-in">
-    <div class="brand"><svg class="brand-mark" viewBox="5.75 7.75 84.5 77.5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M 55.88,27.27 L 77.63,66.65 A 9,9 0 0 1 69.75,80.00 L 26.25,80.00 A 9,9 0 0 1 18.37,66.65 L 40.12,27.27 A 9,9 0 0 1 55.88,27.27 Z" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linejoin="round"/><circle cx="48" cy="58" r="9.5" fill="var(--thermal)"/></svg>VeiVakt <small data-i18n="brandSub"></small></div>
+    <div class="brand"><svg class="brand-mark" viewBox="5.75 7.75 84.5 77.5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M 55.88,27.27 L 77.63,66.65 A 9,9 0 0 1 69.75,80.00 L 26.25,80.00 A 9,9 0 0 1 18.37,66.65 L 40.12,27.27 A 9,9 0 0 1 55.88,27.27 Z" fill="none" stroke="currentColor" stroke-width="10.5" stroke-linejoin="round"/><circle cx="48" cy="58" r="9.5" fill="var(--thermal)"/></svg>VeiVakt</div>
     <div class="langsw" role="group" aria-label="Språk / Language">
       <button type="button" data-lang="no" aria-pressed="true">NO</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -290,59 +367,50 @@ a{color:inherit}
   </div>
 </header>
 
-<section class="hero">
+<main id="hoved">
+
+<section class="hero" aria-labelledby="heroTitle">
   <div class="wrap hero-grid">
     <div>
-      <div class="eyebrow mono" data-i18n="heroEyebrow"></div>
-      <h1 data-i18n-html="heroTitle"></h1>
+      <h1 id="heroTitle" data-i18n-html="heroTitle"></h1>
       <p class="hero-lede" data-i18n="heroLede"></p>
-      <div class="hero-stats">
-        <div><b class="mono">24</b><span data-i18n="statDomains"></span></div>
-        <div><b class="mono" data-i18n="statPatentV"></b><span data-i18n="statPatent"></span></div>
-        <div><b class="mono" data-i18n="statAllV"></b><span data-i18n="statAll"></span></div>
-        <div><b class="mono" data-i18n="statLocalV"></b><span data-i18n="statLocal"></span></div>
+      <div class="hero-cta">
+        <!-- Knapp 1 av 3: åpner kontaktskjemaet -->
+        <button type="button" class="btn" data-kontakt="call" data-kilde="topp" data-i18n="ctaHero"></button>
+        <a class="tlink" href="#bruksomrader" data-i18n="ctaHeroLink"></a>
       </div>
     </div>
     <div id="heroStage"></div>
   </div>
 </section>
 
-<section class="flag">
-  <div class="wrap flag-grid">
-    <div>
-      <div class="eyebrow mono" data-i18n="flagEyebrow"></div>
-      <h2 data-i18n-html="flagTitle"></h2>
-      <p data-i18n="flagBody"></p>
-      <p data-i18n="flagBody2"></p>
+<section class="partners" id="konsortiet" aria-labelledby="pTitle">
+  <div class="wrap">
+    <div class="partners-head">
+      <h2 id="pTitle" data-i18n="pTitle"></h2>
+      <p data-i18n="pBody"></p>
     </div>
-    <div class="flag-part">
-      <h3 data-i18n="flagPartners"></h3>
-      <div class="flag-list">
-        <span><b data-i18n="flagRole1"></b>SINTEF</span>
-        <span><b data-i18n="flagRole2"></b>NINA</span>
-        <span><b data-i18n="flagRole3"></b>Statens vegvesen</span>
-        <span><b data-i18n="flagRole4"></b>Høgskulen på Vestlandet</span>
-        <span><b data-i18n="flagRole5"></b>VeiVakt AS</span>
-      </div>
-    </div>
+    <ul class="p-grid" id="pGrid"></ul>
+    <p class="p-note" data-i18n="pNote"></p>
   </div>
 </section>
 
-<section class="legend">
+<section class="legend" aria-labelledby="legTitle">
   <div class="wrap">
+    <h2 id="legTitle" class="sr" data-i18n="legTitle"></h2>
     <div class="legend-grid">
       <div class="leg">
-        <div class="leg-key"><i></i>01 · <span data-i18n="legAKey"></span></div>
+        <div class="leg-key"><i></i><span data-i18n="legAKey"></span></div>
         <h3 data-i18n="legATitle"></h3>
         <p data-i18n="legABody"></p>
       </div>
       <div class="leg">
-        <div class="leg-key"><i></i>02 · <span data-i18n="legBKey"></span></div>
+        <div class="leg-key"><i></i><span data-i18n="legBKey"></span></div>
         <h3 data-i18n="legBTitle"></h3>
         <p data-i18n="legBBody"></p>
       </div>
       <div class="leg">
-        <div class="leg-key"><i></i>03 · <span data-i18n="legCKey"></span></div>
+        <div class="leg-key"><i></i><span data-i18n="legCKey"></span></div>
         <h3 data-i18n="legCTitle"></h3>
         <p data-i18n="legCBody"></p>
       </div>
@@ -351,9 +419,16 @@ a{color:inherit}
   </div>
 </section>
 
+<section class="areas-head" id="bruksomrader" aria-labelledby="areasTitle">
+  <div class="wrap">
+    <h2 id="areasTitle" data-i18n="areasTitle"></h2>
+    <p data-i18n="areasBody"></p>
+  </div>
+</section>
+
 <section class="ctrl">
   <div class="wrap ctrl-in">
-    <div class="tiers" role="group" aria-label="Filter">
+    <div class="tiers" role="group" data-i18n-aria="filterLbl">
       <button type="button" class="cat-btn tier-btn" data-cat="all" aria-pressed="true" data-i18n="filterAll"></button>
       <button type="button" class="cat-btn tier-btn" data-cat="sam" aria-pressed="false" data-i18n="filterSam"></button>
       <button type="button" class="cat-btn tier-btn" data-cat="nat" aria-pressed="false" data-i18n="filterNat"></button>
@@ -361,30 +436,43 @@ a{color:inherit}
       <button type="button" class="cat-btn tier-btn" data-cat="ind" aria-pressed="false" data-i18n="filterInd"></button>
     </div>
     <div class="search">
-      <input type="search" id="q" data-i18n-ph="searchPh" aria-label="Søk">
+      <input type="search" id="q" data-i18n-ph="searchPh" data-i18n-aria="searchLbl">
     </div>
   </div>
 </section>
 
-<main class="wrap split">
-  <nav class="nav" id="nav" aria-label="Bruksområder"></nav>
+<div class="wrap split">
+  <nav class="nav" id="nav" data-i18n-aria="navLbl"></nav>
+  <!-- Knapp 2 av 3 ligger nederst i hvert bruksområde (se renderDetail) -->
   <article class="detail" id="detail" aria-live="polite"></article>
-</main>
+</div>
 
-<section class="about">
+<section class="about" aria-labelledby="aboutTitle">
   <div class="wrap about-grid">
+    <h2 id="aboutTitle" data-i18n="aboutTitle"></h2>
     <div>
-      <div class="eyebrow mono" data-i18n="aboutEyebrow"></div>
-      <h2 data-i18n="aboutTitle"></h2>
       <p data-i18n="aboutBody"></p>
       <p data-i18n="aboutBody2"></p>
     </div>
+  </div>
+</section>
+
+<section class="closing" aria-labelledby="closeTitle">
+  <div class="wrap closing-grid">
+    <div>
+      <h2 id="closeTitle" data-i18n="closeTitle"></h2>
+      <p data-i18n="closeBody"></p>
+      <!-- Knapp 3 av 3 -->
+      <button type="button" class="btn" data-kontakt="pilot" data-kilde="bunn" data-i18n="ctaClose"></button>
+    </div>
     <div class="contact">
-      <h3 class="mono" data-i18n="contactH"></h3>
+      <h3 data-i18n="contactH"></h3>
       <dl id="contactList"></dl>
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="ftr">
   <div class="wrap ftr-grid">
@@ -393,10 +481,68 @@ a{color:inherit}
       <p data-i18n="ftrSources"></p>
     </div>
     <div>
-      <p><a href="https://veivakten.no">veivakten.no</a> · VeiVakt AS</p>
+      <p><a href="https://veivakten.no">veivakten.no</a> · VeiVakt AS · <span data-i18n="ftrOrg"></span> 937 497 490</p>
     </div>
   </div>
 </footer>
+
+<!-- Kontaktskjema. Alle tre knappene åpner dette. Lenken veivakten.no/#kontakt åpner det direkte. -->
+<dialog class="kdlg" id="kontakt" aria-labelledby="kTitle">
+  <form id="kForm" novalidate>
+    <div class="k-top">
+      <h2 id="kTitle" data-i18n="kTitle"></h2>
+      <button type="button" class="k-x" data-k-lukk data-i18n-aria="kClose">
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="k-intro" data-i18n="kIntro"></p>
+    <p class="k-topic" id="kTopic" hidden></p>
+    <p class="k-req" data-i18n="kReq"></p>
+
+    <div class="f">
+      <label for="fNavn" data-i18n="fNavn"></label>
+      <input id="fNavn" name="navn" type="text" autocomplete="name" required aria-describedby="eNavn">
+      <p class="f-err" id="eNavn"></p>
+    </div>
+    <div class="f">
+      <label for="fBedrift" data-i18n="fBedrift"></label>
+      <input id="fBedrift" name="bedrift" type="text" autocomplete="organization" required aria-describedby="eBedrift">
+      <p class="f-err" id="eBedrift"></p>
+    </div>
+    <div class="f">
+      <label for="fEpost" data-i18n="fEpost"></label>
+      <input id="fEpost" name="epost" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="eEpost">
+      <p class="f-err" id="eEpost"></p>
+    </div>
+    <div class="f">
+      <label for="fMelding" data-i18n="fMelding"></label>
+      <span class="f-hint" id="hMelding" data-i18n="fMeldingHint"></span>
+      <textarea id="fMelding" name="melding" rows="5" required aria-describedby="hMelding eMelding"></textarea>
+      <p class="f-err" id="eMelding"></p>
+    </div>
+    <div class="k-hp" aria-hidden="true">
+      <label for="fHp">Ikke fyll ut dette feltet</label>
+      <input id="fHp" name="_honey" type="text" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div class="k-actions">
+      <button type="submit" class="btn" id="kSend" data-i18n="kSend"></button>
+    </div>
+    <p class="k-status" id="kStatus" role="status"></p>
+    <p class="k-priv" data-i18n="kPriv"></p>
+  </form>
+
+  <div class="k-done" id="kDone" hidden>
+    <div class="k-top">
+      <h2 id="kDoneTitle" tabindex="-1" data-i18n="kDoneTitle"></h2>
+      <button type="button" class="k-x" data-k-lukk data-i18n-aria="kClose">
+        <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p id="kDoneText"></p>
+    <button type="button" class="btn" data-k-lukk data-i18n="kDoneClose"></button>
+  </div>
+</dialog>
 
 <script>
 /* VeiVakt – bruksområder / application domains */
@@ -409,7 +555,7 @@ a{color:inherit}
 const KONTAKT = {
   selskap:  "VeiVakt AS",
   person:   "Benjamin Nystrøm-Grøntjernet",
-  rolle:    {no:"Gründer og daglig leder", en:"founder and CEO"},
+  rolle:    {no:"gründer og daglig leder", en:"founder and CEO"},
   epost:    "benjamin@veivakten.no",
   telefon:  "+47 413 42 349",
   orgnr:    "937 497 490",
@@ -418,16 +564,52 @@ const KONTAKT = {
   linkedin: "https://www.linkedin.com/company/structmedias/"
 };
 
+/* =====================================================================
+   KONTAKTSKJEMA – hvor henvendelsene sendes.
+   FormSubmit videresender skjemaet som e-post. Første gang skjemaet
+   brukes, sender FormSubmit en bekreftelseslenke til adressen under.
+   Klikk på den én gang, så kommer alle senere henvendelser fram.
+   Bytter du til en annen tjeneste, endrer du bare «endepunkt» og
+   navnet i personvernteksten (kPriv lenger ned).
+   ===================================================================== */
+const SKJEMA = {
+  endepunkt: "https://formsubmit.co/ajax/benjamin@veivakten.no",
+  emne:      "Ny henvendelse fra veivakten.no"
+};
+
+/* =====================================================================
+   KONSORTIET – logoene vises automatisk når filene ligger i mappa
+   «logoer» i repoet. Mangler en fil, vises navnet i stedet.
+   SVG er best; PNG med gjennomsiktig bakgrunn går også (endre filnavnet).
+   ===================================================================== */
+const PARTNERE = [
+  {id:"sintef", hoved:true, navn:{no:"SINTEF",en:"SINTEF"}, logo:"logoer/sintef.svg",
+   rolle:{no:"Prosjektleder",en:"Project lead"},
+   om:{no:"En av Europas største uavhengige forskningsorganisasjoner",en:"One of Europe’s largest independent research organisations"}},
+  {id:"nina", navn:{no:"NINA",en:"NINA"}, logo:"logoer/nina.svg",
+   rolle:{no:"Viltbiologi og bestandsdata",en:"Wildlife biology and population data"},
+   om:{no:"Norsk institutt for naturforskning",en:"Norwegian Institute for Nature Research"}},
+  {id:"svv", navn:{no:"Statens vegvesen",en:"Statens vegvesen"}, logo:"logoer/statens-vegvesen.svg",
+   rolle:{no:"Veieier og kravstiller",en:"Road owner and requirements"},
+   om:{no:"",en:"Norwegian Public Roads Administration"}},
+  {id:"hvl", navn:{no:"Høgskulen på Vestlandet",en:"Høgskulen på Vestlandet"}, logo:"logoer/hvl.svg",
+   rolle:{no:"Forskning og validering",en:"Research and validation"},
+   om:{no:"",en:"Western Norway University of Applied Sciences"}},
+  {id:"rcn", fond:true, navn:{no:"Forskningsrådet",en:"Research Council of Norway"}, logo:"logoer/forskningsradet.svg",
+   rolle:{no:"Finansierer prosjektet",en:"Funds the project"},
+   om:{no:"",en:""}}
+];
+
 const D = [
 {n:1,cat:"sam",name:{no:"Vei og vilt",en:"Roads and wildlife"},
- tag:{no:"Kjerneproduktet: farevarsling på utsatte veistrekninger. Ved ulykke skal systemet kunne varsle nødetatene.",
-      en:"The core product: hazard warning on high-risk road sections. After a crash, the system is designed to be able to alert the emergency services."},
+ tag:{no:"Elg, hjort og rådyr krysser veien når sikten er dårligst. Systemet skal varsle bilisten før dyret er i veibanen.",
+      en:"Moose, red deer and roe deer cross the road when visibility is at its worst. The system is meant to warn the driver before the animal is in the carriageway."},
  problem:{no:"SSB registrerte <span class='num'>9 100</span> elg, hjort og rådyr påkjørt og drept av bil og tog i jaktåret 2025/2026. Oslo Economics anslår samfunnskostnaden ved viltpåkjørsler til rundt <span class='num'>1,5 mrd. kroner</span> i året, der forsikringsbransjen alene betaler om lag <span class='num'>700 mill. kroner</span>. I 2025 omkom 106 personer i trafikken.",
         en:"Statistics Norway recorded <span class='num'>9,100</span> moose, red deer and roe deer killed by cars and trains in the 2025/2026 hunting year. Oslo Economics puts the societal cost of wildlife collisions at roughly <span class='num'>NOK 1.5 bn</span> a year, of which insurers alone cover some <span class='num'>NOK 700 m</span>. Road deaths in Norway reached 106 in 2025."},
  edge:{no:"Vilt krysser veien om natten, i tåke og i snøkav – når sikten er dårligst og farten fortsatt er høy. Systemet skal oppdage dyret før det er synlig fra førersetet, skille det fra alt annet som beveger seg i veikanten og vurdere om det er på vei ut i kjørebanen. Målet er å varsle 2 sekunder før dyret når veibanen, mens bilisten fortsatt har tid til å senke farten.",
        en:"Wildlife crosses at night, in fog and in drifting snow — when visibility is at its worst and speeds are still high. The system is designed to detect the animal before it is visible from the driver's seat, separate it from everything else moving at the roadside, and judge whether it is heading into the carriageway. The goal is to warn 2 seconds before the animal reaches the road, while the driver still has time to slow down."},
- adapt:{no:"Dette er kjerneproduktet. Det er under utvikling, og første feltpilot planlegges når finansieringen er på plass.",
-        en:"This is the core product. It is under development, and the first field pilot is planned once funding is in place."}},
+ adapt:{no:"Anlegget monteres på eksisterende stolper langs veien og varsler med lys på stedet. Deteksjon og varsling av vilt er tema i forskningsprosjektet WILDETECT, ledet av SINTEF.",
+        en:"The installation mounts on existing poles along the road and warns with lights on the spot. Wildlife detection and warning is the subject of the WILDETECT research project, led by SINTEF."}},
 
 {n:2,cat:"sam",name:{no:"Jernbane",en:"Railway"},
  tag:{no:"Rein og elg på sporet er jernbanens dyreste og mest belastende gjentakende hendelse.",
@@ -606,8 +788,8 @@ const D = [
         en:"Pedestrians and cyclists are struck in darkness at junctions and crossings without adequate lighting. Municipalities know their accident black spots well, but have few tools beyond signage and speed bumps."},
  edge:{no:"Systemet skal finne fotgjengeren før billyktene rekker fram, og varsle bilisten med lys. Det skal avgjøre om personen står på fortauet eller er på vei ut i gangfeltet, som er forskjellen på et varsel og et unødvendig varsel. Alt regnes ut lokalt.",
        en:"The system is designed to find the pedestrian before the headlights reach them and warn the driver with a light signal. It is meant to determine whether the person is standing on the pavement or stepping into the crossing, which is the difference between a warning and an unnecessary one. Everything is computed locally."},
- adapt:{no:"Liten. Dette er kjerneproduktet flyttet fra landevei til bygate, med en modell lært opp på fotgjenger og syklist framfor hjortevilt.",
-        en:"Minimal. This is the core product moved from open highway to city street, with a model trained on pedestrians and cyclists rather than deer."}},
+ adapt:{no:"Liten. Oppsettet er det samme som langs landevei, med en modell lært opp på fotgjenger og syklist.",
+        en:"Minimal. The setup is the same as on an open highway, with a model trained on pedestrians and cyclists."}},
 
 {n:21,cat:"sik",name:{no:"Søk og redning",en:"Search and rescue"},
  tag:{no:"Faste risikopunkter kan overvåkes hele døgnet: elveløp, stup og innfallsporter til turterreng.",
@@ -646,8 +828,8 @@ const D = [
         en:"Connected and eventually autonomous vehicles need information about hazards beyond their own sensor range. A roadside unit that detects moose, pedestrians and stopped vehicles will hold exactly that data."},
  edge:{no:"Klassifiserte faredata fra veikanten i sanntid er mangelvare. Dette blir i praksis en ny distribusjonskanal for informasjon anlegget skal produsere, ikke et nytt produkt.",
        en:"Classified real-time hazard data from the roadside is scarce. In practice this becomes a new distribution channel for information the installation is designed to produce, not a new product."},
- adapt:{no:"Kommunikasjonsstakk og meldingsformat må utvikles mot de europeiske V2X-standardene. Deteksjonen er den samme som i kjerneproduktet.",
-        en:"A communications stack and message format must be developed against the European V2X standards. The detection is the same as in the core product."}},
+ adapt:{no:"Kommunikasjonsstakk og meldingsformat må utvikles mot de europeiske V2X-standardene. Deteksjonen er den samme som i de andre veianleggene.",
+        en:"A communications stack and message format must be developed against the European V2X standards. The detection is the same as in the other road installations."}},
 
 {n:25,cat:"sik",name:{no:"Hendelsesdokumentasjon",en:"Incident documentation"},
  tag:{no:"Ikke et eget bruksområde, men en funksjon som følger med i alle de andre.",
@@ -960,136 +1142,192 @@ function stage(n, extraClass){
 /* ---------------- grensesnittekster / interface strings ---------------- */
 const T = {
  no:{
-  brandSub:"Bruksområder",
-  aboutEyebrow:"Om selskapet",
-  aboutTitle:"Et norsk selskap som bygger for norske forhold",
-  aboutBody:"VeiVakt AS utvikler et patentsøkt system med sensorer og kunstig intelligens som skal oppdage farer og varsle før noe rekker å skje. Arbeidet begynte med hjortevilt langs vei – et problem som koster samfunnet mye, og som få har løst.",
-  aboutBody2:"VeiVakt AS er industripartner i WILDETECT, et forskningsprosjekt ledet av SINTEF og finansiert av Forskningsrådet. De andre partnerne er NINA, Statens vegvesen og Høgskulen på Vestlandet. Systemet utvikles for mørketid, snø, kulde og strekninger der det er langt mellom folk, og derfor har vi også kartlagt bruksområder langt utenfor veikanten.",
-  contactH:"Kontakt",
-  fillIn:"fyll inn",
-  cSelskap:"Selskap",cPerson:"Kontaktperson",cEpost:"E-post",cTelefon:"Telefon",
-  cOrgnr:"Organisasjonsnummer",cSted:"Sted",cNett:"Nettsted",cLinkedIn:"Profil",
-  flagEyebrow:"Forskningsprosjekt · finansiert av Forskningsrådet",
-  flagTitle:"WILDETECT: <em>viltdeteksjon</em> på norske veier",
-  flagBody:"VeiVakt AS er industripartner i WILDETECT, et forskningsprosjekt ledet av SINTEF om å hindre påkjørsler av hjortevilt langs vei.",
-  flagBody2:"Konsortiet samler viltfaglig kompetanse, veieierens krav og forskningsmiljøer. Vei og vilt er kjerneproduktet. De øvrige bruksområdene på denne siden er kartlagt av VeiVakt og er ikke en del av WILDETECT.",
-  flagPartners:"Konsortiet",
-  flagRole1:"Prosjektledelse og forskning",
-  flagRole2:"Viltbiologi og bestandsdata",
-  flagRole3:"Veieier og kravstiller",
-  flagRole4:"Forskning og validering",
-  flagRole5:"Industripartner",
-  coreTag:"Kjerne",
-  heroEyebrow:"Patentsøkt · 24 kartlagte bruksområder",
-  heroTitle:"Ett system.<br>Mange oppgaver.<br><em>Ett prinsipp.</em>",
-  heroLede:"VeiVakt utvikles for å oppdage farer langs vei. Det samme patentsøkte systemet kan brukes til en rekke andre oppgaver der vanlige overvåkingsløsninger kommer til kort. Her er oversikten over bruksområdene vi har kartlagt.",
-  statDomains:"kartlagte bruksområder",
-  statPatentV:"Patentsøkt",statPatent:"sensorer og KI",
-  statAllV:"Døgnet",statAll:"utviklet for drift i mørke",
-  statLocalV:"Lokalt",statLocal:"alt regnes ut på stedet",
+  skip:"Hopp til innholdet",
+  heroTitle:"Oppdager farer.<br>Varsler straks.<br>Holder vakt.",
+  heroLede:"VeiVakt utvikler sensorenheter med kunstig intelligens for vei, jernbane, industri og kritisk infrastruktur. Enheten skal oppdage mennesker, kjøretøy, dyr og brann – også i mørke, tåke og snødrev – og varsle på stedet. All KI-analyse kjøres lokalt på enheten.",
+  ctaHero:"Avtal en samtale",
+  ctaHeroLink:"Se de 24 bruksområdene",
   sceneLive:"Deteksjon",sceneNode:"anlegg",
-  legAKey:"Oppdager",legATitle:"Utviklet for mørke og dårlig vær",
-  legABody:"Systemet utvikles for å oppdage farer også i mørke, tåke, røyk og snødrev, uten at noe må stå stille for å bli lagt merke til. Det er der vanlige kameraløsninger kommer til kort.",
-  legBKey:"Skiller",legBTitle:"Laget for få falske alarmer",
-  legBBody:"Et varsel har bare verdi hvis det er riktig. Systemet skal avgjøre hva objektet er og hvor det er på vei, slik at falske alarmer ikke tar knekken på tilliten – og på bemanningen.",
-  legCKey:"Varsler",legCTitle:"Handler på stedet",
-  legCBody:"All KI-analyse kjøres lokalt i anlegget. Varselet skal gå ut med en gang, uten at data må sendes ut først, og uten at systemet er avhengig av at sambandet står.",
-  legNote:"VeiVakt V1 er under utvikling. Ingen anlegg er i drift ennå, og det som beskrives på denne siden, er mål og ikke målte resultater. Tekniske detaljer er ikke offentlige: VeiVakt har patentsøknader under behandling, og komponentvalg, arkitektur og ytelsestall holdes tilbake.",
+
+  pTitle:"Industripartner i et forskningskonsortium ledet av SINTEF",
+  pBody:"VeiVakt AS er industripartner i WILDETECT, et forskningsprosjekt om deteksjon og varsling av vilt på vei og jernbane. Prosjektet er finansiert av Forskningsrådet.",
+  pNote:"De andre bruksområdene på denne siden er kartlagt av VeiVakt og er ikke en del av WILDETECT.",
+  pListLbl:"Partnerne i WILDETECT",
+
+  legTitle:"Hva systemet gjør",
+  legAKey:"Oppdager",legATitle:"Ser også når sikten er borte",
+  legABody:"Sensorer og kunstig intelligens skal oppdage mennesker, kjøretøy, dyr og brann i mørke, tåke, røyk og snødrev. Det er der vanlige kameraløsninger kommer til kort.",
+  legBKey:"Varsler",legBTitle:"Varsler på stedet, med én gang",
+  legBBody:"All KI-analyse kjøres lokalt på enheten. Varselet på stedet går ut med en gang og er ikke avhengig av samband. Ved behov sendes det videre til alarmsentral eller nødetater.",
+  legCKey:"Overvåker",legCTitle:"Holder vakt med få falske alarmer",
+  legCBody:"Systemet skal skille reelle hendelser fra vær, skygger og ufarlige bevegelser, og logge hver hendelse med tid og type. Et varsel har bare verdi hvis det er riktig.",
+  legNote:"VeiVakt V1 er under utvikling. Ingen anlegg er i drift ennå, og det som beskrives på denne siden, er mål og ikke målte resultater. Tekniske detaljer, komponentvalg og ytelsestall er ikke offentlige.",
+
+  areasTitle:"24 bruksområder, ett system",
+  areasBody:"Den samme enheten kan settes opp for svært ulike oppgaver. Velg et område for å se behovet, hvordan systemet skal brukes og hva som må tilpasses.",
+  filterLbl:"Filtrer bruksområder",searchLbl:"Søk i bruksområder",navLbl:"Bruksområder",
   filterAll:"Alle 24",filterSam:"Samferdsel",filterNat:"Natur og landbruk",filterSik:"Beredskap",filterInd:"Industri og anlegg",
   searchPh:"Søk i bruksområder …",
   catsam:"Samferdsel",catnat:"Natur og landbruk",catsik:"Beredskap og sikkerhet",catind:"Industri og anlegg",
   fProblem:"Behovet",fEdge:"Slik skal systemet brukes",fAdapt:"Oppsett og tilpasning",
+  areaCtaQ:"Er dette aktuelt for dere?",
+  areaCta:"Ta kontakt om dette området",
   prev:"← Forrige",next:"Neste →",
   empty:"Ingen bruksområder passer søket.",
-  ftrNote:"Oversikten viser bruksområdene vi har kartlagt. Ingen av dem er i drift ennå. Vei og vilt utvikles først, og de andre krever at systemet læres opp på nye objekttyper eller monteres annerledes. Det står i teksten for hvert område.",
-  ftrSources:"Tall og statistikk er hentet fra SSB, Hjorteviltregisteret, Oslo Economics, NIBIO, Miljødirektoratet, Bane NOR, NINA, Fiskeridirektoratet, RISE, US EPA og offentlig tilgjengelige rapporter."
+
+  aboutTitle:"Om VeiVakt",
+  aboutBody:"VeiVakt AS er et norsk teknologiselskap som utvikler sensorer og kunstig intelligens for varsling og overvåking. Systemet utvikles for mørketid, snø, kulde og steder der det er langt mellom folk.",
+  aboutBody2:"Selskapet holder til på Sørumsand utenfor Oslo og er industripartner i forskningsprosjektet WILDETECT, ledet av SINTEF og finansiert av Forskningsrådet.",
+
+  closeTitle:"Vil dere teste VeiVakt hos dere?",
+  closeBody:"Vi ser etter virksomheter i Norge og resten av Europa som vil være med på en pilot med VeiVakt V1. Fortell kort hva dere vil oppdage og hvor, så følger vi opp.",
+  ctaClose:"Bli pilotpartner",
+  contactH:"Eller kontakt oss direkte",
+  fillIn:"fyll inn",
+  cSelskap:"Selskap",cPerson:"Kontaktperson",cEpost:"E-post",cTelefon:"Telefon",
+  cOrgnr:"Organisasjonsnummer",cSted:"Sted",cNett:"Nettsted",cLinkedIn:"Profil",
+
+  kTitle:"Ta kontakt med VeiVakt",
+  kIntro:"Fortell kort hvem dere er og hva dere ønsker. Du får svar direkte fra daglig leder, normalt innen to virkedager.",
+  kTopicLbl:"Gjelder:",topicCall:"Samtale",topicPilot:"Pilotprosjekt",
+  kReq:"Alle feltene må fylles ut.",
+  fNavn:"Navn",fBedrift:"Bedrift",fEpost:"E-post",fMelding:"Melding",
+  fMeldingHint:"For eksempel hva dere vil oppdage, hvor og når dere ønsker å starte.",
+  errNavn:"Skriv inn navnet ditt.",
+  errBedrift:"Skriv inn navnet på bedriften.",
+  errEpost:"Skriv inn e-postadressen din.",
+  errEpostFormat:"Skriv e-postadressen på formen navn@bedrift.no.",
+  errMelding:"Skriv en kort melding.",
+  kSend:"Send henvendelse",kSending:"Sender …",
+  kFail:"Henvendelsen ble ikke sendt. Prøv igjen om litt, eller send den som e-post.",
+  kFailMail:"Send som e-post",
+  kPriv:"Vi bruker opplysningene bare til å svare på og følge opp henvendelsen. Skjemaet sendes via tjenesten FormSubmit.",
+  kDoneTitle:"Henvendelsen er sendt",
+  kDoneText:"Takk! Vi svarer til {epost}.",
+  kDoneClose:"Lukk",
+  kClose:"Lukk skjemaet",
+  mailBody:"Navn: {navn}\nBedrift: {bedrift}\nGjelder: {gjelder}\n\n{melding}",
+
+  ftrNote:"Ingen av bruksområdene er i drift ennå. Hvert av dem krever at systemet læres opp på nye objekttyper eller monteres annerledes, og det står i teksten for hvert område.",
+  ftrSources:"Tall og statistikk er hentet fra SSB, Hjorteviltregisteret, Oslo Economics, NIBIO, Miljødirektoratet, Bane NOR, NINA, Fiskeridirektoratet, RISE, US EPA og offentlig tilgjengelige rapporter.",
+  ftrOrg:"org.nr.",
+  docTitle:"VeiVakt – sensorer og kunstig intelligens for varsling og overvåking"
  },
  en:{
-  brandSub:"Applications",
-  aboutEyebrow:"About the company",
-  aboutTitle:"A Norwegian company building for Norwegian conditions",
-  aboutBody:"VeiVakt AS develops a patent-pending system of sensors and artificial intelligence designed to detect hazards and warn before anything happens. The work began with deer on the road — a problem that costs society a great deal and that few have solved.",
-  aboutBody2:"VeiVakt AS is an industry partner in WILDETECT, a research project led by SINTEF and funded by the Research Council of Norway. The other partners are NINA, the Norwegian Public Roads Administration and Western Norway University of Applied Sciences. The system is being developed for polar night, snow, cold and remote stretches of road, which is why we have also mapped applications well beyond the roadside.",
-  contactH:"Contact",
-  fillIn:"to be filled in",
-  cSelskap:"Company",cPerson:"Contact",cEpost:"Email",cTelefon:"Phone",
-  cOrgnr:"Company registration number",cSted:"Location",cNett:"Website",cLinkedIn:"Profile",
-  flagEyebrow:"Research project · funded by the Research Council of Norway",
-  flagTitle:"WILDETECT: <em>wildlife detection</em> on Norwegian roads",
-  flagBody:"VeiVakt AS is an industry partner in WILDETECT, a research project led by SINTEF on preventing deer collisions along roads.",
-  flagBody2:"The consortium brings together wildlife expertise, the road owner's requirements and research groups. Roads and wildlife is the core product. The other applications on this page were mapped by VeiVakt and are not part of WILDETECT.",
-  flagPartners:"The consortium",
-  flagRole1:"Project lead and research",
-  flagRole2:"Wildlife biology and population data",
-  flagRole3:"Road owner and requirements",
-  flagRole4:"Research and validation",
-  flagRole5:"Industry partner",
-  coreTag:"Core",
-  heroEyebrow:"Patent pending · 24 mapped applications",
-  heroTitle:"One system.<br>Many jobs.<br><em>One principle.</em>",
-  heroLede:"VeiVakt is being developed to detect hazards on the road. The same patent-pending system can be applied to a range of other jobs where conventional monitoring falls short. Here are the applications we have mapped.",
-  statDomains:"mapped applications",
-  statPatentV:"Patent pending",statPatent:"sensors and AI",
-  statAllV:"Around the clock",statAll:"designed to work in darkness",
-  statLocalV:"On site",statLocal:"everything computed locally",
+  skip:"Skip to content",
+  heroTitle:"Detects hazards.<br>Warns at once.<br>Keeps watch.",
+  heroLede:"VeiVakt develops sensor units with artificial intelligence for roads, railways, industry and critical infrastructure. The unit is designed to detect people, vehicles, animals and fire – in darkness, fog and drifting snow too – and to warn on the spot. All AI analysis runs locally on the unit.",
+  ctaHero:"Book a call",
+  ctaHeroLink:"See all 24 applications",
   sceneLive:"Detection",sceneNode:"installation",
-  legAKey:"Detects",legATitle:"Built for darkness and poor weather",
-  legABody:"The system is being developed to detect hazards in darkness, fog, smoke and drifting snow as well, without anything having to stand still to be noticed. That is where conventional camera solutions fall short.",
-  legBKey:"Distinguishes",legBTitle:"Designed for few false alarms",
-  legBBody:"A warning is only worth anything if it is right. The system is designed to determine what the object is and where it is heading, so that false alarms do not destroy trust — or exhaust the people responding.",
-  legCKey:"Warns",legCTitle:"Acts on the spot",
-  legCBody:"All AI analysis runs locally in the installation. The warning is designed to go out immediately, without data having to leave the site first, and without depending on the network staying up.",
-  legNote:"VeiVakt V1 is under development. No installation is in service yet, and what this page describes are goals, not measured results. Technical details are not public: VeiVakt has patent applications under examination, and component choices, architecture and performance figures are withheld.",
+
+  pTitle:"Industry partner in a research consortium led by SINTEF",
+  pBody:"VeiVakt AS is an industry partner in WILDETECT, a research project on detecting and warning of wildlife on roads and railways. The project is funded by the Research Council of Norway.",
+  pNote:"The other applications on this page were mapped by VeiVakt and are not part of WILDETECT.",
+  pListLbl:"The WILDETECT partners",
+
+  legTitle:"What the system does",
+  legAKey:"Detects",legATitle:"Sees when visibility is gone",
+  legABody:"Sensors and artificial intelligence are designed to detect people, vehicles, animals and fire in darkness, fog, smoke and drifting snow. That is where conventional camera solutions fall short.",
+  legBKey:"Warns",legBTitle:"Warns on the spot, at once",
+  legBBody:"All AI analysis runs locally on the unit. The on-site warning goes out immediately and does not depend on a network connection. Where needed, it is passed on to an alarm centre or the emergency services.",
+  legCKey:"Monitors",legCTitle:"Keeps watch with few false alarms",
+  legCBody:"The system is designed to tell real events from weather, shadows and harmless movement, and to log every event with its time and type. A warning is only worth anything if it is right.",
+  legNote:"VeiVakt V1 is under development. No installation is in service yet, and what this page describes are goals, not measured results. Technical details, component choices and performance figures are not public.",
+
+  areasTitle:"24 applications, one system",
+  areasBody:"The same unit can be set up for very different jobs. Pick an application to see the need, how the system is meant to be used and what has to be adapted.",
+  filterLbl:"Filter applications",searchLbl:"Search applications",navLbl:"Applications",
   filterAll:"All 24",filterSam:"Transport",filterNat:"Nature and farming",filterSik:"Safety and response",filterInd:"Industry and sites",
   searchPh:"Search applications …",
   catsam:"Transport",catnat:"Nature and farming",catsik:"Safety and response",catind:"Industry and sites",
   fProblem:"The need",fEdge:"How the system is meant to be used",fAdapt:"Setup and adaptation",
+  areaCtaQ:"Is this relevant to you?",
+  areaCta:"Get in touch about this application",
   prev:"← Previous",next:"Next →",
   empty:"No applications match that search.",
-  ftrNote:"This overview shows the applications we have mapped. None of them is in service yet. Roads and wildlife comes first; the others require the system to be trained on new object types or mounted differently. Each entry says which.",
-  ftrSources:"Figures and statistics are drawn from Statistics Norway, the Norwegian Deer Register, Oslo Economics, NIBIO, the Norwegian Environment Agency, Bane NOR, NINA, the Directorate of Fisheries, RISE, the US EPA and publicly available reports."
+
+  aboutTitle:"About VeiVakt",
+  aboutBody:"VeiVakt AS is a Norwegian technology company developing sensors and artificial intelligence for warning and monitoring. The system is being built for polar night, snow, cold and places where people are few and far between.",
+  aboutBody2:"The company is based in Sørumsand outside Oslo and is an industry partner in the WILDETECT research project, led by SINTEF and funded by the Research Council of Norway.",
+
+  closeTitle:"Want to test VeiVakt on your site?",
+  closeBody:"We are looking for organisations in Norway and across Europe that want to take part in a pilot with VeiVakt V1. Tell us briefly what you want to detect and where, and we will follow up.",
+  ctaClose:"Become a pilot partner",
+  contactH:"Or contact us directly",
+  fillIn:"to be filled in",
+  cSelskap:"Company",cPerson:"Contact",cEpost:"Email",cTelefon:"Phone",
+  cOrgnr:"Company registration number",cSted:"Location",cNett:"Website",cLinkedIn:"Profile",
+
+  kTitle:"Get in touch with VeiVakt",
+  kIntro:"Tell us briefly who you are and what you need. You will get a reply from the CEO in person, normally within two working days.",
+  kTopicLbl:"Regarding:",topicCall:"A call",topicPilot:"Pilot project",
+  kReq:"All fields are required.",
+  fNavn:"Name",fBedrift:"Company",fEpost:"Email",fMelding:"Message",
+  fMeldingHint:"For example what you want to detect, where, and when you would like to start.",
+  errNavn:"Enter your name.",
+  errBedrift:"Enter your company name.",
+  errEpost:"Enter your email address.",
+  errEpostFormat:"Enter the email address in the format name@company.com.",
+  errMelding:"Write a short message.",
+  kSend:"Send enquiry",kSending:"Sending …",
+  kFail:"Your enquiry was not sent. Try again shortly, or send it by email.",
+  kFailMail:"Send by email",
+  kPriv:"We use your details only to reply to and follow up your enquiry. The form is sent via the FormSubmit service.",
+  kDoneTitle:"Your enquiry has been sent",
+  kDoneText:"Thank you! We will reply to {epost}.",
+  kDoneClose:"Close",
+  kClose:"Close the form",
+  mailBody:"Name: {navn}\nCompany: {bedrift}\nRegarding: {gjelder}\n\n{melding}",
+
+  ftrNote:"None of the applications is in service yet. Each requires the system to be trained on new object types or mounted differently, as described in each entry.",
+  ftrSources:"Figures and statistics are drawn from Statistics Norway, the Norwegian Deer Register, Oslo Economics, NIBIO, the Norwegian Environment Agency, Bane NOR, NINA, the Directorate of Fisheries, RISE, the US EPA and publicly available reports.",
+  ftrOrg:"reg. no.",
+  docTitle:"VeiVakt – sensors and AI for warning and monitoring"
  }
 };
 
 const CATS = ["sam","nat","sik","ind"];
-let lang = "no", cat = "all", q = "", cur = 1;
+let lang = "no", cat = "all", q = "", cur = 0, picked = false;
 
 /* Slik kan man lenke rett til et bruksområde på valgt språk:
-   ...html?lang=en#jernbane  – uten dette er alt bare én adresse. */
+   ...?lang=en#jernbane – og veivakten.no/#kontakt åpner kontaktskjemaet. */
 function slug(name){
   return name.toLowerCase()
     .replace(/æ/g,"ae").replace(/ø/g,"o").replace(/å/g,"a")
     .replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 }
+let openAtLoad = false;
 function readUrl(){
   try{
   const qs = new URLSearchParams(location.search);
   const l = (qs.get("lang") || "").toLowerCase();
   if(l === "en" || l === "no") lang = l;
   const h = decodeURIComponent(location.hash.replace(/^#/,""));
-  if(h){
+  if(h === "kontakt") openAtLoad = true;
+  else if(h){
     const hit = D.find(d => slug(d.name.no) === h || slug(d.name.en) === h);
-    if(hit) cur = hit.n;
+    if(hit){ cur = hit.n; picked = true; }
   }
   }catch(e){ /* uleselig adresse: siden åpner med standardvalg */ }
 }
 function writeUrl(){
-  // Ikke alle sammenhenger tillater at siden endrer adressen – i en sandkasse
-  // eller uten eget opphav kaster nettleseren. Da er adressen bare mindre nyttig,
-  // ikke ødelagt, så feilen skal ikke stoppe resten av siden.
+  // Adressen endres bare når besøkende selv har valgt et bruksområde,
+  // slik at forsiden har en ren adresse når den deles.
   try{
     const d = D.find(x => x.n === cur);
-    const url = location.pathname + (lang === "en" ? "?lang=en" : "") + (d ? "#" + slug(d.name.no) : "");
+    const url = location.pathname + (lang === "en" ? "?lang=en" : "") + (picked && d ? "#" + slug(d.name.no) : "");
     history.replaceState(null, "", url);
   }catch(e){ /* adressen forblir uendret */ }
 }
 const $ = s => document.querySelector(s);
 const t = k => T[lang][k];
+const esc = v => String(v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 
-/* ---------------- hero: scenen sykler gjennom fire bruksområder ----------------
+/* ---------------- hero: scenen veksler mellom ulike bruksområder ----------------
    Hvert bytte venter til scenen har fullført en hel runde, slik at
    bevegelsen aldri hopper tilbake til start rett før skiftet.        */
-const HERO = [1, 4, 3, 6];
+const HERO = [12, 8, 2, 14, 20, 6, 1];
 let hi = 0, heroTimer = null;
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 function heroPaint(){
@@ -1108,6 +1346,33 @@ function heroNext(){
   heroSchedule();
 }
 
+/* ---------------- konsortiet ---------------- */
+const logoOK = {};
+function renderPartners(){
+  const ul = $("#pGrid");
+  if(!ul) return;
+  ul.setAttribute("aria-label", t("pListLbl"));
+  ul.innerHTML = PARTNERE.map(p => {
+    const navn = p.navn[lang];
+    const mark = logoOK[p.id]
+      ? '<img src="'+p.logo+'" alt="'+esc(navn)+'">'
+      : '<span class="p-word">'+esc(navn)+'</span>';
+    const om = p.om[lang] ? '<span>'+esc(p.om[lang])+'</span>' : '';
+    return '<li class="p-tile'+(p.hoved?' p-lead':'')+(p.fond?' p-fund':'')+'">'+
+      '<div class="p-mark">'+mark+'</div>'+
+      '<p class="p-role"><b>'+esc(p.rolle[lang])+'</b>'+om+'</p></li>';
+  }).join("");
+}
+function loadLogos(){
+  PARTNERE.forEach(p => {
+    if(!p.logo) return;
+    const im = new Image();
+    im.onload = () => { logoOK[p.id] = true; renderPartners(); };
+    im.src = p.logo;
+  });
+}
+
+/* ---------------- bruksområder ---------------- */
 function matches(d){
   if(cat !== "all" && d.cat !== cat) return false;
   if(!q) return true;
@@ -1115,10 +1380,16 @@ function matches(d){
     .join(" ").toLowerCase().replace(/<[^>]+>/g,"");
   return hay.includes(q.toLowerCase());
 }
+/* Alle områdene er likestilt: sortert etter kategori, deretter alfabetisk. */
+function ordered(){
+  const loc = lang === "no" ? "nb" : "en";
+  return D.filter(matches).sort((a,b) =>
+    (CATS.indexOf(a.cat) - CATS.indexOf(b.cat)) || a.name[lang].localeCompare(b.name[lang], loc));
+}
 
-/* ---------------- rendering ---------------- */
 function renderNav(){
-  const list = D.filter(matches);
+  const list = ordered();
+  if(list.length && !list.some(d=>d.n===cur)) cur = list[0].n;
   const nav = $("#nav");
   if(!list.length){ nav.innerHTML = '<p class="nav-empty">'+t("empty")+'</p>'; return; }
   let html = "";
@@ -1128,20 +1399,20 @@ function renderNav(){
     html += '<div class="nav-group"><div class="nav-h '+c+'"><i></i>'+t("cat"+c)+'</div>';
     g.forEach(d=>{
       html += '<button type="button" class="nav-item" data-n="'+d.n+'"'+(d.n===cur?' aria-current="true"':'')+
-              '><span class="nav-dot"></span><span>'+d.name[lang]+'</span>'+(d.n===1?'<span class="core-tag">'+t('coreTag')+'</span>':'')+'</button>';
+              '><span class="nav-dot"></span><span>'+d.name[lang]+'</span></button>';
     });
     html += '</div>';
   });
   nav.innerHTML = html;
   nav.querySelectorAll(".nav-item").forEach(b=>{
-    b.addEventListener("click",()=>{ cur = +b.dataset.n; render();
+    b.addEventListener("click",()=>{ cur = +b.dataset.n; picked = true; render();
       if(window.innerWidth<=960) $("#detail").scrollIntoView({behavior: reduce?"auto":"smooth", block:"start"});
     });
   });
 }
 
 function renderDetail(){
-  const list = D.filter(matches);
+  const list = ordered();
   if(!list.length){ $("#detail").innerHTML = ""; return; }
   if(!list.some(d=>d.n===cur)) cur = list[0].n;
   const d = D.find(x=>x.n===cur);
@@ -1163,14 +1434,17 @@ function renderDetail(){
      fld("fEdge","edge")+
      fld("fAdapt","adapt")+
    '</div>'+
+   '<div class="d-cta"><p>'+t("areaCtaQ")+'</p>'+
+     '<button type="button" class="btn" data-kontakt="area" data-n="'+d.n+'" data-kilde="bruksomrade">'+t("areaCta")+'</button>'+
+   '</div>'+
    '<div class="d-foot"><div class="stepper">'+
      '<button type="button" class="step" id="prev"'+(i<=0?' disabled':'')+'>'+t("prev")+'</button>'+
      '<button type="button" class="step" id="next"'+(i>=list.length-1?' disabled':'')+'>'+t("next")+'</button>'+
    '</div></div>';
 
   const p = $("#prev"), nx = $("#next");
-  if(p) p.addEventListener("click",()=>{ if(i>0){ cur = list[i-1].n; render(); }});
-  if(nx) nx.addEventListener("click",()=>{ if(i<list.length-1){ cur = list[i+1].n; render(); }});
+  if(p) p.addEventListener("click",()=>{ if(i>0){ cur = list[i-1].n; picked = true; render(); }});
+  if(nx) nx.addEventListener("click",()=>{ if(i<list.length-1){ cur = list[i+1].n; picked = true; render(); }});
 }
 
 function renderStatic(){
@@ -1178,9 +1452,8 @@ function renderStatic(){
   document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll("[data-i18n-html]").forEach(el=>{ el.innerHTML = t(el.dataset.i18nHtml); });
   document.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.placeholder = t(el.dataset.i18nPh); });
-  document.title = lang === "no"
-    ? "VeiVakt – Bruksområder for faredeteksjon og varsling"
-    : "VeiVakt – Applications for hazard detection and warning";
+  document.querySelectorAll("[data-i18n-aria]").forEach(el=>{ el.setAttribute("aria-label", t(el.dataset.i18nAria)); });
+  document.title = t("docTitle");
 }
 
 function renderContact(){
@@ -1189,19 +1462,152 @@ function renderContact(){
   const todo = v => v === "fyll inn";
   const val = v => todo(v) ? '<span class="todo">'+t("fillIn")+'</span>' : v;
   const rows = [
-    ["cSelskap", KONTAKT.selskap],
     ["cPerson",  KONTAKT.person ? KONTAKT.person + (KONTAKT.rolle ? ", " + KONTAKT.rolle[lang] : "") : ""],
     ["cEpost",   KONTAKT.epost && !todo(KONTAKT.epost) ? '<a href="mailto:'+KONTAKT.epost+'">'+KONTAKT.epost+'</a>' : KONTAKT.epost],
-    ["cTelefon", KONTAKT.telefon],
-    ["cOrgnr",   KONTAKT.orgnr],
-    ["cSted",    KONTAKT.sted],
-    ["cNett",    KONTAKT.nettsted ? '<a href="https://'+KONTAKT.nettsted+'">'+KONTAKT.nettsted+'</a>' : ""],
+    ["cTelefon", KONTAKT.telefon ? '<a href="tel:'+KONTAKT.telefon.replace(/\s+/g,"")+'">'+KONTAKT.telefon+'</a>' : ""],
+    ["cSelskap", KONTAKT.selskap + (KONTAKT.sted ? ", " + KONTAKT.sted : "")],
     ["cLinkedIn",KONTAKT.linkedin ? '<a href="'+KONTAKT.linkedin+'">LinkedIn</a>' : ""]
   ];
   dl.innerHTML = rows.filter(r => r[1])
     .map(r => '<dt>'+t(r[0])+'</dt><dd>'+val(r[1])+'</dd>').join("");
 }
-function render(){ renderStatic(); renderNav(); renderDetail(); renderContact(); writeUrl(); }
+
+/* ---------------- kontaktskjema ---------------- */
+const dlg = $("#kontakt"), kForm = $("#kForm"), kDone = $("#kDone");
+let kTema = null, kKilde = "", kOpener = null, kTried = false, kSent = null;
+const EPOST = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const FELT = [
+  ["fNavn",    "eNavn",    v => v ? "" : "errNavn"],
+  ["fBedrift", "eBedrift", v => v ? "" : "errBedrift"],
+  ["fEpost",   "eEpost",   v => !v ? "errEpost" : (EPOST.test(v) ? "" : "errEpostFormat")],
+  ["fMelding", "eMelding", v => v ? "" : "errMelding"]
+];
+function temaTekst(){
+  if(!kTema) return "";
+  if(kTema.type === "area"){ const d = D.find(x => x.n === kTema.n); return d ? d.name[lang] : ""; }
+  return t(kTema.type === "pilot" ? "topicPilot" : "topicCall");
+}
+function paintTopic(){
+  const el = $("#kTopic"), s = temaTekst();
+  el.hidden = !s;
+  el.textContent = s ? t("kTopicLbl") + " " + s : "";
+}
+function sjekk(id){
+  const f = FELT.find(x => x[0] === id), el = $("#"+id);
+  const feil = f[2](el.value.trim());
+  if(feil) el.setAttribute("aria-invalid","true"); else el.removeAttribute("aria-invalid");
+  $("#"+f[1]).textContent = feil ? t(feil) : "";
+  return !feil;
+}
+function nullstill(){
+  kForm.reset(); kTried = false;
+  FELT.forEach(f => { $("#"+f[0]).removeAttribute("aria-invalid"); $("#"+f[1]).textContent = ""; });
+  const st = $("#kStatus"); st.textContent = ""; st.className = "k-status";
+}
+function openKontakt(tema, kilde, opener){
+  kTema = tema; kKilde = kilde || ""; kOpener = opener || document.activeElement;
+  if(kSent){ nullstill(); kSent = null; }
+  kDone.hidden = true; kForm.hidden = false;
+  paintTopic();
+  if(!dlg.open){
+    if(typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open","");
+  }
+  document.documentElement.classList.add("k-open");
+  setTimeout(() => $("#fNavn").focus(), 30);
+}
+function closeKontakt(){
+  if(typeof dlg.close === "function" && dlg.open) dlg.close();
+  else { dlg.removeAttribute("open"); dlg.dispatchEvent(new Event("close")); }
+}
+dlg.addEventListener("close", () => {
+  document.documentElement.classList.remove("k-open");
+  if(kOpener && document.contains(kOpener) && kOpener.focus) kOpener.focus();
+});
+dlg.addEventListener("click", e => { if(e.target === dlg) closeKontakt(); });
+dlg.querySelectorAll("[data-k-lukk]").forEach(b => b.addEventListener("click", closeKontakt));
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-kontakt]");
+  if(!b) return;
+  const type = b.dataset.kontakt;
+  openKontakt(type === "area" ? {type:"area", n:+b.dataset.n} : {type:type}, b.dataset.kilde, b);
+});
+
+FELT.forEach(f => {
+  const el = $("#"+f[0]);
+  el.addEventListener("blur", () => { if(kTried || el.value.trim()) sjekk(f[0]); });
+  el.addEventListener("input", () => { if(el.getAttribute("aria-invalid") === "true") sjekk(f[0]); });
+});
+
+function mailtoHref(d){
+  const body = t("mailBody").replace("{navn}", d.navn).replace("{bedrift}", d.bedrift)
+    .replace("{gjelder}", d.gjelder || "–").replace("{melding}", d.melding);
+  return "mailto:" + KONTAKT.epost + "?subject=" + encodeURIComponent(SKJEMA.emne + " – " + d.bedrift) +
+         "&body=" + encodeURIComponent(body);
+}
+function visKvittering(d){
+  kSent = d;
+  kForm.hidden = true; kDone.hidden = false;
+  $("#kDoneText").textContent = t("kDoneText").replace("{epost}", d.epost);
+  $("#kDoneTitle").focus();
+}
+
+kForm.addEventListener("submit", async e => {
+  e.preventDefault();
+  kTried = true;
+  let forste = null;
+  FELT.forEach(f => { if(!sjekk(f[0]) && !forste) forste = $("#"+f[0]); });
+  if(forste){ forste.focus(); return; }
+
+  const d = {
+    navn: $("#fNavn").value.trim(),
+    bedrift: $("#fBedrift").value.trim(),
+    epost: $("#fEpost").value.trim(),
+    melding: $("#fMelding").value.trim(),
+    gjelder: temaTekst()
+  };
+  if($("#fHp").value){ visKvittering(d); return; }   // fanget av spamfellen
+
+  const btn = $("#kSend"), st = $("#kStatus");
+  btn.disabled = true; btn.textContent = t("kSending");
+  st.textContent = ""; st.className = "k-status";
+  try{
+    const ctrl = ("AbortController" in window) ? new AbortController() : null;
+    const tm = ctrl ? setTimeout(() => ctrl.abort(), 15000) : null;
+    const res = await fetch(SKJEMA.endepunkt, {
+      method: "POST",
+      headers: {"Content-Type":"application/json", "Accept":"application/json"},
+      body: JSON.stringify({
+        Navn: d.navn, Bedrift: d.bedrift, "E-post": d.epost, Melding: d.melding,
+        Gjelder: d.gjelder || "–", Knapp: kKilde || "lenke", "Språk": lang.toUpperCase(),
+        _subject: SKJEMA.emne + " – " + d.bedrift,
+        _replyto: d.epost,
+        _template: "table",
+        _honey: ""
+      }),
+      signal: ctrl ? ctrl.signal : undefined
+    });
+    if(tm) clearTimeout(tm);
+    let ok = res.ok;
+    try{ const j = await res.json(); if(j && (j.success === false || j.success === "false")) ok = false; }catch(_){ }
+    if(!ok) throw new Error("ikke sendt");
+    visKvittering(d);
+  }catch(err){
+    st.className = "k-status err";
+    st.innerHTML = esc(t("kFail")) + ' <a href="' + esc(mailtoHref(d)) + '">' + esc(t("kFailMail")) + '</a>';
+  }finally{
+    btn.disabled = false; btn.textContent = t("kSend");
+  }
+});
+
+function render(){
+  renderStatic(); renderPartners(); renderNav(); renderDetail(); renderContact(); writeUrl();
+  if(dlg.open){
+    paintTopic();
+    if(kTried && !kForm.hidden) FELT.forEach(f => sjekk(f[0]));
+    if(kSent) $("#kDoneText").textContent = t("kDoneText").replace("{epost}", kSent.epost);
+  }
+}
 
 /* ---------------- hendelser ---------------- */
 document.querySelectorAll(".langsw button").forEach(b=>{
@@ -1222,15 +1628,18 @@ $("#q").addEventListener("input", e=>{ q = e.target.value.trim(); render(); });
 window.addEventListener("hashchange", ()=>{
   let h = "";
   try{ h = decodeURIComponent(location.hash.replace(/^#/,"")); }catch(e){ return; }
+  if(h === "kontakt"){ openKontakt(null, "lenke"); return; }
   const hit = D.find(d => slug(d.name.no) === h || slug(d.name.en) === h);
-  if(hit && hit.n !== cur){ cur = hit.n; render(); }
+  if(hit && hit.n !== cur){ cur = hit.n; picked = true; render(); }
 });
 
 readUrl();
 document.querySelectorAll(".langsw button").forEach(x=>x.setAttribute("aria-pressed", String(x.dataset.lang===lang)));
 render();
+loadLogos();
 heroPaint();
 heroSchedule();
+if(openAtLoad) openKontakt(null, "lenke");
 </script>
 </body>
 </html>
