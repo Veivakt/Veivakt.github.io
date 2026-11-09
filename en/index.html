@@ -57,12 +57,8 @@ body{margin:0}
 .vv-cards>div{flex:0 0 82%;scroll-snap-align:start;box-sizing:border-box}
 .vv-status>div{padding:12px 0 2px !important}
 .vv-status ul{margin-top:6px !important}
-.vv-steps{margin-top:20px !important}
-.vv-steps li{padding:10px 0 !important}
-.vv-steps li p{margin-top:2px !important}
-.vv-pilot{margin-top:18px !important;padding-top:18px !important}
-.vv-crit{grid-template-columns:1fr 1fr !important;gap:6px 14px !important}
-.vv-crit dd{display:none}
+.vv-om-rule{margin-top:26px !important;padding-top:24px !important}
+.vv-om-cols{margin-top:18px !important;gap:16px !important}
 .vv-photos{margin-top:18px !important}
 .vv-photos>div:nth-child(2){display:none}
 .vv-uses{margin-top:16px !important}
@@ -126,7 +122,7 @@ input:focus-visible,textarea:focus-visible,a:focus-visible,button:focus-visible{
         <a class="vv-nl" href="#what" style="color: #DCE5EE; text-decoration: none">What it does</a>
         <a class="vv-nl" href="#who" style="color: #DCE5EE; text-decoration: none">Who it is for</a>
         <a class="vv-nl" href="#status" style="color: #DCE5EE; text-decoration: none">Where we are</a>
-        <a class="vv-nl" href="#start" style="color: #DCE5EE; text-decoration: none">Get started</a>
+        <a class="vv-nl" href="#om" style="color: #DCE5EE; text-decoration: none">About</a>
         <span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #DCE5EE">EN / <a lang="no" href="/?lang=no" style="color: #DCE5EE">NO</a></span>
       </nav>
     </div>
@@ -323,31 +319,28 @@ input:focus-visible,textarea:focus-visible,a:focus-visible,button:focus-visible{
     </div>
   </section>
 
-  <section id="start" aria-labelledby="start-title" style="position: relative; overflow: hidden; background: #16324F; color: #FFFFFF">
+  <section id="om" aria-labelledby="om-title" style="position: relative; overflow: hidden; background: #16324F; color: #FFFFFF">
     <img onerror="this.style.display='none'" srcset="https://images.unsplash.com/photo-1736705292747-8acdfc0b3f4b?ixid=M3wxMDE3MjIwfDB8MXxzZWFyY2h8M3x8bm9yd2F5JTIwd2ludGVyJTIwcm9hZCUyMGR1c2t8ZW58MHwwfHx8MTc5NDIyNzcyMXwy&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=640&amp;q=80 640w, https://images.unsplash.com/photo-1736705292747-8acdfc0b3f4b?ixid=M3wxMDE3MjIwfDB8MXxzZWFyY2h8M3x8bm9yd2F5JTIwd2ludGVyJTIwcm9hZCUyMGR1c2t8ZW58MHwwfHx8MTc5NDIyNzcyMXwy&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1080&amp;q=80 1080w, https://images.unsplash.com/photo-1736705292747-8acdfc0b3f4b?ixid=M3wxMDE3MjIwfDB8MXxzZWFyY2h8M3x8bm9yd2F5JTIwd2ludGVyJTIwcm9hZCUyMGR1c2t8ZW58MHwwfHx8MTc5NDIyNzcyMXwy&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1600&amp;q=80 1600w, https://images.unsplash.com/photo-1736705292747-8acdfc0b3f4b?ixid=M3wxMDE3MjIwfDB8MXxzZWFyY2h8M3x8bm9yd2F5JTIwd2ludGVyJTIwcm9hZCUyMGR1c2t8ZW58MHwwfHx8MTc5NDIyNzcyMXwy&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1800&amp;q=80 1800w" sizes="100vw" decoding="async" loading="lazy" src="https://images.unsplash.com/photo-1736705292747-8acdfc0b3f4b?ixid=M3wxMDE3MjIwfDB8MXxzZWFyY2h8M3x8bm9yd2F5JTIwd2ludGVyJTIwcm9hZCUyMGR1c2t8ZW58MHwwfHx8MTc5NDIyNzcyMXwy&amp;ixlib=rb-4.1.0&amp;auto=format&amp;fit=crop&amp;w=1800&amp;q=80" alt="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.3">
     <p style="position: absolute; right: 0; bottom: 0; margin: 0; font-size: 12.5px; color: #FFFFFF; background: rgba(14,27,42,0.8); padding: 4px 8px">Photo: <a href="https://unsplash.com/@davotibarna?utm_source=veivakt&amp;utm_medium=referral" style="color: #FFFFFF">Barnabas Davoti</a> / <a href="https://unsplash.com/?utm_source=veivakt&amp;utm_medium=referral" style="color: #FFFFFF">Unsplash</a></p>
     <div class="vv-pad" style="position: relative; max-width: 1240px; margin: 0 auto; padding: 72px 24px">
-      <h2 id="start-title" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.08; letter-spacing: -0.02em">You can start small</h2>
-      <p style="margin: 14px 0 0; color: #DCE5EE; max-width: 40em">You do not have to buy anything to get started. Each step is meant to be worth it for you, even if the next one never comes.</p>
-      <ol class="vv-steps" style="list-style: none; margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0 24px; border-top: 2px solid #F2860D">
-        <li style="padding: 16px 0"><h3 style="margin: 0; font-size: 19px"><span style="font-family: 'IBM Plex Mono', monospace; color: #F2860D">1 </span>Letter of support</h3><p style="margin: 6px 0 0; font-size: 15.5px; color: #DCE5EE">Free. You confirm that the need exists.</p></li>
-        <li style="padding: 16px 0"><h3 style="margin: 0; font-size: 19px"><span style="font-family: 'IBM Plex Mono', monospace; color: #F2860D">2 </span>Letter of intent</h3><p style="margin: 6px 0 0; font-size: 15.5px; color: #DCE5EE">Non-binding. For public bodies it gives no advantage in any later tender.</p></li>
-        <li style="padding: 16px 0"><h3 style="margin: 0; font-size: 19px"><span style="font-family: 'IBM Plex Mono', monospace; color: #F2860D">3 </span>Risk assessment</h3><p style="margin: 6px 0 0; font-size: 15.5px; color: #DCE5EE">Paid assignment. We work out where warning would have the greatest effect.</p></li>
-        <li style="padding: 16px 0"><h3 style="margin: 0; font-size: 19px"><span style="font-family: 'IBM Plex Mono', monospace; color: #F2860D">4 </span>Pilot</h3><p style="margin: 6px 0 0; font-size: 15.5px; color: #DCE5EE">Paid pilot on your site, with measured results.</p></li>
-        <li style="padding: 16px 0"><h3 style="margin: 0; font-size: 19px"><span style="font-family: 'IBM Plex Mono', monospace; color: #F2860D">5 </span>Purchase or subscription</h3><p style="margin: 6px 0 0; font-size: 15.5px; color: #DCE5EE">Once the pilot has shown results, under the procurement rules that apply to you.</p></li>
-      </ol>
-      <div class="vv-pilot" style="margin-top: 34px; padding-top: 28px; border-top: 1px solid #46617F; display: flex; flex-wrap: wrap; gap: 20px 56px">
-        <div style="flex: 1 1 300px">
-          <h3 style="margin: 0; font-size: 25px; line-height: 1.18">Before a pilot starts, we agree on five things</h3>
-          <a href="#talk" style="display: inline-block; margin-top: 22px; background: #F2860D; color: #0E1B2A; font-weight: 700; text-decoration: none; padding: 15px 26px; border-radius: 4px">Take the first step</a>
+      <div style="display: flex; flex-wrap: wrap; gap: 18px 64px">
+        <div style="flex: 3 1 460px; min-width: 0">
+          <h2 id="om-title" style="margin: 0; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.08; letter-spacing: -0.02em">About VeiVakt</h2>
+          <p style="margin: 18px 0 0; font-size: clamp(21px, 2vw, 26px); line-height: 1.3; font-weight: 600; letter-spacing: -0.01em">VeiVakt AS is a Norwegian technology company developing sensors and artificial intelligence for warning and monitoring along roads, railways and critical infrastructure.</p>
         </div>
-        <dl class="vv-crit" style="flex: 2 1 520px; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 28px; font-size: 15.5px">
-          <div><dt style="font-weight: 700">The use case</dt><dd style="margin: 2px 0 0; color: #DCE5EE">One stretch or site, and one concrete problem.</dd></div>
-          <div><dt style="font-weight: 700">Success criteria</dt><dd style="margin: 2px 0 0; color: #DCE5EE">What counts as detected, and how many false alarms are acceptable.</dd></div>
-          <div><dt style="font-weight: 700">Cost and benefit</dt><dd style="margin: 2px 0 0; color: #DCE5EE">What the pilot must show to justify going further.</dd></div>
-          <div><dt style="font-weight: 700">Legal and safety review</dt><dd style="margin: 2px 0 0; color: #DCE5EE">Permits, approval from the signing authority, and privacy.</dd></div>
-          <div><dt style="font-weight: 700">Winter and upkeep</dt><dd style="margin: 2px 0 0; color: #DCE5EE">Operation in cold and snow, and what maintenance it takes.</dd></div>
-        </dl>
+        <div style="flex: 2 1 340px; min-width: 0; align-self: flex-end">
+          <p style="margin: 0; color: #DCE5EE">The system is being built for polar night, snow, cold and places where people are few and far between. The company is based in Lillestrøm and is an industry partner in the WILDETECT research project, led by SINTEF and funded by the Research Council of Norway.</p>
+          <a href="#talk" style="display: inline-block; margin-top: 22px; background: #F2860D; color: #0E1B2A; font-weight: 700; text-decoration: none; padding: 15px 26px; border-radius: 4px">Contact us</a>
+        </div>
+      </div>
+      <div class="vv-om-rule" style="margin-top: 48px; padding-top: 36px; border-top: 1px solid #6B8199">
+        <p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; font-weight: 600; letter-spacing: 0.02em; color: #FFC46B">THE INVENTION</p>
+        <h3 style="margin: 8px 0 0; max-width: 24em; font-size: clamp(25px, 2.7vw, 34px); line-height: 1.14; letter-spacing: -0.015em">VeiVakt moves detection from the car out to the road.</h3>
+      </div>
+      <div class="vv-om-cols" style="margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px 32px">
+        <div style="border-top: 2px solid #F2860D; padding-top: 14px"><h4 style="margin: 0; font-size: 20px; line-height: 1.22">Designed to see what the car cannot</h4><p style="margin: 8px 0 0; font-size: 16px; color: #DCE5EE">The unit stands at a fixed point beside the road, two to five metres above it, and is designed to watch where the car has no line of sight, such as beyond a bend or over a crest.</p></div>
+        <div style="border-top: 2px solid #F2860D; padding-top: 14px"><h4 style="margin: 0; font-size: 20px; line-height: 1.22">Designed to decide on site</h4><p style="margin: 8px 0 0; font-size: 16px; color: #DCE5EE">All AI analysis runs locally on the device. The local warning is designed to go out at once, without relying on a data connection.</p></div>
+        <div style="border-top: 2px solid #F2860D; padding-top: 14px"><h4 style="margin: 0; font-size: 20px; line-height: 1.22">Designed to share what it finds</h4><p style="margin: 8px 0 0; font-size: 16px; color: #DCE5EE">Hazards are to be shared with traffic management and with connected and autonomous vehicles. After an accident, the system will be able to alert the emergency services.</p></div>
       </div>
     </div>
   </section>
