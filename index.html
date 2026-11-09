@@ -4,7 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VeiVakt – vi gjør veien levende</title>
-<meta name="description" content="VeiVakt gjør veien levende og gir biler og autonom transport øyne langs veien. Sensorer og kunstig intelligens som oppdager farer og varsler med én gang – langs vei, jernbane og kritisk infrastruktur.">
+<meta name="description" content="VeiVakt gjør veien levende og gir biler og autonom transport øyne langs veien. Sensorer og kunstig intelligens som skal oppdage farer og varsle med én gang – langs vei, jernbane og kritisk infrastruktur.">
+
+<link rel="canonical" href="https://veivakten.no/">
+<link rel="alternate" hreflang="no" href="https://veivakten.no/?lang=no">
+<link rel="alternate" hreflang="en" href="https://veivakten.no/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://veivakten.no/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"VeiVakt","legalName":"VeiVakt AS","url":"https://veivakten.no/","logo":"https://veivakten.no/icon-512.png","taxID":"937497490","email":"benjamin@veivakten.no","telephone":"+4741342349","address":{"@type":"PostalAddress","streetAddress":"Karl Johans gate 25","postalCode":"0159","addressLocality":"Oslo","addressCountry":"NO"}}</script>
 
 <!-- Favikon og ikoner -->
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -26,10 +32,12 @@
 <meta property="og:locale:alternate" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url(/fonts/manrope-latin-wght-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(/fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:500;font-display:swap;src:url(/fonts/ibm-plex-mono-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(/fonts/ibm-plex-mono-latin-600-normal.woff2) format("woff2")}
 :root{
   --paper:#F1F4F7;
   --panel:#FFFFFF;
@@ -182,6 +190,21 @@ a{color:inherit}
 .areas-head h2{font-size:clamp(28px,3.4vw,44px)}
 .areas-head p{margin:14px 0 0;font-size:17px;color:var(--ink-2);max-width:60ch}
 /* ---------- avslutning ---------- */
+.hero-status{margin:18px 0 0;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.proof{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 28px;border-top:2px solid var(--ink)}
+.proof li{padding:14px 0;border-bottom:1px solid var(--rule)}
+.proof b{display:block;font-size:16px;color:var(--ink)}
+.proof span{display:block;margin-top:2px;font-size:14.5px;line-height:1.4;color:var(--ink-2)}
+.steps{padding:68px 0;background:var(--paper);border-top:1px solid var(--rule)}
+.steps h2{font-size:clamp(26px,3vw,36px)}
+.steps-lede{margin:14px 0 30px;font-size:17px;line-height:1.55;color:var(--ink-2);max-width:60ch}
+.steps-list{list-style:none;counter-reset:st;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);border-top:2px solid var(--ink)}
+.steps-list li{counter-increment:st;padding:18px 20px 6px;border-left:1px solid var(--rule)}
+.steps-list li:first-child{border-left:0;padding-left:0}
+.steps-list li::before{content:counter(st);display:block;font:600 14px/1 "IBM Plex Mono",monospace;color:var(--signal-ink);margin-bottom:12px}
+.steps-list h3{font-size:18px;line-height:1.2}
+.steps-list p{margin:8px 0 0;font-size:15px;line-height:1.45;color:var(--ink-2)}
+@media (max-width:900px){.steps-list{grid-template-columns:1fr}.steps-list li,.steps-list li:first-child{border-left:0;padding:14px 0;border-bottom:1px solid var(--rule)}}
 .closing{background:var(--ink);color:#fff;padding:80px 0 76px}
 .closing-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:start}
 .closing h2{font-size:clamp(34px,4.6vw,60px);line-height:1.02;max-width:15ch;color:#fff}
@@ -385,7 +408,7 @@ section[id]{scroll-margin-top:64px}
 </head>
 <body>
 
-<a class="skip" href="#hoved" data-i18n="skip"></a>
+<a class="skip" href="#hoved" data-i18n="skip">Hopp til innholdet</a>
 
 <header class="hdr">
   <div class="wrap hdr-in">
@@ -402,14 +425,15 @@ section[id]{scroll-margin-top:64px}
 <section class="hero" aria-labelledby="heroTitle">
   <div class="wrap hero-grid">
     <div>
-      <h1 id="heroTitle" data-i18n-html="heroTitle"></h1>
-      <p class="hero-sub" data-i18n="heroSub"></p>
-      <p class="hero-lede" data-i18n="heroLede"></p>
+      <h1 id="heroTitle" data-i18n-html="heroTitle">Vi gjør veien levende.</h1>
+      <p class="hero-sub" data-i18n="heroSub">VeiVakt gir biler og autonom transport øyne langs veien.</p>
+      <p class="hero-lede" data-i18n="heroLede">Sensorenheter med kunstig intelligens skal oppdage mennesker, kjøretøy, dyr og hindringer der bilen ikke ser – rundt svingen og over bakketoppen – og varsle med én gang. Den samme enheten kan også holde vakt langs jernbane, i industrien og rundt kritisk infrastruktur.</p>
       <div class="hero-cta">
         <!-- Knapp 1 av 3: åpner kontaktskjemaet -->
-        <button type="button" class="btn" data-kontakt="call" data-kilde="topp" data-i18n="ctaHero"></button>
-        <a class="tlink" href="#bruksomrader" data-i18n="ctaHeroLink"></a>
+        <button type="button" class="btn" data-kontakt="call" data-kilde="topp" data-i18n="ctaHero">Avtal en samtale</button>
+        <a class="tlink" href="#bruksomrader" data-i18n="ctaHeroLink">Se de 24 bruksområdene</a>
       </div>
+      <p class="hero-status" data-i18n="heroStatus">VeiVakt V1 er under utvikling. Ingen anlegg er i drift ennå.</p>
     </div>
     <div id="heroStage"></div>
   </div>
@@ -418,19 +442,19 @@ section[id]{scroll-margin-top:64px}
 <section class="partners" id="konsortiet" aria-labelledby="pTitle">
   <div class="wrap">
     <div class="partners-head">
-      <h2 id="pTitle" data-i18n="pTitle"></h2>
-      <p data-i18n="pBody"></p>
+      <h2 id="pTitle" data-i18n="pTitle">Industripartner i et forskningskonsortium ledet av SINTEF</h2>
+      <p data-i18n="pBody">VeiVakt AS er industripartner i WILDETECT, et forskningsprosjekt om deteksjon og varsling av vilt på vei og jernbane. Prosjektet er finansiert av Forskningsrådet.</p>
     </div>
     <ul class="p-grid" id="pGrid"></ul>
-    <p class="p-note" data-i18n="pNote"></p>
+    <p class="p-note" data-i18n="pNote">De andre bruksområdene på denne siden er kartlagt av VeiVakt og er ikke en del av WILDETECT.</p>
   </div>
 </section>
 
 <section class="eyes" id="oyne" aria-labelledby="eyesTitle">
   <div class="wrap eyes-grid">
     <div class="eyes-head">
-      <h2 id="eyesTitle" data-i18n="eyesTitle"></h2>
-      <p data-i18n="eyesLede"></p>
+      <h2 id="eyesTitle" data-i18n="eyesTitle">Øyne langs veien</h2>
+      <p data-i18n="eyesLede">En bil ser bare så langt lyktene og sensorene rekker. Bak svingen, over bakketoppen og i tett tåke er den blind, enten det sitter en sjåfør bak rattet eller ikke. VeiVakt skal stå der bilen ikke ser, og fortelle hva som er der.</p>
     </div>
     <figure class="eyes-fig">
       <svg class="eyes-svg" viewBox="0 0 640 440" role="img" data-i18n-aria="eyesFigLbl" xmlns="http://www.w3.org/2000/svg">
@@ -485,64 +509,64 @@ section[id]{scroll-margin-top:64px}
           </g>
         </svg>
       <ul class="eyes-key">
-        <li><i class="k-car"></i><span data-i18n="keyCar"></span></li>
-        <li><i class="k-unit"></i><span data-i18n="keyUnit"></span></li>
-        <li><i class="k-sig"></i><span data-i18n="keySig"></span></li>
-        <li><i class="k-haz"></i><span data-i18n="keyHaz"></span></li>
+        <li><i class="k-car"></i><span data-i18n="keyCar">Det bilen ser</span></li>
+        <li><i class="k-unit"></i><span data-i18n="keyUnit">Det VeiVakt skal se</span></li>
+        <li><i class="k-sig"></i><span data-i18n="keySig">Varsel til bil og sjåfør</span></li>
+        <li><i class="k-haz"></i><span data-i18n="keyHaz">Stanset kjøretøy bak svingen</span></li>
       </ul>
     </figure>
     <ul class="eyes-items">
-      <li><h3 data-i18n="eyes1T"></h3><p data-i18n="eyes1B"></p></li>
-      <li><h3 data-i18n="eyes2T"></h3><p data-i18n="eyes2B"></p></li>
-      <li><h3 data-i18n="eyes3T"></h3><p data-i18n="eyes3B"></p></li>
+      <li><h3 data-i18n="eyes1T">Skal varsle sjåføren på stedet</h3><p data-i18n="eyes1B">Lys langs veien skal varsle før faren er synlig fra førersetet. Varselet skal nå alle bilister, uansett bil.</p></li>
+      <li><h3 data-i18n="eyes2T">Skal dele farene med tilkoblede og selvkjørende kjøretøy</h3><p data-i18n="eyes2B">Enheten utvikles for å sende farene videre i sanntid etter de europeiske standardene for tilkoblede kjøretøy (C-ITS). Da kan kjøretøyet se lenger enn egne sensorer rekker.</p></li>
+      <li><h3 data-i18n="eyes3T">Skal gi veieieren oversikt</h3><p data-i18n="eyes3B">Hver hendelse skal logges med tid og type. Veieieren skal se hvor og når farene oppstår, og hvilke strekninger som trenger tiltak.</p></li>
     </ul>
     <div class="eyes-cta">
-      <p data-i18n="eyesCtaQ"></p>
+      <p data-i18n="eyesCtaQ">Har dere en strekning som trenger øyne?</p>
       <!-- Knapp 2 av 3 -->
-      <button type="button" class="btn" data-kontakt="eyes" data-kilde="midten" data-i18n="eyesCta"></button>
+      <button type="button" class="btn" data-kontakt="eyes" data-kilde="midten" data-i18n="eyesCta">Fortell oss om strekningen</button>
     </div>
   </div>
 </section>
 
 <section class="legend" aria-labelledby="legTitle">
   <div class="wrap">
-    <h2 id="legTitle" class="sr" data-i18n="legTitle"></h2>
+    <h2 id="legTitle" class="sr" data-i18n="legTitle">Hva systemet gjør</h2>
     <div class="legend-grid">
       <div class="leg">
-        <div class="leg-key"><i></i><span data-i18n="legAKey"></span></div>
-        <h3 data-i18n="legATitle"></h3>
-        <p data-i18n="legABody"></p>
+        <div class="leg-key"><i></i><span data-i18n="legAKey">Oppdager</span></div>
+        <h3 data-i18n="legATitle">Skal se det bilen ikke ser</h3>
+        <p data-i18n="legABody">Sensorer og kunstig intelligens skal oppdage mennesker, kjøretøy, dyr og hindringer langs veien. Hvor godt systemet virker i mørke, tåke og snø, skal måles i pilot.</p>
       </div>
       <div class="leg">
-        <div class="leg-key"><i></i><span data-i18n="legBKey"></span></div>
-        <h3 data-i18n="legBTitle"></h3>
-        <p data-i18n="legBBody"></p>
+        <div class="leg-key"><i></i><span data-i18n="legBKey">Varsler</span></div>
+        <h3 data-i18n="legBTitle">Skal varsle på stedet, med én gang</h3>
+        <p data-i18n="legBBody">All KI-analyse kjøres lokalt på enheten. Varselet på stedet skal gå ut med en gang, uten å være avhengig av samband. Systemet skal også kunne varsle alarmsentral eller nødetater.</p>
       </div>
       <div class="leg">
-        <div class="leg-key"><i></i><span data-i18n="legCKey"></span></div>
-        <h3 data-i18n="legCTitle"></h3>
-        <p data-i18n="legCBody"></p>
+        <div class="leg-key"><i></i><span data-i18n="legCKey">Overvåker</span></div>
+        <h3 data-i18n="legCTitle">Skal holde vakt med få falske alarmer</h3>
+        <p data-i18n="legCBody">Systemet skal skille reelle hendelser fra vær, skygger og ufarlige bevegelser, og logge hver hendelse med tid og type. Et varsel har bare verdi hvis det er riktig.</p>
       </div>
     </div>
-    <p class="leg-note" data-i18n="legNote"></p>
+    <p class="leg-note" data-i18n="legNote">VeiVakt V1 er under utvikling. Ingen anlegg er i drift ennå, og det som beskrives på denne siden, er mål og ikke målte resultater. Tekniske detaljer, komponentvalg og ytelsestall er ikke offentlige.</p>
   </div>
 </section>
 
 <section class="areas-head" id="bruksomrader" aria-labelledby="areasTitle">
   <div class="wrap">
-    <h2 id="areasTitle" data-i18n="areasTitle"></h2>
-    <p data-i18n="areasBody"></p>
+    <h2 id="areasTitle" data-i18n="areasTitle">24 bruksområder, ett system</h2>
+    <p data-i18n="areasBody">Den samme enheten kan settes opp for svært ulike oppgaver. Velg et område for å se behovet, hvordan systemet skal brukes og hva som må tilpasses.</p>
   </div>
 </section>
 
 <section class="ctrl">
   <div class="wrap ctrl-in">
     <div class="tiers" role="group" data-i18n-aria="filterLbl">
-      <button type="button" class="cat-btn tier-btn" data-cat="all" aria-pressed="true" data-i18n="filterAll"></button>
-      <button type="button" class="cat-btn tier-btn" data-cat="sam" aria-pressed="false" data-i18n="filterSam"></button>
-      <button type="button" class="cat-btn tier-btn" data-cat="nat" aria-pressed="false" data-i18n="filterNat"></button>
-      <button type="button" class="cat-btn tier-btn" data-cat="sik" aria-pressed="false" data-i18n="filterSik"></button>
-      <button type="button" class="cat-btn tier-btn" data-cat="ind" aria-pressed="false" data-i18n="filterInd"></button>
+      <button type="button" class="cat-btn tier-btn" data-cat="all" aria-pressed="true" data-i18n="filterAll">Alle 24</button>
+      <button type="button" class="cat-btn tier-btn" data-cat="sam" aria-pressed="false" data-i18n="filterSam">Samferdsel</button>
+      <button type="button" class="cat-btn tier-btn" data-cat="nat" aria-pressed="false" data-i18n="filterNat">Natur og landbruk</button>
+      <button type="button" class="cat-btn tier-btn" data-cat="sik" aria-pressed="false" data-i18n="filterSik">Beredskap</button>
+      <button type="button" class="cat-btn tier-btn" data-cat="ind" aria-pressed="false" data-i18n="filterInd">Industri og anlegg</button>
     </div>
     <div class="search">
       <input type="search" id="q" data-i18n-ph="searchPh" data-i18n-aria="searchLbl">
@@ -555,26 +579,76 @@ section[id]{scroll-margin-top:64px}
   <article class="detail" id="detail" aria-live="polite"></article>
 </div>
 
+<noscript>
+<section class="wrap"><h2>24 bruksområder</h2><ul>
+<li><h3>Vei og vilt</h3><p>Elg, hjort og rådyr krysser veien når sikten er dårligst. Systemet skal varsle bilisten før dyret er i veibanen.</p><p>Vilt krysser veien om natten, i tåke og i snøkav – når sikten er dårligst og farten fortsatt er høy. Systemet skal oppdage dyret før det er synlig fra førersetet, skille det fra alt annet som beveger seg i veikanten og vurdere om det er på vei ut i kjørebanen. Målet er å varsle 2 sekunder før dyret når veibanen, mens bilisten fortsatt har tid til å senke farten.</p></li>
+<li><h3>Jernbane</h3><p>Rein og elg på sporet er jernbanens dyreste og mest belastende gjentakende hendelse.</p><p>Toget kan ikke svinge unna, så varselet må komme tidlig nok til at lokfører rekker å bremse. Systemet skal se flokken lenger unna enn lyskasteren rekker, og avgjøre om dyrene står i sporet eller trygt utenfor. Det er forskjellen mellom en nødvendig saktekjøring og en unødvendig forsinkelse.</p></li>
+<li><h3>Forsvar og perimetersikring</h3><p>Rimelige, ubemannede sensorposter rundt baser, depoter og kritisk infrastruktur – inkludert deteksjon av lavtflygende droner.</p><p>Et perimeter må dekke både bakken og lufta over den. Systemet skal oppdage personer, kjøretøy og små luftfarkoster hele døgnet, uten belysning som røper anlegget, og skille reelle hendelser fra dyr og vær. Det siste er avgjørende: i perimeteranlegg er det de falske alarmene som koster, fordi hver eneste av dem binder personell.</p></li>
+<li><h3>Landbruk og slått</h3><p>Rådyrkalven ligger stille i graset til slåmaskinen kommer. Systemet skal sitte på maskinen og se enga før knivene når fram.</p><p>Dronesøk virker, men bare i et smalt tidsvindu tidlig om morgenen, og det krever pilot, godt vær og planlegging. Montert på traktoren skal systemet følge med hele tiden mens slåtten pågår. Det skal lese enga foran maskinen, finne kalven også når den ligger helt i ro – som er nettopp det som gjør den usynlig for øyet – og varsle føreren i tide til å stanse.</p></li>
+<li><h3>Beitedyr og rovvilt</h3><p>Varsling til beitelag og reineier når jerv, gaupe, ulv, bjørn eller kongeørn nærmer seg flokken.</p><p>Rovdyr beveger seg i skumring og mørke, ofte i skog. Systemet skal oppdage dem der viltkamera med blits verken rekker eller virker, og skille jerv fra gaupe fra løshund – som avgjør om varselet er verdt å rykke ut på. Målet er å gi beitelaget noe det ikke har i dag: beskjed før tapet, ikke etter.</p></li>
+<li><h3>Brann i avfallsanlegg</h3><p>Litiumbatterier antenner seg selv inne i avfallshauger. Utfordringen er å oppdage det før det brenner.</p><p>Et batteri i termisk rusing utvikler seg lenge før det slår ut i åpen flamme. Systemet skal fange opp utviklingen mens den fortsatt kan håndteres med en gravemaskin og en slange, peke ut hvor i haugen den er, og dokumentere forløpet for anlegget og forsikringsselskapet i etterkant.</p></li>
+<li><h3>Vindkraft og energianlegg</h3><p>Stans turbinen når ørna nærmer seg – og hold øye med anlegget på samme tid.</p><p>Systemer som bare kjenner igjen fuglen på form og vingeslag, mister den i lav sikt og mørke. Anlegget skal følge fuglen også når sikten svikter, og avgjøre om den faktisk kommer til å krysse rotorplanet – det er den vurderingen som avgjør om det er riktig å stanse turbinen. Samme anlegg kan følge med på selve anleggsområdet.</p></li>
+<li><h3>Tunnel</h3><p>Elbilbrann utvikler seg raskt. Den begynner lenge før røyken utløser en detektor.</p><p>Konvensjonelle detektorer venter på røyk. Systemet skal fange opp et kjøretøy som utvikler seg feil før det kommer så langt, og skille det fra normal trafikk. Det skal samtidig håndtere de andre tunnelfarene – stanset kjøretøy, feilkjøring og fotgjenger i løpet – også når sikten i tunnelen er dårlig.</p></li>
+<li><h3>Havbruk</h3><p>Overflateperimeter rundt merdene: predatorer, fartøy og folk over vann.</p><p>Over vannflaten skal systemet oppdage sel, fugl og mennesker i mørke og sjøsprøyt, og fartøy som nærmer seg anlegget uten navigasjonslys. Mann over bord er den mest tidskritiske hendelsen på en lokalitet, og det er der behovet for å oppdage noen i mørket er størst.</p></li>
+<li><h3>Lufthavn</h3><p>Fugl, vilt og fremmedlegemer på rullebanen – og uvedkommende innenfor gjerdet.</p><p>Radar ser fugleflokker, men klarer verken små fremmedlegemer eller sikker artsbestemmelse. Systemet skal dekke fugl, vilt, personer og kjøretøy hele døgnet, finne små objekter på banedekket, og håndtere droner med samme anlegg som dekker perimeteret.</p></li>
+<li><h3>Skogbrann</h3><p>De første minuttene avgjør. Etter det er det ikke lenger ett mannskaps jobb.</p><p>Tårnkameraer som bare arbeider i synlig lys, trenger både dagslys og røyk som er tett nok til å se på avstand. Systemet skal fange opp utviklingen tidligere og fungere også om natten, og samtidig gi mannskapet et bilde å vurdere før de rykker ut.</p></li>
+<li><h3>Bygg, anlegg og pukkverk</h3><p>Person nær maskin i mørke og støv – sett fra maskinen selv.</p><p>Føreren av en gravemaskin ser lite bakover, og enda mindre i mørke og støv. Montert på maskinen skal systemet lese området rundt den og varsle føreren i førerhuset, der varselet kan brukes med en gang. Systemet flytter seg med maskinen, som er måten en anleggsplass faktisk fungerer på.</p></li>
+<li><h3>Datasenter og telekom</h3><p>CER og NIS2 gjør fysisk sikring av kritiske virksomheter til en lovpålagt oppgave.</p><p>Ett anlegg skal løse to oppgaver: dekke perimeteret uten belysning og fange opp utstyr som utvikler seg feil før det får konsekvenser. Hendelsene skal dokumenteres i en form som lar seg rapportere videre under NIS2. Det er et tydelig regnestykke mot to separate systemer.</p></li>
+<li><h3>Fengsel og lukkede anlegg</h3><p>Perimeter begge veier: rømning ut, og droner med smuglergods inn.</p><p>Systemet skal dekke muren uten belysning og med få falske alarmer, som er det avgjørende driftskriteriet i et lukket anlegg. Samme anlegg skal håndtere luftrommet over muren, slik at begge trusselretninger kan dekkes uten to leverandører og to alarmsentraler.</p></li>
+<li><h3>Havn og maritim</h3><p>Kaikant, terminalperimeter og mann over bord.</p><p>Systemet skal finne en person i vannet – den mest tidskritiske hendelsen på en kai – og se småbåter som går uten navigasjonslys. Det skal følge fartøy som nærmer seg, og dokumentere hendelser for ISPS-rapportering.</p></li>
+<li><h3>Grense og toll</h3><p>198 kilometer grense mot Russland, mye av den i skog og mørke store deler av året.</p><p>Systemet skal finne personer i skog og snø uten belysning som røper posten, og fastslå posisjon lokalt selv når satellittsignalet blir forstyrret. All KI-analyse kjøres på stedet, så anlegget skal virke også når sambandet faller ut.</p></li>
+<li><h3>Gruvedrift</h3><p>Under jord er det verken dagslys eller sikt. Systemet skal sitte på maskinen og se likevel.</p><p>Under jord er et vanlig kamera nær ubrukelig uten kunstig lys, og støv gjør det verre. Montert på lastebæreren eller dumperen skal systemet finne personer i stollen foran og rundt maskinen. Det er nettopp det maskinføreren – og det autonome kjøretøyet – trenger for å stanse i tide.</p></li>
+<li><h3>Romfart</h3><p>Sikkerhetssonen må være tom før hver oppskyting – i mørke og kuling like mye som i klarvær.</p><p>Systemet skal klarere sonen i mørke og dårlig vær, som er normaltilstanden på Andøya store deler av året, og gi en logget bekreftelse på at sonen faktisk var tom. Det er i praksis perimetersikring under et annet navn.</p></li>
+<li><h3>Smartby</h3><p>Fotgjengeren i mørket ved gangfeltet, sett før billyktene rekker fram.</p><p>Systemet skal finne fotgjengeren før billyktene rekker fram, og varsle bilisten med lys. Det skal avgjøre om personen står på fortauet eller er på vei ut i gangfeltet, som er forskjellen på et varsel og et unødvendig varsel. All KI-analyse kjøres lokalt.</p></li>
+<li><h3>Søk og redning</h3><p>Faste risikopunkter kan overvåkes hele døgnet: elveløp, stup og innfallsporter til turterreng.</p><p>Systemet skal finne en person i terreng og mørke, der øyet og lyskasteren ikke rekker. Et fast anlegg gjør nytte ved innfallsporter, der det kan registrere at noen gikk inn og ikke kom ut igjen. Det gir letemannskapet et startpunkt framfor et søkeområde.</p></li>
+<li><h3>Skianlegg og friluftsliv</h3><p>Preppemaskinen kjører uansett hele løypa. Da kan den like gjerne se etter folk mens den gjør det.</p><p>Montert på preppemaskinen skal systemet lese løypa foran maskinen gjennom hele natten. Det skal finne en person som ligger i snø i mørke, og skille vedkommende fra en terrengformasjon eller en snøhaug. Kontrollrunden skal dermed gi et svar og ikke bare en antakelse – uten at noen må kjøre den ekstra gangen.</p></li>
+<li><h3>Naturovervåking og bevaring</h3><p>Telling og artsregistrering uten blits, feller eller folk i felt.</p><p>Systemet skal registrere dyr hele døgnet uten blits som forstyrrer dem, bestemme art og gi grove størrelsesmål. Til bestandstelling er det forskjellen på spredte observasjoner og et sammenhengende datagrunnlag.</p></li>
+<li><h3>Veikantenheter og V2X</h3><p>Anlegget skal se elgen i svingen før bilen bak svingen gjør det.</p><p>Klassifiserte faredata fra veikanten i sanntid er mangelvare. Dette blir i praksis en ny distribusjonskanal for informasjon anlegget skal produsere, ikke et nytt produkt.</p></li>
+<li><h3>Hendelsesdokumentasjon</h3><p>Ikke et eget bruksområde, men en funksjon som følger med i alle de andre.</p><p>Anlegget skal logge hendelsen mens den skjer, med tidsstempel og klassifisering. Loggen skal kunne brukes til å analysere hvilke punkter som faktisk er farlige.</p></li>
+</ul></section>
+</noscript>
+
 <section class="about" aria-labelledby="aboutTitle">
   <div class="wrap about-grid">
-    <h2 id="aboutTitle" data-i18n="aboutTitle"></h2>
+    <h2 id="aboutTitle" data-i18n="aboutTitle">Om VeiVakt</h2>
     <div>
-      <p data-i18n="aboutBody"></p>
-      <p data-i18n="aboutBody2"></p>
+      <p data-i18n="aboutBody">VeiVakt AS er et norsk teknologiselskap som utvikler sensorer og kunstig intelligens for varsling og overvåking. Systemet utvikles for mørketid, snø, kulde og steder der det er langt mellom folk.</p>
+      <p data-i18n="aboutBody2">Selskapet holder til på Sørumsand utenfor Oslo og er industripartner i forskningsprosjektet WILDETECT, ledet av SINTEF og finansiert av Forskningsrådet.</p>
+      <ul class="proof" data-i18n-aria="proofLbl">
+        <li><b data-i18n="pr1T">Duvi-prisen 2026</b><span data-i18n="pr1B">Startupfestivalen i Lillestrøm</span></li>
+        <li><b data-i18n="pr2T">Topp 50</b><span data-i18n="pr2B">DNB NXT 100 Pitches</span></li>
+        <li><b data-i18n="pr3T">Beste idé</b><span data-i18n="pr3B">Pitchekonkurransen i Total Innovation</span></li>
+        <li><b data-i18n="pr4T">Innlegg for Veglovutvalget</b><span data-i18n="pr4B">Trafikksikkerhet og digitalisering, oktober 2026</span></li>
+        <li><b data-i18n="pr5T">Preinkubator</b><span data-i18n="pr5B">Kjeller Innovasjon</span></li>
+      </ul>
     </div>
+  </div>
+</section>
+
+<section class="steps" id="kom-i-gang" aria-labelledby="stTitle">
+  <div class="wrap">
+    <h2 id="stTitle" data-i18n="stTitle">Dere kan begynne i det små</h2>
+    <p class="steps-lede" data-i18n="stLede">Dere trenger ikke kjøpe noe for å komme i gang. Hvert steg skal være verdt det for dere, selv om det neste aldri kommer.</p>
+    <ol class="steps-list">
+        <li><h3 data-i18n="st1T">Støtteerklæring</h3><p data-i18n="st1B">Gratis. Dere bekrefter at behovet finnes.</p></li>
+        <li><h3 data-i18n="st2T">Intensjonsavtale</h3><p data-i18n="st2B">Ikke bindende. For offentlige kunder gir den ikke fortrinn i en senere konkurranse.</p></li>
+        <li><h3 data-i18n="st3T">Risikokartlegging</h3><p data-i18n="st3B">Betalt oppdrag. Vi finner ut hvor på strekningen eller anlegget varsling skal ha størst effekt.</p></li>
+        <li><h3 data-i18n="st4T">Pilot</h3><p data-i18n="st4B">Betalt pilot hos dere, med målte resultater på deteksjon og falske alarmer.</p></li>
+        <li><h3 data-i18n="st5T">Kjøp eller abonnement</h3><p data-i18n="st5B">Når piloten har vist resultater, og etter de innkjøpsreglene som gjelder for dere.</p></li>
+    </ol>
   </div>
 </section>
 
 <section class="closing" aria-labelledby="closeTitle">
   <div class="wrap closing-grid">
     <div>
-      <h2 id="closeTitle" data-i18n="closeTitle"></h2>
-      <p data-i18n="closeBody"></p>
+      <h2 id="closeTitle" data-i18n="closeTitle">Vil dere teste VeiVakt hos dere?</h2>
+      <p data-i18n="closeBody">Vi ser etter virksomheter i Norge og resten av Europa som vil være med fra starten. Fortell kort hva dere vil oppdage og hvor, så finner vi det første steget sammen.</p>
       <!-- Knapp 3 av 3 -->
-      <button type="button" class="btn" data-kontakt="pilot" data-kilde="bunn" data-i18n="ctaClose"></button>
+      <button type="button" class="btn" data-kontakt="pilot" data-kilde="bunn" data-i18n="ctaClose">Ta det første steget</button>
     </div>
     <div class="contact">
-      <h3 data-i18n="contactH"></h3>
+      <h3 data-i18n="contactH">Eller kontakt oss direkte</h3>
       <dl id="contactList"></dl>
     </div>
   </div>
@@ -585,11 +659,12 @@ section[id]{scroll-margin-top:64px}
 <footer class="ftr">
   <div class="wrap ftr-grid">
     <div>
-      <p data-i18n="ftrNote"></p>
-      <p data-i18n="ftrSources"></p>
+      <p data-i18n="ftrNote">Ingen av bruksområdene er i drift ennå. Hvert av dem krever at systemet læres opp på nye objekttyper eller monteres annerledes, og det står i teksten for hvert område.</p>
+      <p data-i18n="ftrSources">Tall og statistikk er hentet fra SSB, Hjorteviltregisteret, Oslo Economics, NIBIO, Miljødirektoratet, Bane NOR, NINA, Fiskeridirektoratet, RISE, US EPA og offentlig tilgjengelige rapporter.</p>
     </div>
     <div>
-      <p><a href="https://veivakten.no">veivakten.no</a> · VeiVakt AS · <span data-i18n="ftrOrg"></span> 937 497 490</p>
+      <p><a href="https://veivakten.no">veivakten.no</a> · VeiVakt AS · <span data-i18n="ftrOrg">org.nr.</span> 937 497 490 · Karl Johans gate 25, 0159 Oslo · <span data-i18n="ftrVat">ikke mva-registrert</span></p>
+      <p><a href="/personvern.html" data-i18n="privLink">Personvernerklæring</a></p>
     </div>
   </div>
 </footer>
@@ -598,33 +673,33 @@ section[id]{scroll-margin-top:64px}
 <dialog class="kdlg" id="kontakt" aria-labelledby="kTitle">
   <form id="kForm" novalidate>
     <div class="k-top">
-      <h2 id="kTitle" data-i18n="kTitle"></h2>
+      <h2 id="kTitle" data-i18n="kTitle">Ta kontakt med VeiVakt</h2>
       <button type="button" class="k-x" data-k-lukk data-i18n-aria="kClose">
         <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
       </button>
     </div>
-    <p class="k-intro" data-i18n="kIntro"></p>
+    <p class="k-intro" data-i18n="kIntro">Fortell kort hvem dere er og hva dere ønsker. Du får svar direkte fra daglig leder, normalt innen to virkedager.</p>
     <p class="k-topic" id="kTopic" hidden></p>
-    <p class="k-req" data-i18n="kReq"></p>
+    <p class="k-req" data-i18n="kReq">Alle feltene må fylles ut.</p>
 
     <div class="f">
-      <label for="fNavn" data-i18n="fNavn"></label>
+      <label for="fNavn" data-i18n="fNavn">Navn</label>
       <input id="fNavn" name="navn" type="text" autocomplete="name" required aria-describedby="eNavn">
       <p class="f-err" id="eNavn"></p>
     </div>
     <div class="f">
-      <label for="fBedrift" data-i18n="fBedrift"></label>
+      <label for="fBedrift" data-i18n="fBedrift">Bedrift</label>
       <input id="fBedrift" name="bedrift" type="text" autocomplete="organization" required aria-describedby="eBedrift">
       <p class="f-err" id="eBedrift"></p>
     </div>
     <div class="f">
-      <label for="fEpost" data-i18n="fEpost"></label>
+      <label for="fEpost" data-i18n="fEpost">E-post</label>
       <input id="fEpost" name="epost" type="email" autocomplete="email" inputmode="email" spellcheck="false" required aria-describedby="eEpost">
       <p class="f-err" id="eEpost"></p>
     </div>
     <div class="f">
-      <label for="fMelding" data-i18n="fMelding"></label>
-      <span class="f-hint" id="hMelding" data-i18n="fMeldingHint"></span>
+      <label for="fMelding" data-i18n="fMelding">Melding</label>
+      <span class="f-hint" id="hMelding" data-i18n="fMeldingHint">For eksempel hva dere vil oppdage, hvor og når dere ønsker å starte.</span>
       <textarea id="fMelding" name="melding" rows="5" required aria-describedby="hMelding eMelding"></textarea>
       <p class="f-err" id="eMelding"></p>
     </div>
@@ -634,21 +709,21 @@ section[id]{scroll-margin-top:64px}
     </div>
 
     <div class="k-actions">
-      <button type="submit" class="btn" id="kSend" data-i18n="kSend"></button>
+      <button type="submit" class="btn" id="kSend" data-i18n="kSend">Send henvendelse</button>
     </div>
     <p class="k-status" id="kStatus" role="status"></p>
-    <p class="k-priv" data-i18n="kPriv"></p>
+    <p class="k-priv"><span data-i18n="kPriv">Vi bruker opplysningene bare til å svare på og følge opp henvendelsen. Skjemaet sendes via tjenesten Web3Forms.</span> <a href="/personvern.html" target="_blank" rel="noopener" data-i18n="privLink">Personvernerklæring</a></p>
   </form>
 
   <div class="k-done" id="kDone" hidden>
     <div class="k-top">
-      <h2 id="kDoneTitle" tabindex="-1" data-i18n="kDoneTitle"></h2>
+      <h2 id="kDoneTitle" tabindex="-1" data-i18n="kDoneTitle">Henvendelsen er sendt</h2>
       <button type="button" class="k-x" data-k-lukk data-i18n-aria="kClose">
         <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
       </button>
     </div>
     <p id="kDoneText"></p>
-    <button type="button" class="btn" data-k-lukk data-i18n="kDoneClose"></button>
+    <button type="button" class="btn" data-k-lukk data-i18n="kDoneClose">Lukk</button>
   </div>
 </dialog>
 
@@ -662,14 +737,15 @@ section[id]{scroll-margin-top:64px}
    ===================================================================== */
 const KONTAKT = {
   selskap:  "VeiVakt AS",
-  person:   "Benjamin Nystrøm-Grøntjernet",
+  person:   "Benjamin Perez Nystrøm-Grøntjernet",
   rolle:    {no:"gründer og daglig leder", en:"founder and CEO"},
   epost:    "benjamin@veivakten.no",
   telefon:  "+47 413 42 349",
   orgnr:    "937 497 490",
   sted:     "Sørumsand",
+  adresse:  "Karl Johans gate 25, 0159 Oslo",
   nettsted: "veivakten.no",
-  linkedin: "https://www.linkedin.com/company/structmedias/"
+  linkedin: ""
 };
 
 /* =====================================================================
@@ -726,8 +802,8 @@ const D = [
       en:"Reindeer and moose on the track are the railway's most costly and most demoralising recurring incident."},
  problem:{no:"<span class='num'>3 072</span> rein er påkjørt på Nordlandsbanen på ti år, med enkelthendelser på 106 og 135 dyr. Siden 1985 er rundt <span class='num'>8 156</span> rein påkjørt på norske baner, om lag 7 350 av dem på Nordlandsbanen. Et reingjerde til 43 mill. kroner var ikke nok. Bane NOR sier selv at de leter etter tekniske løsninger for automatisk deteksjon og varsling.",
         en:"<span class='num'>3,072</span> reindeer have been struck on the Nordland Line in ten years, including single incidents of 106 and 135 animals. Since 1985 roughly <span class='num'>8,156</span> reindeer have been hit on Norwegian railways, some 7,350 of them on the Nordland Line. A NOK 43 m reindeer fence was not enough. Bane NOR states openly that it is looking for technical solutions for automatic detection and warning."},
- edge:{no:"Toget kan ikke svinge unna, så varselet må komme tidlig nok til at lokfører rekker å bremse. Systemet ser flokken gjennom snødrev og polarnatt, langt utenfor rekkevidden til lyskasteren, og avgjør om dyrene står i sporet eller trygt utenfor. Det er forskjellen mellom en nødvendig saktekjøring og en unødvendig forsinkelse.",
-       en:"A train cannot swerve, so the warning has to arrive early enough for the driver to brake. The system sees the herd through drifting snow and polar night, far beyond the reach of the headlight, and determines whether the animals are on the track or safely clear of it. That is the difference between a justified speed restriction and an avoidable delay."},
+ edge:{no:"Toget kan ikke svinge unna, så varselet må komme tidlig nok til at lokfører rekker å bremse. Systemet skal se flokken lenger unna enn lyskasteren rekker, og avgjøre om dyrene står i sporet eller trygt utenfor. Det er forskjellen mellom en nødvendig saktekjøring og en unødvendig forsinkelse.",
+       en:"A train cannot swerve, so the warning has to arrive early enough for the driver to brake. The system is designed to see the herd further away than the headlight reaches, and to determine whether the animals are on the track or safely clear of it. That is the difference between a justified speed restriction and an avoidable delay."},
  adapt:{no:"Modellen må lære å kjenne igjen rein som flokk framfor enkeltdyr. Anlegget knyttes til strømnettet langs sporet, og varselet kobles inn i jernbanens egen trafikkstyring slik at togleder får det direkte.",
         en:"The model has to learn to recognise reindeer as a herd rather than as individual animals. The installation connects to the power supply along the track, and the warning is fed into the railway's own traffic management so the controller receives it directly."}},
 
@@ -736,18 +812,18 @@ const D = [
       en:"Low-cost unmanned sensor posts around bases, depots and critical infrastructure — including detection of low-flying drones."},
  problem:{no:"Dronehendelsene i september 2025 stengte Københavns lufthavn i nær fire timer og rammet Gardermoen samme kveld. Norske lufthavner meldte over <span class='num'>500</span> droneinnsidenter i 2024, og nær <span class='num'>300</span> GPS-jammingshendelser ble registrert nær grensen i 2023 mot 122 året før. Norge planlegger en anskaffelse av mottiltak mot droner verdt inntil <span class='num'>750 mill. kroner</span>.",
         en:"The drone incidents of September 2025 closed Copenhagen Airport for almost four hours and hit Oslo Gardermoen the same evening. Norwegian airports logged more than <span class='num'>500</span> drone incidents in 2024, and nearly <span class='num'>300</span> GPS jamming events were recorded near the border in 2023, against 122 the year before. Norway is planning a counter-drone procurement worth up to <span class='num'>NOK 750 m</span>."},
- edge:{no:"Et perimeter må dekke både bakken og lufta over den. Systemet oppdager personer, kjøretøy og små luftfarkoster hele døgnet, uten belysning som røper anlegget, og skiller reelle hendelser fra dyr og vær. Det siste er avgjørende: i perimeteranlegg er det de falske alarmene som koster, fordi hver eneste av dem binder personell.",
-       en:"A perimeter has to cover both the ground and the air above it. The system detects people, vehicles and small aircraft around the clock, without lighting that would reveal the site, and separates real events from animals and weather. That last part is decisive: in perimeter installations it is the false alarms that cost, because every one of them ties up personnel."},
+ edge:{no:"Et perimeter må dekke både bakken og lufta over den. Systemet skal oppdage personer, kjøretøy og små luftfarkoster hele døgnet, uten belysning som røper anlegget, og skille reelle hendelser fra dyr og vær. Det siste er avgjørende: i perimeteranlegg er det de falske alarmene som koster, fordi hver eneste av dem binder personell.",
+       en:"A perimeter has to cover both the ground and the air above it. The system is designed to detect people, vehicles and small aircraft around the clock, without lighting that would reveal the site, and to separate real events from animals and weather. That last part is decisive: in perimeter installations it is the false alarms that cost, because every one of them ties up personnel."},
  adapt:{no:"Militær herding og cybersikring, og en modell som er lært opp på trusselbildet framfor på vilt. Varselet må inn i eksisterende kommando- og kontrollsystemer.",
         en:"Military hardening and cyber protection, and a model trained on the threat picture rather than on wildlife. The alert has to reach existing command-and-control systems."}},
 
 {n:4,cat:"nat",name:{no:"Landbruk og slått",en:"Agriculture and mowing"},
- tag:{no:"Rådyrkalven ligger stille i graset til slåmaskinen kommer. Systemet sitter på maskinen og ser enga før knivene når fram.",
-      en:"A roe deer fawn lies motionless in the grass until the mower arrives. The system rides on the machine and sees the field before the blades get there."},
+ tag:{no:"Rådyrkalven ligger stille i graset til slåmaskinen kommer. Systemet skal sitte på maskinen og se enga før knivene når fram.",
+      en:"A roe deer fawn lies motionless in the grass until the mower arrives. The system is designed to ride on the machine and see the field before the blades get there."},
  problem:{no:"Opp mot <span class='num'>10 000</span> rådyrkalver drepes årlig av slåmaskiner i Norge. Rågeita gjemmer kalven i høyt gras, og kalven ligger helt stille på instinkt – usynlig for bonden fra førerhuset. På Vestlandet gjelder det samme for hjortekalv.",
         en:"Up to <span class='num'>10,000</span> roe deer fawns are killed by mowers in Norway every year. The doe hides her fawn in tall grass, and instinct keeps the fawn perfectly still — invisible to the farmer from the cab. On the west coast the same applies to red deer calves."},
- edge:{no:"Dronesøk virker, men bare i et smalt tidsvindu tidlig om morgenen, og det krever pilot, godt vær og planlegging. Montert på traktoren følger systemet med hele tiden mens slåtten pågår. Det leser enga foran maskinen, finner kalven også når den ligger helt i ro – som er nettopp det som gjør den usynlig for øyet – og varsler føreren i tide til å stanse.",
-       en:"Drone searches work, but only in a narrow window early in the morning, and they need a pilot, decent weather and planning. Mounted on the tractor, the system keeps watch throughout the mowing itself. It reads the field ahead of the machine, finds the fawn even when it lies completely still — which is precisely what makes it invisible to the eye — and warns the driver in time to stop."},
+ edge:{no:"Dronesøk virker, men bare i et smalt tidsvindu tidlig om morgenen, og det krever pilot, godt vær og planlegging. Montert på traktoren skal systemet følge med hele tiden mens slåtten pågår. Det skal lese enga foran maskinen, finne kalven også når den ligger helt i ro – som er nettopp det som gjør den usynlig for øyet – og varsle føreren i tide til å stanse.",
+       en:"Drone searches work, but only in a narrow window early in the morning, and they need a pilot, decent weather and planning. Mounted on the tractor, the system is designed to keep watch throughout the mowing itself. It is to read the field ahead of the machine, find the fawn even when it lies completely still — which is precisely what makes it invisible to the eye — and warn the driver in time to stop."},
  adapt:{no:"Systemet monteres på traktor eller slåmaskin og ser framover i kjøreretningen, med strøm fra maskinen selv. Det følger dermed maskinen fra jorde til jorde gjennom hele sesongen. Modellen må lære kalven i gras.",
         en:"The system mounts on the tractor or the mower and looks forward along the direction of travel, powered by the machine itself. It therefore follows the machine from field to field through the whole season. The model has to learn the fawn in grass."}},
 
@@ -756,8 +832,8 @@ const D = [
       en:"Alerting grazing associations and reindeer herders when wolverine, lynx, wolf, bear or golden eagle approach the flock."},
  problem:{no:"Om lag <span class='num'>1 281 300</span> sau og lam ble sluppet på utmarksbeite i 2024. <span class='num'>68 575</span> kom ikke hjem – et tap på 5,4 %. Staten erstattet nær 15 000 sau og lam og rundt 19 000 tamrein, med over <span class='num'>108 mill. kroner</span> bare for tamrein. Siden rovviltforliket er det erstattet mer enn <span class='num'>834 665</span> sau og rein.",
         en:"Around <span class='num'>1,281,300</span> sheep and lambs were released onto open rangeland in 2024. <span class='num'>68,575</span> never came home — a loss rate of 5.4 %. The state compensated nearly 15,000 sheep and lambs and some 19,000 semi-domesticated reindeer, paying over <span class='num'>NOK 108 m</span> for reindeer alone. Since the predator settlement, compensation has covered more than <span class='num'>834,665</span> sheep and reindeer."},
- edge:{no:"Rovdyr beveger seg i skumring og mørke, ofte i skog. Systemet oppdager dem der viltkamera med blits verken rekker eller virker, og skiller jerv fra gaupe fra løshund – som avgjør om varselet er verdt å rykke ut på. Det gir beitelaget noe det ikke har i dag: beskjed før tapet, ikke etter.",
-       en:"Predators move at dusk and in darkness, often under forest cover. The system finds them where flash-triggered trail cameras neither reach nor function, and tells wolverine from lynx from a loose dog — which decides whether the alert is worth turning out for. It gives the grazing association something it does not have today: word before the loss, not after."},
+ edge:{no:"Rovdyr beveger seg i skumring og mørke, ofte i skog. Systemet skal oppdage dem der viltkamera med blits verken rekker eller virker, og skille jerv fra gaupe fra løshund – som avgjør om varselet er verdt å rykke ut på. Målet er å gi beitelaget noe det ikke har i dag: beskjed før tapet, ikke etter.",
+       en:"Predators move at dusk and in darkness, often under forest cover. The system is designed to find them where flash-triggered trail cameras neither reach nor function, and to tell wolverine from lynx from a loose dog — which decides whether the alert is worth turning out for. The aim is to give the grazing association something it does not have today: word before the loss, not after."},
  adapt:{no:"Modellen må lære rovviltartene. Anlegget settes opp der flokken samles og der rovdyra kommer inn: ved samlekveer, sperregjerder og driftsbygninger. Samband løses med satellitt der mobilnettet ikke rekker.",
         en:"The model has to learn the predator species. The installation goes where the flock gathers and where predators come in: at gathering pens, barrier fences and farm buildings. Communications are solved with satellite where the mobile network does not reach."}},
 
@@ -766,8 +842,8 @@ const D = [
       en:"Lithium batteries self-ignite inside waste piles. The challenge is spotting it before it burns."},
  problem:{no:"I Sverige krever mer enn én avfallsanleggsbrann i uken utrykning fra brannvesenet. I USA anslår bransjeorganisasjonen NWRA over <span class='num'>5 000</span> branner årlig ved gjenvinningsanlegg, og EPA dokumenterte 245 branner ved 64 anlegg over sju år knyttet til litiumbatterier. RISE og DSB dokumenterer den samme økende risikoen i Norge.",
         en:"In Sweden, more than one waste-facility fire a week requires a fire-service response. In the United States the industry body NWRA estimates over <span class='num'>5,000</span> fires a year at recycling plants, and the EPA documented 245 fires at 64 facilities over seven years linked to lithium batteries. RISE and the Norwegian Directorate for Civil Protection document the same rising risk in Norway."},
- edge:{no:"Et batteri i termisk rusing utvikler seg lenge før det slår ut i åpen flamme. Systemet fanger opp utviklingen mens den fortsatt kan håndteres med en gravemaskin og en slange, peker ut hvor i haugen den er, og dokumenterer forløpet for anlegget og forsikringsselskapet i etterkant.",
-       en:"A battery in thermal runaway develops long before it breaks into open flame. The system picks up that development while it can still be handled with an excavator and a hose, points to where in the pile it is, and documents the sequence afterwards for the facility and its insurer."},
+ edge:{no:"Et batteri i termisk rusing utvikler seg lenge før det slår ut i åpen flamme. Systemet skal fange opp utviklingen mens den fortsatt kan håndteres med en gravemaskin og en slange, peke ut hvor i haugen den er, og dokumentere forløpet for anlegget og forsikringsselskapet i etterkant.",
+       en:"A battery in thermal runaway develops long before it breaks into open flame. The system is designed to pick up that development while it can still be handled with an excavator and a hose, point to where in the pile it is, and document the sequence afterwards for the facility and its insurer."},
  adapt:{no:"Liten. Modellen må læres opp på begynnende brann framfor på dyr, og anlegget monteres høyt nok til å dekke hele lagerflaten.",
         en:"Minimal. The model has to be trained on incipient fire rather than on animals, and the installation mounted high enough to cover the whole storage area."}},
 
@@ -776,8 +852,8 @@ const D = [
       en:"Stop the turbine when the eagle approaches — and keep an eye on the site at the same time."},
  problem:{no:"Smøla vindpark med 68 turbiner drepte havørn i et omfang som utløste flere NINA-studier. Å male ett turbinblad svart reduserte samlet fugledød med rundt <span class='num'>70 %</span>. Samtidig krever transformatorstasjoner, dammer og kraftlinjer både perimetersikring og tilstandsovervåking.",
         en:"Smøla wind farm and its 68 turbines killed white-tailed eagles on a scale that prompted several NINA studies. Painting one turbine blade black cut total bird mortality by around <span class='num'>70 %</span>. At the same time, substations, dams and power lines need both perimeter security and condition monitoring."},
- edge:{no:"Systemer som bare kjenner igjen fuglen på form og vingeslag, mister den i lav sikt og mørke. Dette anlegget følger fuglen også når sikten svikter, og avgjør om den faktisk kommer til å krysse rotorplanet – det er den vurderingen som avgjør om det er riktig å stanse turbinen. Samme anlegg kan følge med på selve anleggsområdet.",
-       en:"Systems that recognise a bird only by shape and wingbeat lose it in poor visibility and darkness. This installation keeps track of the bird when visibility fails, and judges whether it will actually cross the rotor plane — that judgement is what decides whether stopping the turbine is the right call. The same installation can watch the site itself."},
+ edge:{no:"Systemer som bare kjenner igjen fuglen på form og vingeslag, mister den i lav sikt og mørke. Anlegget skal følge fuglen også når sikten svikter, og avgjøre om den faktisk kommer til å krysse rotorplanet – det er den vurderingen som avgjør om det er riktig å stanse turbinen. Samme anlegg kan følge med på selve anleggsområdet.",
+       en:"Systems that recognise a bird only by shape and wingbeat lose it in poor visibility and darkness. The installation is designed to keep track of the bird when visibility fails, and to judge whether it will actually cross the rotor plane — that judgement is what decides whether stopping the turbine is the right call. The same installation can watch the site itself."},
  adapt:{no:"Modellen må lære ørn, rovfugl og flaggermus, og varselet må kobles til turbinens eget styringssystem for å kunne stanse den. Montering i navhøyde eller på egen mast krever ny mekanikk.",
         en:"The model has to learn eagles, raptors and bats, and the alert has to connect to the turbine's own control system to be able to stop it. Mounting at hub height or on a dedicated mast requires new mechanics."}},
 
@@ -786,8 +862,8 @@ const D = [
       en:"An EV fire develops fast. It begins long before smoke sets off a detector."},
  problem:{no:"Norge har over <span class='num'>1 100</span> veitunneler. En tunnelbrann når 800–1 000 °C, og tunnelsikkerhetsforskriften og EU-direktiv 2004/54/EF krever deteksjon. Elbilbrann er et nytt og dårlig dekket problem: termisk rusing utvikler seg raskt og lar seg vanskelig slokke når den først er i gang.",
         en:"Norway has more than <span class='num'>1,100</span> road tunnels. A tunnel fire reaches 800–1,000 °C, and both the Norwegian tunnel safety regulations and EU Directive 2004/54/EC require detection. EV fires are a new and poorly covered problem: thermal runaway develops fast and is hard to extinguish once under way."},
- edge:{no:"Konvensjonelle detektorer venter på røyk. Systemet fanger opp et kjøretøy som utvikler seg feil før det kommer så langt, og skiller det fra normal trafikk. Det håndterer samtidig de andre tunnelfarene – stanset kjøretøy, feilkjøring og fotgjenger i løpet – og gjør det også når sikten i tunnelen er borte.",
-       en:"Conventional detectors wait for smoke. The system picks up a vehicle developing badly before it gets that far, and separates it from normal traffic. It handles the other tunnel hazards at the same time — stopped vehicles, wrong-way driving and pedestrians in the bore — and does so even when visibility inside the tunnel is gone."},
+ edge:{no:"Konvensjonelle detektorer venter på røyk. Systemet skal fange opp et kjøretøy som utvikler seg feil før det kommer så langt, og skille det fra normal trafikk. Det skal samtidig håndtere de andre tunnelfarene – stanset kjøretøy, feilkjøring og fotgjenger i løpet – også når sikten i tunnelen er dårlig.",
+       en:"Conventional detectors wait for smoke. The system is designed to pick up a vehicle developing badly before it gets that far, and to separate it from normal traffic. It is also to handle the other tunnel hazards — stopped vehicles, wrong-way driving and pedestrians in the bore — even when visibility inside the tunnel is poor."},
  adapt:{no:"Takmontering framfor stolpe, tett kapsling mot vaskevann og eksos, og et grensesnitt mot vegtrafikksentralen.",
         en:"Ceiling mounting rather than a pole, sealing against wash water and exhaust, and an interface to the road traffic control centre."}},
 
@@ -796,8 +872,8 @@ const D = [
       en:"A surface perimeter around the pens: predators, vessels and people above the waterline."},
  problem:{no:"Mellom 2010 og 2018 førte <span class='num'>305</span> rømmingshendelser til at rundt <span class='num'>1 960 000</span> laks og regnbueørret slapp ut i norsk sjø. Sel, fugl og oter er kroniske problemer på lokalitetene, og næringen har nullvisjon for rømming. Arbeid på merdkant i mørke er dessuten en reell HMS-risiko.",
         en:"Between 2010 and 2018, <span class='num'>305</span> escape incidents released around <span class='num'>1,960,000</span> salmon and rainbow trout into Norwegian waters. Seals, birds and otters are chronic problems at sites, and the industry works to a zero-escape target. Working on the pen edge in darkness is also a genuine safety risk."},
- edge:{no:"Over vannflaten oppdager systemet sel, fugl og mennesker i mørke og sjøsprøyt, og fartøy som nærmer seg anlegget uten navigasjonslys. Mann over bord er den mest tidskritiske hendelsen på en lokalitet, og det er nettopp der et anlegg som virker i mørke gjør størst forskjell.",
-       en:"Above the waterline the system finds seals, birds and people in darkness and spray, and vessels approaching the site without navigation lights. Man overboard is the most time-critical event at a site, and that is exactly where an installation that works in the dark makes the greatest difference."},
+ edge:{no:"Over vannflaten skal systemet oppdage sel, fugl og mennesker i mørke og sjøsprøyt, og fartøy som nærmer seg anlegget uten navigasjonslys. Mann over bord er den mest tidskritiske hendelsen på en lokalitet, og det er der behovet for å oppdage noen i mørket er størst.",
+       en:"Above the waterline the system is designed to find seals, birds and people in darkness and spray, and vessels approaching the site without navigation lights. Man overboard is the most time-critical event at a site, and that is where the need to spot someone in the dark is greatest."},
  adapt:{no:"Marin herding mot salt og korrosjon, montering på flåte eller merdkant med kompensasjon for bevegelse, og en modell som er lært opp på sel, fugl og fartøy.",
         en:"Marine hardening against salt and corrosion, mounting on the feed barge or pen edge with motion compensation, and a model trained on seals, birds and vessels."}},
 
@@ -806,8 +882,8 @@ const D = [
       en:"Birds, wildlife and foreign object debris on the runway — and intruders inside the fence."},
  problem:{no:"Fuglekollisjoner, uautorisert inntrenging på rullebane og fremmedlegemer er globale flysikkerhetsproblemer. Avinor drifter rundt <span class='num'>40</span> lufthavner, mange av dem kystnære eller arktiske med krevende viltforhold. EASA krever dronedeteksjonsteknologi ved lufthavner med over én million passasjerer.",
         en:"Bird strikes, runway incursions and foreign object debris are global flight-safety problems. Avinor operates around <span class='num'>40</span> airports, many of them coastal or Arctic with demanding wildlife conditions. EASA requires drone detection technology at airports handling more than one million passengers."},
- edge:{no:"Radar ser fugleflokker, men klarer verken små fremmedlegemer eller sikker artsbestemmelse. Systemet dekker fugl, vilt, personer og kjøretøy hele døgnet, finner små objekter på banedekket, og håndterer droner med samme anlegg som dekker perimeteret.",
-       en:"Radar sees flocks, but handles neither small debris nor reliable species identification. The system covers birds, wildlife, people and vehicles around the clock, finds small objects on the pavement, and handles drones with the same installation that covers the perimeter."},
+ edge:{no:"Radar ser fugleflokker, men klarer verken små fremmedlegemer eller sikker artsbestemmelse. Systemet skal dekke fugl, vilt, personer og kjøretøy hele døgnet, finne små objekter på banedekket, og håndtere droner med samme anlegg som dekker perimeteret.",
+       en:"Radar sees flocks, but handles neither small debris nor reliable species identification. The system is designed to cover birds, wildlife, people and vehicles around the clock, find small objects on the pavement, and handle drones with the same installation that covers the perimeter."},
  adapt:{no:"Montering nær rullebane med strenge krav til brekkbarhet og lyssetting, integrasjon mot tårnet, og en modell lært opp på fugl og fremmedlegemer.",
         en:"Runway-adjacent mounting with strict frangibility and lighting requirements, integration with the tower, and a model trained on birds and debris."}},
 
@@ -816,8 +892,8 @@ const D = [
       en:"The first minutes decide. After that it is no longer one crew's job."},
  problem:{no:"Brannsesongen blir lengre, og tidlig deteksjon avgjør om en brann håndteres av ett mannskap eller av et helt distrikt. En brann som oppdages mens den fortsatt er på noen kvadratmeter, slokkes med utstyret mannskapet allerede har med seg.",
         en:"Fire seasons are lengthening, and early detection decides whether a fire is handled by one crew or an entire district. A fire found while it still covers a few square metres is put out with the equipment the crew already carries."},
- edge:{no:"Tårnkameraer som bare arbeider i synlig lys, trenger både dagslys og røyk som er tett nok til å se på avstand. Systemet fanger opp utviklingen tidligere og fungerer også om natten, og gir samtidig mannskapet et bilde å vurdere før de rykker ut.",
-       en:"Tower cameras working in visible light alone need both daylight and smoke dense enough to see at range. The system picks up the development earlier and works at night as well, while still giving the crew an image to judge before turning out."},
+ edge:{no:"Tårnkameraer som bare arbeider i synlig lys, trenger både dagslys og røyk som er tett nok til å se på avstand. Systemet skal fange opp utviklingen tidligere og fungere også om natten, og samtidig gi mannskapet et bilde å vurdere før de rykker ut.",
+       en:"Tower cameras working in visible light alone need both daylight and smoke dense enough to see at range. The system is designed to pick up the development earlier and work at night as well, while still giving the crew an image to judge before turning out."},
  adapt:{no:"Modellen må lære røyk og begynnende brann, og anlegget må stå høyt nok til lang siktlinje. Et anlegg som allerede står i en kraftlinjetrasé eller en vindpark, dekker skogbrannovervåking som tilleggsfunksjon.",
         en:"The model has to learn smoke and incipient fire, and the installation has to stand high enough for a long sight line. An installation already standing in a power-line corridor or a wind farm covers wildfire watch as an added function."}},
 
@@ -836,8 +912,8 @@ const D = [
       en:"CER and NIS2 turn physical protection of critical entities into a legal obligation."},
  problem:{no:"Norsk datasenterkapasitet vokser raskt på rimelig kraft og naturlig kjøling. Anleggene ligger ofte avsides, med lange perimetere og få folk til stede. Samtidig er avvik i kjøling og transformator en driftsrisiko som oppdages for sent med manuelle rutiner.",
         en:"Norwegian data centre capacity is growing fast on cheap power and natural cooling. The sites are often remote, with long perimeters and few people present. At the same time, anomalies in cooling and transformers are an operational risk that manual routines catch too late."},
- edge:{no:"Ett anlegg løser to oppgaver: det dekker perimeteret uten belysning, og fanger opp utstyr som utvikler seg feil før det får konsekvenser. Hendelsene dokumenteres i en form som lar seg rapportere videre under NIS2. Det er et tydelig regnestykke mot to separate systemer.",
-       en:"One installation covers two jobs: it secures the perimeter without lighting, and picks up equipment developing badly before it has consequences. Events are documented in a form that can be reported onward under NIS2. That is a clear cost argument against buying two separate systems."},
+ edge:{no:"Ett anlegg skal løse to oppgaver: dekke perimeteret uten belysning og fange opp utstyr som utvikler seg feil før det får konsekvenser. Hendelsene skal dokumenteres i en form som lar seg rapportere videre under NIS2. Det er et tydelig regnestykke mot to separate systemer.",
+       en:"One installation is designed to cover two jobs: securing the perimeter without lighting, and picking up equipment developing badly before it has consequences. Events are to be documented in a form that can be reported onward under NIS2. That is a clear cost argument against buying two separate systems."},
  adapt:{no:"En modell lært opp på person og kjøretøy i industrimiljø, og integrasjon mot eksisterende alarmsentral.",
         en:"A model trained on people and vehicles in an industrial setting, and integration with the existing alarm centre."}},
 
@@ -846,8 +922,8 @@ const D = [
       en:"A perimeter that works both ways: escapes out, and contraband drones in."},
  problem:{no:"Droner brukes systematisk til å levere smuglergods over fengselsmurer. Britiske fengsler registrerte <span class='num'>347</span> droneinnsidenter med smuglergods i 2024. Samtidig krever murperimeteret døgnkontinuerlig deteksjon med svært lav andel falske alarmer, siden hver alarm binder personell.",
         en:"Drones are used systematically to deliver contraband over prison walls. British prisons recorded <span class='num'>347</span> contraband drone incidents in 2024. At the same time the wall perimeter needs round-the-clock detection with a very low false-alarm rate, since every alarm ties up staff."},
- edge:{no:"Systemet dekker muren uten belysning og med få falske alarmer, som er det avgjørende driftskriteriet i et lukket anlegg. Samme anlegg håndterer luftrommet over muren, slik at begge trusselretninger dekkes uten to leverandører og to alarmsentraler.",
-       en:"The system covers the wall without lighting and with few false alarms, which is the decisive operational criterion in a closed institution. The same installation handles the airspace above the wall, so both threat directions are covered without two suppliers and two alarm centres."},
+ edge:{no:"Systemet skal dekke muren uten belysning og med få falske alarmer, som er det avgjørende driftskriteriet i et lukket anlegg. Samme anlegg skal håndtere luftrommet over muren, slik at begge trusselretninger kan dekkes uten to leverandører og to alarmsentraler.",
+       en:"The system is designed to cover the wall without lighting and with few false alarms, which is the decisive operational criterion in a closed institution. The same installation is to handle the airspace above the wall, so both threat directions can be covered without two suppliers and two alarm centres."},
  adapt:{no:"En modell lært opp på person, klatring, kastet gjenstand og droner, og integrasjon mot anleggets egen alarmsentral.",
         en:"A model trained on people, climbing, thrown objects and drones, and integration with the facility's own alarm centre."}},
 
@@ -866,14 +942,14 @@ const D = [
       en:"198 kilometres of border with Russia, much of it forested and dark for large parts of the year."},
  problem:{no:"Grensen mot Russland krever overvåking av ulovlig kryssing og smugling over en strekning som er lang, ubebodd og mørk i månedsvis. Nær 300 GPS-jammingshendelser ble registrert i grenseområdet i 2023, som svekker satellittavhengige løsninger.",
         en:"The Russian border requires monitoring of illegal crossings and smuggling along a stretch that is long, uninhabited and dark for months at a time. Nearly 300 GPS jamming events were recorded in the border area in 2023, which undermines satellite-dependent solutions."},
- edge:{no:"Systemet finner personer i skog og snø uten belysning som røper posten, og fastslår posisjon lokalt selv når satellittsignalet blir forstyrret. Alt regnes ut på stedet, så anlegget står også når sambandet faller ut.",
-       en:"The system finds people in forest and snow without lighting that would give away the post, and establishes position locally even when the satellite signal is disrupted. Everything is computed on site, so the installation keeps working when communications drop."},
+ edge:{no:"Systemet skal finne personer i skog og snø uten belysning som røper posten, og fastslå posisjon lokalt selv når satellittsignalet blir forstyrret. All KI-analyse kjøres på stedet, så anlegget skal virke også når sambandet faller ut.",
+       en:"The system is designed to find people in forest and snow without lighting that would give away the post, and to establish position locally even when the satellite signal is disrupted. All AI analysis runs on site, so the installation is designed to keep working when communications drop."},
  adapt:{no:"Samme tilpasning som forsvarssporet: herding, cybersikring og lav signatur. Satellittsamband der mobilnettet mangler.",
         en:"The same adaptation as the defence track: hardening, cyber protection and low signature. Satellite communications where the mobile network is absent."}},
 
 {n:18,cat:"ind",name:{no:"Gruvedrift",en:"Mining"},
- tag:{no:"Under jord er det verken dagslys eller sikt. Systemet sitter på maskinen og ser likevel.",
-      en:"Underground there is neither daylight nor visibility. The system rides on the machine and sees anyway."},
+ tag:{no:"Under jord er det verken dagslys eller sikt. Systemet skal sitte på maskinen og se likevel.",
+      en:"Underground there is neither daylight nor visibility. The system is designed to ride on the machine and see anyway."},
  problem:{no:"Autonom lasting og transport krever pålitelig deteksjon av personer nær maskiner, både i dagbrudd og under jord. Under jord er sikt, støv og fravær av lys en varig utfordring.",
         en:"Autonomous loading and haulage require reliable detection of people near machinery, both in open pits and underground. Underground, visibility, dust and the absence of light are permanent challenges."},
  edge:{no:"Under jord er et vanlig kamera nær ubrukelig uten kunstig lys, og støv gjør det verre. Montert på lastebæreren eller dumperen skal systemet finne personer i stollen foran og rundt maskinen. Det er nettopp det maskinføreren – og det autonome kjøretøyet – trenger for å stanse i tide.",
@@ -886,8 +962,8 @@ const D = [
       en:"The safety zone must be clear before every launch — in darkness and a gale as much as in fine weather."},
  problem:{no:"Andøya Space må kontrollere at sikkerhetssonen er tom for personer, kjøretøy og dyr før hver oppskyting. Satellittbakkestasjoner har lange perimetere på avsidesliggende steder.",
         en:"Andøya Space must confirm that the safety zone is clear of people, vehicles and animals before every launch. Satellite ground stations have long perimeters in remote locations."},
- edge:{no:"Systemet klarerer sonen i mørke og dårlig vær, som er normaltilstanden på Andøya store deler av året, og gir en logget bekreftelse på at sonen faktisk var tom. Det er i praksis perimetersikring under et annet navn.",
-       en:"The system clears the zone in darkness and poor weather, which is the normal condition on Andøya for much of the year, and produces a logged confirmation that the zone really was empty. In practice this is perimeter security under another name."},
+ edge:{no:"Systemet skal klarere sonen i mørke og dårlig vær, som er normaltilstanden på Andøya store deler av året, og gi en logget bekreftelse på at sonen faktisk var tom. Det er i praksis perimetersikring under et annet navn.",
+       en:"The system is designed to clear the zone in darkness and poor weather, which is the normal condition on Andøya for much of the year, and to produce a logged confirmation that the zone really was empty. In practice this is perimeter security under another name."},
  adapt:{no:"Liten, siden oppgaven er den samme som perimetersikring. Loggen må utformes slik at den kan brukes som formell klareringsdokumentasjon.",
         en:"Minimal, since the task is the same as perimeter security. The log has to be designed so it can serve as formal clearance documentation."}},
 
@@ -896,8 +972,8 @@ const D = [
       en:"The pedestrian at the crossing in the dark, seen before the headlights reach them."},
  problem:{no:"Fotgjengere og syklister blir påkjørt i mørket ved kryss og gangfelt uten tilstrekkelig belysning. Kommunene har ulykkespunkter de kjenner godt, men få virkemidler utover skilting og fartsdempere.",
         en:"Pedestrians and cyclists are struck in darkness at junctions and crossings without adequate lighting. Municipalities know their accident black spots well, but have few tools beyond signage and speed bumps."},
- edge:{no:"Systemet skal finne fotgjengeren før billyktene rekker fram, og varsle bilisten med lys. Det skal avgjøre om personen står på fortauet eller er på vei ut i gangfeltet, som er forskjellen på et varsel og et unødvendig varsel. Alt regnes ut lokalt.",
-       en:"The system is designed to find the pedestrian before the headlights reach them and warn the driver with a light signal. It is meant to determine whether the person is standing on the pavement or stepping into the crossing, which is the difference between a warning and an unnecessary one. Everything is computed locally."},
+ edge:{no:"Systemet skal finne fotgjengeren før billyktene rekker fram, og varsle bilisten med lys. Det skal avgjøre om personen står på fortauet eller er på vei ut i gangfeltet, som er forskjellen på et varsel og et unødvendig varsel. All KI-analyse kjøres lokalt.",
+       en:"The system is designed to find the pedestrian before the headlights reach them and warn the driver with a light signal. It is meant to determine whether the person is standing on the pavement or stepping into the crossing, which is the difference between a warning and an unnecessary one. All AI analysis runs locally."},
  adapt:{no:"Liten. Oppsettet er det samme som langs landevei, med en modell lært opp på fotgjenger og syklist.",
         en:"Minimal. The setup is the same as on an open highway, with a model trained on pedestrians and cyclists."}},
 
@@ -906,8 +982,8 @@ const D = [
       en:"Fixed risk points can be watched around the clock: rivers, cliff edges and trailheads into open terrain."},
  problem:{no:"Savnede personer finnes raskest med søk som virker i mørke. Redningstjenesten bruker droner og håndholdt utstyr, og tid er den avgjørende faktoren for utfall.",
         en:"Missing people are found fastest with searching that works in the dark. Rescue services use drones and handheld equipment, and time is the decisive factor in outcomes."},
- edge:{no:"Systemet finner en person i terreng og mørke, der øyet og lyskasteren ikke rekker. Et fast anlegg gjør nytte ved innfallsporter, der det kan registrere at noen gikk inn og ikke kom ut igjen. Det gir letemannskapet et startpunkt framfor et søkeområde.",
-       en:"The system finds a person in terrain and darkness, where the eye and the searchlight do not reach. A fixed installation earns its place at trailheads, where it can register that someone went in and did not come back out. That gives the search team a starting point rather than a search area."},
+ edge:{no:"Systemet skal finne en person i terreng og mørke, der øyet og lyskasteren ikke rekker. Et fast anlegg gjør nytte ved innfallsporter, der det kan registrere at noen gikk inn og ikke kom ut igjen. Det gir letemannskapet et startpunkt framfor et søkeområde.",
+       en:"The system is designed to find a person in terrain and darkness, where the eye and the searchlight do not reach. A fixed installation earns its place at trailheads, where it can register that someone went in and did not come back out. That gives the search team a starting point rather than a search area."},
  adapt:{no:"En modell lært opp på liggende og delvis tildekket person, som ser annerledes ut enn en gående. Anlegget settes opp ved innfallsporter, parkeringsplasser og andre punkter folk faktisk passerer.",
         en:"A model trained on a person lying down or partly covered, which looks different from someone walking. The installation goes at trailheads, car parks and other points people actually pass."}},
 
@@ -916,8 +992,8 @@ const D = [
       en:"The groomer covers the whole piste anyway. It may as well look for people while it does."},
  problem:{no:"Alpinanlegg må kontrollere at løypene er tomme før preppemaskinene går ut, og savnede gjester i mørket er en gjentakende hendelse. Skredsoner i nærheten av anlegget krever også tilsyn.",
         en:"Ski resorts must confirm that the pistes are clear before the groomers go out, and missing guests after dark are a recurring incident. Avalanche zones near the resort also need supervision."},
- edge:{no:"Montert på preppemaskinen leser systemet løypa foran maskinen gjennom hele natten. Det finner en person som ligger i snø i mørke, og skiller vedkommende fra en terrengformasjon eller en snøhaug. Kontrollrunden gir dermed et svar og ikke bare en antakelse – uten at noen må kjøre den ekstra gangen.",
-       en:"Mounted on the groomer, the system reads the piste ahead of the machine right through the night. It finds a person lying in snow in the dark and tells them apart from a terrain feature or a snow bank. The sweep then produces an answer rather than an assumption — without anyone having to make the extra run."},
+ edge:{no:"Montert på preppemaskinen skal systemet lese løypa foran maskinen gjennom hele natten. Det skal finne en person som ligger i snø i mørke, og skille vedkommende fra en terrengformasjon eller en snøhaug. Kontrollrunden skal dermed gi et svar og ikke bare en antakelse – uten at noen må kjøre den ekstra gangen.",
+       en:"Mounted on the groomer, the system is designed to read the piste ahead of the machine right through the night. It is to find a person lying in snow in the dark and tell them apart from a terrain feature or a snow bank. The sweep is then to produce an answer rather than an assumption — without anyone having to make the extra run."},
  adapt:{no:"Systemet monteres på preppemaskinen og går på maskinens eget anlegg. Modellen læres opp på person i snø, og kaldt vær er systemet uansett bygget for.",
         en:"The system mounts on the groomer and runs off the machine's own supply. The model is trained on people in snow, and cold weather is what the system is built for in any case."}},
 
@@ -926,8 +1002,8 @@ const D = [
       en:"Counting and species recording without a flash, a trap or people in the field."},
  problem:{no:"EUs naturrestaureringsforordning og habitatdirektivet krever dokumentert overvåking av arter og bestander. Manuelle metoder er dyre, og viltkameraer gir spredte data av varierende kvalitet.",
         en:"The EU Nature Restoration Regulation and the Habitats Directive require documented monitoring of species and populations. Manual methods are expensive, and trail cameras produce scattered data of variable quality."},
- edge:{no:"Systemet registrerer dyr hele døgnet uten blits som forstyrrer dem, bestemmer art, og gir grove størrelsesmål. Til bestandstelling er det forskjellen på spredte observasjoner og et sammenhengende datagrunnlag.",
-       en:"The system records animals around the clock without a flash that disturbs them, identifies the species, and gives rough size estimates. For population counting that is the difference between scattered observations and a continuous dataset."},
+ edge:{no:"Systemet skal registrere dyr hele døgnet uten blits som forstyrrer dem, bestemme art og gi grove størrelsesmål. Til bestandstelling er det forskjellen på spredte observasjoner og et sammenhengende datagrunnlag.",
+       en:"The system is designed to record animals around the clock without a flash that disturbs them, identify the species and give rough size estimates. For population counting that is the difference between scattered observations and a continuous dataset."},
  adapt:{no:"En modell lært opp på flere arter. Datagrunnlaget fra WILDETECT kan gjenbrukes direkte. Anlegget egner seg til faste overvåkingspunkter som følges over år, der data blir sammenliknbare fra sesong til sesong.",
         en:"A model trained on more species. The data foundation from WILDETECT can be reused directly. The installation suits permanent monitoring points followed over years, where data stay comparable from season to season."}},
 
@@ -946,8 +1022,8 @@ const D = [
       en:"Not an application in its own right, but a function that comes with all the others."},
  problem:{no:"Etter en hendelse er spørsmålet alltid det samme: hva skjedde, når, og hvor raskt gikk det? Svaret bygger som regel på vitneforklaringer og anslag i etterkant. Ved viltpåkjørsler alene gjøres det oppgjør for rundt <span class='num'>700 mill. kroner</span> i året uten objektive data om selve hendelsesforløpet.",
         en:"After an incident the question is always the same: what happened, when, and how fast did it unfold? The answer usually rests on witness statements and after-the-fact estimates. For wildlife collisions alone, some <span class='num'>NOK 700 m</span> a year is settled without objective data on the sequence of events."},
- edge:{no:"Anlegget skal logge hendelsen mens den skjer, med tidsstempel og klassifisering. Loggen lagres som hendelser, ikke som opptak, og kan brukes til å analysere hvilke punkter som faktisk er farlige.",
-       en:"The installation is designed to log the event as it happens, with a timestamp and a classification. The log is stored as events rather than footage, and can be used to analyse which locations are genuinely dangerous."},
+ edge:{no:"Anlegget skal logge hendelsen mens den skjer, med tidsstempel og klassifisering. Loggen skal kunne brukes til å analysere hvilke punkter som faktisk er farlige.",
+       en:"The installation is designed to log the event as it happens, with a timestamp and a classification. The log is designed to be used to analyse which locations are genuinely dangerous."},
  adapt:{no:"Ingen ny maskinvare. Loggen bygges inn i systemet; det som gjenstår, er regler for eksport og oppbevaring.",
         en:"No new hardware. The log is being built into the system; what remains is rules for export and retention."}}
 ];
@@ -1175,7 +1251,7 @@ const SC = {
  5:{t:'fence',a:'pred',aw:62,ah:36,x0:596,y0:0,x1:296,y1:0,dur:10,lab:{no:'JERV',en:'WOLVERINE'},cf:'0,86'},
  6:{t:'pile',a:'glow',aw:62,ah:52,x0:300,y0:-38,x1:300,y1:-38,dur:6,still:1,lab:{no:'GLOBRANN',en:'EMBER'},cf:'0,97'},
  7:{t:'turbine',a:'bird',aw:70,ah:38,x0:120,y0:-96,x1:436,y1:-104,dur:9,lab:{no:'HAVØRN',en:'EAGLE'},cf:'0,89'},
- 8:{t:'tunnel',a:'carHot',aw:82,ah:44,x0:534,y0:32,x1:330,y1:18,dur:9,lab:{no:'BATTERI 84 °C',en:'BATTERY 84 °C'},cf:'0,95'},
+ 8:{t:'tunnel',a:'carHot',aw:82,ah:44,x0:534,y0:32,x1:330,y1:18,dur:9,lab:{no:'BIL I FARE',en:'VEHICLE AT RISK'},cf:'0,95'},
  9:{t:'pen',a:'seal',aw:74,ah:36,x0:594,y0:-6,x1:306,y1:2,dur:10,lab:{no:'SEL',en:'SEAL'},cf:'0,87'},
 10:{t:'runway',a:'flock',aw:140,ah:56,x0:600,y0:-78,x1:242,y1:-62,dur:9,lab:{no:'FUGLEFLOKK',en:'BIRD FLOCK'},cf:'0,90'},
 11:{t:'treeline',a:'plume',aw:60,ah:64,x0:340,y0:-4,x1:340,y1:-4,dur:6,still:1,lab:{no:'VARMEPLUME',en:'HEAT PLUME'},cf:'0,96'},
@@ -1247,9 +1323,8 @@ function stage(n, extraClass){
   return '<div class="stage '+(extraClass||'')+'">'+
     '<div class="stage-top"><span class="stage-live"><i></i>'+t('sceneLive')+'</span></div>'+
     sceneSVG(n)+
-    '<div class="stage-read"><div class="stage-class">'+c.lab[lang]+' <span>'+
-      (lang==='no'?c.cf:c.cf.replace(',','.'))+'</span></div>'+
-    '<div class="stage-meta">'+t('sceneNode')+' N-0'+String(n).padStart(2,'0')+'</div></div></div>';
+    '<div class="stage-read"><div class="stage-class">'+c.lab[lang]+'</div>'+
+    '<div class="stage-meta">'+t('sceneNode')+'</div></div></div>';
 }
 
 /* ---------------- grensesnittekster / interface strings ---------------- */
@@ -1258,23 +1333,24 @@ const T = {
   skip:"Hopp til innholdet",
   heroTitle:"Vi gjør veien levende.",
   heroSub:"VeiVakt gir biler og autonom transport øyne langs veien.",
-  heroLede:"Sensorenheter med kunstig intelligens skal oppdage mennesker, kjøretøy, dyr og hindringer der bilen ikke ser – rundt svingen, i mørke og i snødrev – og varsle med én gang. Den samme enheten kan også holde vakt langs jernbane, i industrien og rundt kritisk infrastruktur.",
+  heroLede:"Sensorenheter med kunstig intelligens skal oppdage mennesker, kjøretøy, dyr og hindringer der bilen ikke ser – rundt svingen og over bakketoppen – og varsle med én gang. Den samme enheten kan også holde vakt langs jernbane, i industrien og rundt kritisk infrastruktur.",
 
   eyesTitle:"Øyne langs veien",
-  eyesLede:"En bil ser bare så langt lyktene og sensorene rekker. Bak svingen, over bakketoppen og i tett tåke er den blind, enten det sitter en sjåfør bak rattet eller ikke. VeiVakt står der bilen ikke ser, og forteller hva som er der.",
+  eyesLede:"En bil ser bare så langt lyktene og sensorene rekker. Bak svingen, over bakketoppen og i tett tåke er den blind, enten det sitter en sjåfør bak rattet eller ikke. VeiVakt skal stå der bilen ikke ser, og fortelle hva som er der.",
   eyesFigLbl:"Illustrasjon sett ovenfra: En bil nærmer seg en sving. Skogen innenfor svingen skjuler et stanset kjøretøy etter svingen. VeiVakt-enheten i ytterkant av svingen ser kjøretøyet og sender varsel til bilen.",
-  keyCar:"Det bilen ser",keyUnit:"Det VeiVakt ser",keySig:"Varsel til bil og sjåfør",keyHaz:"Stanset kjøretøy bak svingen",
-  eyes1T:"Varsler sjåføren på stedet",
-  eyes1B:"Lys langs veien skal varsle før faren er synlig fra førersetet. Det fungerer for alle bilister, uansett bil.",
-  eyes2T:"Deler farene med tilkoblede og selvkjørende kjøretøy",
-  eyes2B:"Enheten utvikles for å sende farene videre i sanntid etter de europeiske standardene for tilkoblede kjøretøy (C-ITS). Da ser kjøretøyet lenger enn egne sensorer rekker.",
-  eyes3T:"Gir veieieren oversikt",
-  eyes3B:"Hver hendelse logges med tid og type. Veieieren ser hvor og når farene oppstår, og hvilke strekninger som trenger tiltak.",
+  keyCar:"Det bilen ser",keyUnit:"Det VeiVakt skal se",keySig:"Varsel til bil og sjåfør",keyHaz:"Stanset kjøretøy bak svingen",
+  eyes1T:"Skal varsle sjåføren på stedet",
+  eyes1B:"Lys langs veien skal varsle før faren er synlig fra førersetet. Varselet skal nå alle bilister, uansett bil.",
+  eyes2T:"Skal dele farene med tilkoblede og selvkjørende kjøretøy",
+  eyes2B:"Enheten utvikles for å sende farene videre i sanntid etter de europeiske standardene for tilkoblede kjøretøy (C-ITS). Da kan kjøretøyet se lenger enn egne sensorer rekker.",
+  eyes3T:"Skal gi veieieren oversikt",
+  eyes3B:"Hver hendelse skal logges med tid og type. Veieieren skal se hvor og når farene oppstår, og hvilke strekninger som trenger tiltak.",
   eyesCtaQ:"Har dere en strekning som trenger øyne?",
   eyesCta:"Fortell oss om strekningen",
   ctaHero:"Avtal en samtale",
   ctaHeroLink:"Se de 24 bruksområdene",
-  sceneLive:"Deteksjon",sceneNode:"anlegg",
+  heroStatus:"VeiVakt V1 er under utvikling. Ingen anlegg er i drift ennå.",
+  sceneLive:"Illustrasjon",sceneNode:"Planlagt funksjon",
 
   pTitle:"Industripartner i et forskningskonsortium ledet av SINTEF",
   pBody:"VeiVakt AS er industripartner i WILDETECT, et forskningsprosjekt om deteksjon og varsling av vilt på vei og jernbane. Prosjektet er finansiert av Forskningsrådet.",
@@ -1282,11 +1358,11 @@ const T = {
   pListLbl:"Partnerne i WILDETECT",
 
   legTitle:"Hva systemet gjør",
-  legAKey:"Oppdager",legATitle:"Ser også når sikten er borte",
-  legABody:"Sensorer og kunstig intelligens skal oppdage mennesker, kjøretøy, dyr og brann i mørke, tåke, røyk og snødrev. Det er der vanlige kameraløsninger kommer til kort.",
-  legBKey:"Varsler",legBTitle:"Varsler på stedet, med én gang",
-  legBBody:"All KI-analyse kjøres lokalt på enheten. Varselet på stedet går ut med en gang og er ikke avhengig av samband. Ved behov sendes det videre til alarmsentral eller nødetater.",
-  legCKey:"Overvåker",legCTitle:"Holder vakt med få falske alarmer",
+  legAKey:"Oppdager",legATitle:"Skal se det bilen ikke ser",
+  legABody:"Sensorer og kunstig intelligens skal oppdage mennesker, kjøretøy, dyr og hindringer langs veien. Hvor godt systemet virker i mørke, tåke og snø, skal måles i pilot.",
+  legBKey:"Varsler",legBTitle:"Skal varsle på stedet, med én gang",
+  legBBody:"All KI-analyse kjøres lokalt på enheten. Varselet på stedet skal gå ut med en gang, uten å være avhengig av samband. Systemet skal også kunne varsle alarmsentral eller nødetater.",
+  legCKey:"Overvåker",legCTitle:"Skal holde vakt med få falske alarmer",
   legCBody:"Systemet skal skille reelle hendelser fra vær, skygger og ufarlige bevegelser, og logge hver hendelse med tid og type. Et varsel har bare verdi hvis det er riktig.",
   legNote:"VeiVakt V1 er under utvikling. Ingen anlegg er i drift ennå, og det som beskrives på denne siden, er mål og ikke målte resultater. Tekniske detaljer, komponentvalg og ytelsestall er ikke offentlige.",
 
@@ -1304,17 +1380,30 @@ const T = {
   aboutBody:"VeiVakt AS er et norsk teknologiselskap som utvikler sensorer og kunstig intelligens for varsling og overvåking. Systemet utvikles for mørketid, snø, kulde og steder der det er langt mellom folk.",
   aboutBody2:"Selskapet holder til på Sørumsand utenfor Oslo og er industripartner i forskningsprosjektet WILDETECT, ledet av SINTEF og finansiert av Forskningsrådet.",
 
+  proofLbl:"Anerkjennelse og samarbeid",
+  pr1T:"Duvi-prisen 2026",pr1B:"Startupfestivalen i Lillestrøm",
+  pr2T:"Topp 50",pr2B:"DNB NXT 100 Pitches",
+  pr3T:"Beste idé",pr3B:"Pitchekonkurransen i Total Innovation",
+  pr4T:"Innlegg for Veglovutvalget",pr4B:"Trafikksikkerhet og digitalisering, oktober 2026",
+  pr5T:"Preinkubator",pr5B:"Kjeller Innovasjon",
+  stTitle:"Dere kan begynne i det små",
+  stLede:"Dere trenger ikke kjøpe noe for å komme i gang. Hvert steg skal være verdt det for dere, selv om det neste aldri kommer.",
+  st1T:"Støtteerklæring",st1B:"Gratis. Dere bekrefter at behovet finnes.",
+  st2T:"Intensjonsavtale",st2B:"Ikke bindende. For offentlige kunder gir den ikke fortrinn i en senere konkurranse.",
+  st3T:"Risikokartlegging",st3B:"Betalt oppdrag. Vi finner ut hvor på strekningen eller anlegget varsling skal ha størst effekt.",
+  st4T:"Pilot",st4B:"Betalt pilot hos dere, med målte resultater på deteksjon og falske alarmer.",
+  st5T:"Kjøp eller abonnement",st5B:"Når piloten har vist resultater, og etter de innkjøpsreglene som gjelder for dere.",
   closeTitle:"Vil dere teste VeiVakt hos dere?",
-  closeBody:"Vi ser etter virksomheter i Norge og resten av Europa som vil være med på en pilot med VeiVakt V1. Fortell kort hva dere vil oppdage og hvor, så følger vi opp.",
-  ctaClose:"Bli pilotpartner",
+  closeBody:"Vi ser etter virksomheter i Norge og resten av Europa som vil være med fra starten. Fortell kort hva dere vil oppdage og hvor, så finner vi det første steget sammen.",
+  ctaClose:"Ta det første steget",
   contactH:"Eller kontakt oss direkte",
   fillIn:"fyll inn",
   cSelskap:"Selskap",cPerson:"Kontaktperson",cEpost:"E-post",cTelefon:"Telefon",
-  cOrgnr:"Organisasjonsnummer",cSted:"Sted",cNett:"Nettsted",cLinkedIn:"Profil",
+  cAdresse:"Forretningsadresse",cOrgnr:"Organisasjonsnummer",cSted:"Sted",cNett:"Nettsted",cLinkedIn:"Profil",
 
   kTitle:"Ta kontakt med VeiVakt",
   kIntro:"Fortell kort hvem dere er og hva dere ønsker. Du får svar direkte fra daglig leder, normalt innen to virkedager.",
-  kTopicLbl:"Gjelder:",topicCall:"Samtale",topicPilot:"Pilotprosjekt",topicEyes:"Øyne langs veien",
+  kTopicLbl:"Gjelder:",topicCall:"Samtale",topicPilot:"Første steg eller pilot",topicEyes:"Øyne langs veien",
   kReq:"Alle feltene må fylles ut.",
   fNavn:"Navn",fBedrift:"Bedrift",fEpost:"E-post",fMelding:"Melding",
   fMeldingHint:"For eksempel hva dere vil oppdage, hvor og når dere ønsker å starte.",
@@ -1335,30 +1424,31 @@ const T = {
 
   ftrNote:"Ingen av bruksområdene er i drift ennå. Hvert av dem krever at systemet læres opp på nye objekttyper eller monteres annerledes, og det står i teksten for hvert område.",
   ftrSources:"Tall og statistikk er hentet fra SSB, Hjorteviltregisteret, Oslo Economics, NIBIO, Miljødirektoratet, Bane NOR, NINA, Fiskeridirektoratet, RISE, US EPA og offentlig tilgjengelige rapporter.",
-  ftrOrg:"org.nr.",
+  ftrOrg:"org.nr.",ftrVat:"ikke mva-registrert",privLink:"Personvernerklæring",
   docTitle:"VeiVakt – vi gjør veien levende"
  },
  en:{
   skip:"Skip to content",
   heroTitle:"We bring the road to life.",
   heroSub:"VeiVakt gives cars and autonomous vehicles eyes along the road.",
-  heroLede:"Sensor units with artificial intelligence are designed to detect people, vehicles, animals and obstacles where the car cannot see – around the bend, in darkness and in drifting snow – and to warn at once. The same unit can also keep watch along railways, at industrial sites and around critical infrastructure.",
+  heroLede:"Sensor units with artificial intelligence are designed to detect people, vehicles, animals and obstacles where the car cannot see – around the bend and over the crest – and to warn at once. The same unit can also keep watch along railways, at industrial sites and around critical infrastructure.",
 
   eyesTitle:"Eyes along the road",
-  eyesLede:"A car can only see as far as its headlights and sensors reach. Around the bend, over the crest and in thick fog it is blind, whether or not there is a driver at the wheel. VeiVakt stands where the car cannot see, and tells it what is there.",
+  eyesLede:"A car can only see as far as its headlights and sensors reach. Around the bend, over the crest and in thick fog it is blind, whether or not there is a driver at the wheel. VeiVakt is designed to stand where the car cannot see, and tell it what is there.",
   eyesFigLbl:"Illustration seen from above: a car approaches a bend. The forest inside the bend hides a stopped vehicle beyond it. The VeiVakt unit on the outside of the bend sees the vehicle and sends a warning to the car.",
-  keyCar:"What the car sees",keyUnit:"What VeiVakt sees",keySig:"Warning to car and driver",keyHaz:"Stopped vehicle beyond the bend",
-  eyes1T:"Warns the driver on the spot",
-  eyes1B:"Lights along the road are designed to warn before the hazard is visible from the driver’s seat. It works for every driver, whatever the car.",
-  eyes2T:"Shares hazards with connected and self-driving vehicles",
-  eyes2B:"The unit is being developed to pass hazards on in real time using the European standards for connected vehicles (C-ITS). The vehicle then sees further than its own sensors reach.",
-  eyes3T:"Gives the road owner an overview",
-  eyes3B:"Every event is logged with its time and type. The road owner sees where and when hazards occur, and which sections need action.",
+  keyCar:"What the car sees",keyUnit:"What VeiVakt is designed to see",keySig:"Warning to car and driver",keyHaz:"Stopped vehicle beyond the bend",
+  eyes1T:"Will warn the driver on the spot",
+  eyes1B:"Lights along the road are designed to warn before the hazard is visible from the driver’s seat. The warning is meant to reach every driver, whatever the car.",
+  eyes2T:"Will share hazards with connected and self-driving vehicles",
+  eyes2B:"The unit is being developed to pass hazards on in real time using the European standards for connected vehicles (C-ITS). The vehicle can then see further than its own sensors reach.",
+  eyes3T:"Will give the road owner an overview",
+  eyes3B:"Every event is to be logged with its time and type. The road owner will see where and when hazards occur, and which sections need action.",
   eyesCtaQ:"Got a stretch of road that needs eyes?",
   eyesCta:"Tell us about your road",
   ctaHero:"Book a call",
   ctaHeroLink:"See all 24 applications",
-  sceneLive:"Detection",sceneNode:"installation",
+  heroStatus:"VeiVakt V1 is under development. No installation is in service yet.",
+  sceneLive:"Illustration",sceneNode:"Planned function",
 
   pTitle:"Industry partner in a research consortium led by SINTEF",
   pBody:"VeiVakt AS is an industry partner in WILDETECT, a research project on detecting and warning of wildlife on roads and railways. The project is funded by the Research Council of Norway.",
@@ -1366,11 +1456,11 @@ const T = {
   pListLbl:"The WILDETECT partners",
 
   legTitle:"What the system does",
-  legAKey:"Detects",legATitle:"Sees when visibility is gone",
-  legABody:"Sensors and artificial intelligence are designed to detect people, vehicles, animals and fire in darkness, fog, smoke and drifting snow. That is where conventional camera solutions fall short.",
-  legBKey:"Warns",legBTitle:"Warns on the spot, at once",
-  legBBody:"All AI analysis runs locally on the unit. The on-site warning goes out immediately and does not depend on a network connection. Where needed, it is passed on to an alarm centre or the emergency services.",
-  legCKey:"Monitors",legCTitle:"Keeps watch with few false alarms",
+  legAKey:"Detects",legATitle:"Designed to see what the car cannot",
+  legABody:"Sensors and artificial intelligence are designed to detect people, vehicles, animals and obstacles along the road. How well the system works in darkness, fog and snow will be measured in pilots.",
+  legBKey:"Warns",legBTitle:"Designed to warn on the spot, at once",
+  legBBody:"All AI analysis runs locally on the unit. The on-site warning is designed to go out immediately, without depending on a network connection. The system will also be able to alert an alarm centre or the emergency services.",
+  legCKey:"Monitors",legCTitle:"Designed to keep watch with few false alarms",
   legCBody:"The system is designed to tell real events from weather, shadows and harmless movement, and to log every event with its time and type. A warning is only worth anything if it is right.",
   legNote:"VeiVakt V1 is under development. No installation is in service yet, and what this page describes are goals, not measured results. Technical details, component choices and performance figures are not public.",
 
@@ -1388,17 +1478,30 @@ const T = {
   aboutBody:"VeiVakt AS is a Norwegian technology company developing sensors and artificial intelligence for warning and monitoring. The system is being built for polar night, snow, cold and places where people are few and far between.",
   aboutBody2:"The company is based in Sørumsand outside Oslo and is an industry partner in the WILDETECT research project, led by SINTEF and funded by the Research Council of Norway.",
 
+  proofLbl:"Recognition and collaboration",
+  pr1T:"Duvi Prize 2026",pr1B:"Startup Festival, Lillestrøm",
+  pr2T:"Top 50",pr2B:"DNB NXT 100 Pitches",
+  pr3T:"Best idea",pr3B:"Total Innovation pitch competition",
+  pr4T:"Presented to the Road Act Committee",pr4B:"Road safety and digitalisation, October 2026",
+  pr5T:"Pre-incubator",pr5B:"Kjeller Innovasjon",
+  stTitle:"You can start small",
+  stLede:"You do not have to buy anything to get started. Each step is meant to be worth it for you, even if the next one never comes.",
+  st1T:"Letter of support",st1B:"Free. You confirm that the need exists.",
+  st2T:"Letter of intent",st2B:"Non-binding. For public bodies it gives no advantage in any later tender.",
+  st3T:"Risk assessment",st3B:"Paid assignment. We work out where on your road or site warning would have the greatest effect.",
+  st4T:"Pilot",st4B:"Paid pilot on your site, with measured results on detection and false alarms.",
+  st5T:"Purchase or subscription",st5B:"Once the pilot has shown results, and under the procurement rules that apply to you.",
   closeTitle:"Want to test VeiVakt on your site?",
-  closeBody:"We are looking for organisations in Norway and across Europe that want to take part in a pilot with VeiVakt V1. Tell us briefly what you want to detect and where, and we will follow up.",
-  ctaClose:"Become a pilot partner",
+  closeBody:"We are looking for organisations in Norway and across Europe that want to be involved from the start. Tell us briefly what you want to detect and where, and we will find the first step together.",
+  ctaClose:"Take the first step",
   contactH:"Or contact us directly",
   fillIn:"to be filled in",
   cSelskap:"Company",cPerson:"Contact",cEpost:"Email",cTelefon:"Phone",
-  cOrgnr:"Company registration number",cSted:"Location",cNett:"Website",cLinkedIn:"Profile",
+  cAdresse:"Registered address",cOrgnr:"Company registration number",cSted:"Location",cNett:"Website",cLinkedIn:"Profile",
 
   kTitle:"Get in touch with VeiVakt",
   kIntro:"Tell us briefly who you are and what you need. You will get a reply from the CEO in person, normally within two working days.",
-  kTopicLbl:"Regarding:",topicCall:"A call",topicPilot:"Pilot project",topicEyes:"Eyes along the road",
+  kTopicLbl:"Regarding:",topicCall:"A call",topicPilot:"First step or pilot",topicEyes:"Eyes along the road",
   kReq:"All fields are required.",
   fNavn:"Name",fBedrift:"Company",fEpost:"Email",fMelding:"Message",
   fMeldingHint:"For example what you want to detect, where, and when you would like to start.",
@@ -1419,12 +1522,19 @@ const T = {
 
   ftrNote:"None of the applications is in service yet. Each requires the system to be trained on new object types or mounted differently, as described in each entry.",
   ftrSources:"Figures and statistics are drawn from Statistics Norway, the Norwegian Deer Register, Oslo Economics, NIBIO, the Norwegian Environment Agency, Bane NOR, NINA, the Directorate of Fisheries, RISE, the US EPA and publicly available reports.",
-  ftrOrg:"reg. no.",
+  ftrOrg:"reg. no.",ftrVat:"not VAT registered",privLink:"Privacy notice",
   docTitle:"VeiVakt – we bring the road to life"
  }
 };
 
 const CATS = ["sam","nat","sik","ind"];
+const defaultLang = (function(){
+  try{
+    if(/bot|crawl|spider|slurp/i.test(navigator.userAgent)) return "no";
+    const list = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "no"];
+    return /^(nb|nn|no)\b/i.test(list[0]) ? "no" : "en";
+  }catch(e){ return "no"; }
+})();
 let lang = "no", cat = "all", q = "", cur = 0, picked = false;
 
 /* Slik kan man lenke rett til et bruksområde på valgt språk:
@@ -1440,6 +1550,7 @@ function readUrl(){
   const qs = new URLSearchParams(location.search);
   const l = (qs.get("lang") || "").toLowerCase();
   if(l === "en" || l === "no") lang = l;
+  else if(defaultLang === "en") lang = "en";
   const h = decodeURIComponent(location.hash.replace(/^#/,""));
   if(h === "kontakt") openAtLoad = true;
   else if(h){
@@ -1453,7 +1564,7 @@ function writeUrl(){
   // slik at forsiden har en ren adresse når den deles.
   try{
     const d = D.find(x => x.n === cur);
-    const url = location.pathname + (lang === "en" ? "?lang=en" : "") + (picked && d ? "#" + slug(d.name.no) : "");
+    const url = location.pathname + (lang !== defaultLang ? "?lang=" + lang : "") + (picked && d ? "#" + slug(d.name.no) : "");
     history.replaceState(null, "", url);
   }catch(e){ /* adressen forblir uendret */ }
 }
@@ -1599,7 +1710,8 @@ function renderContact(){
     ["cPerson",  KONTAKT.person ? KONTAKT.person + (KONTAKT.rolle ? ", " + KONTAKT.rolle[lang] : "") : ""],
     ["cEpost",   KONTAKT.epost && !todo(KONTAKT.epost) ? '<a href="mailto:'+KONTAKT.epost+'">'+KONTAKT.epost+'</a>' : KONTAKT.epost],
     ["cTelefon", KONTAKT.telefon ? '<a href="tel:'+KONTAKT.telefon.replace(/\s+/g,"")+'">'+KONTAKT.telefon+'</a>' : ""],
-    ["cSelskap", KONTAKT.selskap + (KONTAKT.sted ? ", " + KONTAKT.sted : "")],
+    ["cSelskap", KONTAKT.selskap + ", " + t("ftrOrg") + " " + KONTAKT.orgnr],
+    ["cAdresse", KONTAKT.adresse],
     ["cLinkedIn",KONTAKT.linkedin ? '<a href="'+KONTAKT.linkedin+'">LinkedIn</a>' : ""]
   ];
   dl.innerHTML = rows.filter(r => r[1])
